@@ -10,7 +10,6 @@
 |                           김준현                           |            이성현            |             하태준             |      하태준       |
 | :--------------------------------------------------------: | :--------------------------: | :----------------------------: | :---------------: |
 |                            팀장                            |             팀원             |              팀원              |       팀원        |
-|                         :--------:                         |           :------:           |            :-----:             |      :-----:      |
 | GitHub, Notion 전반적인 관리 및 작업, 프로젝트 방향성 설정 | Figma 활용한 프로로타입 구성 | API활용 방안 연구 및 방향 제시 | 프로젝트 문서관리 |
 
 ## 프로젝트 소개
@@ -19,7 +18,7 @@
   
 <p align="center">
 <br>
-  <img src="./assets/readme-main.png" width="30%" height="auto">
+  <img src="./images/common/readme-main.png" width="30%" height="auto">
 <br>
 </p>
 
@@ -76,10 +75,10 @@ MIT &copy; [준현](https://dduneon.tistory.com)
 
 <!-- Stack Icon Refernces -->
 
-[main]: /image/common/readme-main.png
-[ocr]: /image/common/readme-ocr.png
-[login]: /image/common/readme-login.png
-[openai]: /image/common/readme-openai.png
+[main]: /images/common/readme-main.png
+[ocr]: /images/common/readme-ocr.png
+[login]: /images/common/readme-login.png
+[openai]: /images/common/readme-openai.png
 [js]: /images/stack/javascript.svg
 [rn]: /images/stack/react-native.svg
 [figma]: /images/stack/figma.svg
