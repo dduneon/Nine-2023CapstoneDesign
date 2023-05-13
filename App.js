@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Button, Image, Text, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-const API_KEY = 'AIzaSyA0QlDTv0atwNb5gKpHCkb8UKcz2h4ic1Q';
+const API_KEY = 'your_api_key';
 const OCR_API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
 
 export default function App() {
