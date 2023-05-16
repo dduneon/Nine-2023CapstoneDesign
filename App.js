@@ -34,7 +34,9 @@ export default function App() {
         <Stack.Screen
           name="Main_Home"
           component={MainHome}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />
