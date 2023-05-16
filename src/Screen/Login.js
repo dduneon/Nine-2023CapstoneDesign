@@ -13,11 +13,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
-function LoginScreen({ navigation }) {
+function Login({ navigation }) {
   return (
     <View style={styles.LoginScreen}>
       <Image
-        source={require("../assets/Nine_image.png")}
+        source={require("../../assets/Nine_image.png")}
         style={styles.Nine_image}
       />
       <View style={{ alignItems: "center" }}>
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default Login;

@@ -13,7 +13,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
+import BottomTab from "../Components/BottomTab";
 import HomeHeader from "../Components/HomeHeader";
+import Home from "../Screen/Home";
 
 function HomeScreen({ navigation }) {
   return (
@@ -22,18 +24,10 @@ function HomeScreen({ navigation }) {
         <HomeHeader />
       </View>
       <View style={{ flex: 4, alignItems: "center", marginTop: 120 }}>
-        <TouchableOpacity style={styles.homeMenu}>
-          <View style={styles.homeMenu_detail}>
-            <Text style={styles.homeMenu_Text}>오답노트</Text>
-            <Fontisto name="arrow-right-l" size={24} color="black" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ ...styles.homeMenu, marginTop: 30 }}>
-          <View style={styles.homeMenu_detail}>
-            <Text style={styles.homeMenu_Text}>실력 다지기</Text>
-            <Fontisto name="arrow-right-l" size={24} color="black" />
-          </View>
-        </TouchableOpacity>
+        <Home />
+      </View>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <BottomTab />
       </View>
     </View>
   );
@@ -47,39 +41,45 @@ function CalendarScreen(navigation) {
         justifyContent: "center",
       }}
     >
-      <Text style={{ fontSize: 50 }}>공부 일정 화면</Text>
+      <Text style={{ fontSize: 50 }}>MyPage 화면</Text>
+    </View>
+  );
+}
+function MyPageScreen(navigation) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Text style={{ fontSize: 50 }}>MyPage 화면</Text>
     </View>
   );
 }
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MainHome({ navigation }) {
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{
           headerShown: false,
-          title: "홈",
-          tabBarIcon: ({ color, size }) => (
-            <Fontisto name="home" color={color} size={size} />
-          ),
         }}
       />
-      <Tab.Screen
-        name="Calendar"
-        component={CalendarScreen}
+      <Stack.Screen
+        name="MyPage"
+        component={MyPageScreen}
         options={{
           headerShown: false,
-          title: "공부 일정",
-          tabBarIcon: ({ color, size }) => (
-            <Fontisto name="calendar" color={color} size={size} />
-          ),
         }}
       />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 }
 
