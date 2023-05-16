@@ -13,9 +13,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
-import HomeHeader from "./Components/HomeHeader";
-import LoginScreen from "./Screen/LoginScreen";
-import MainHome from "./Screen/MainHome";
+import HomeHeader from "./src/Components/HomeHeader";
+import LoginScreen from "./src/Screen/LoginScreen";
+import MainHome from "./src/Screen/MainHome";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
