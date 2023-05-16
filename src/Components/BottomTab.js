@@ -13,7 +13,14 @@ function BottomTab({ navigation }) {
 
   return (
     <View style={styles.bottomTab}>
-      <TouchableOpacity style={styles.tabMenu} onPress={home}>
+      <TouchableOpacity
+        style={styles.tabMenu}
+        onPress={() => {
+          home;
+          navigation.popToTop("Home");
+          navigation.navigate("Home");
+        }}
+      >
         {tab ? (
           <Ionicons name="home-sharp" size={24} color="#445CE9" />
         ) : (
@@ -26,7 +33,13 @@ function BottomTab({ navigation }) {
       <TouchableOpacity>
         <Ionicons name="add-circle" size={70} color="#445CE9" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.tabMenu} onPress={mypage}>
+      <TouchableOpacity
+        style={styles.tabMenu}
+        onPress={() => {
+          mypage;
+          navigation.navigate("MyPage");
+        }}
+      >
         {!tab ? (
           <Ionicons name="person-sharp" size={24} color="#445CE9" />
         ) : (

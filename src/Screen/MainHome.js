@@ -27,34 +27,24 @@ function HomeScreen({ navigation }) {
         <Home />
       </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <BottomTab />
+        <BottomTab navigation={navigation} />
       </View>
     </View>
   );
 }
-function CalendarScreen(navigation) {
+
+function MyPageScreen({ navigation }) {
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ fontSize: 50 }}>MyPage 화면</Text>
-    </View>
-  );
-}
-function MyPageScreen(navigation) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ fontSize: 50 }}>MyPage 화면</Text>
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, width: "100%" }}>
+        <HomeHeader />
+      </View>
+      <View style={{ flex: 4, alignItems: "center", marginTop: 120 }}>
+        <Text>My Page Screen</Text>
+      </View>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <BottomTab navigation={navigation} />
+      </View>
     </View>
   );
 }
