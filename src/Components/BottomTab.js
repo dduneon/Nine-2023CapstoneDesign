@@ -5,8 +5,8 @@ import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Shadow } from "react-native-shadow-2";
 
-function BottomTab({ navigation }) {
-  const [tab, setTab] = useState(true);
+function BottomTab({ navigation, tab_state }) {
+  const [tab, setTab] = useState(tab_state);
 
   const mypage = () => setTab(false);
   const home = () => setTab(true);
@@ -17,7 +17,6 @@ function BottomTab({ navigation }) {
         style={styles.tabMenu}
         onPress={() => {
           home;
-          navigation.popToTop("Home");
           navigation.navigate("Home");
         }}
       >

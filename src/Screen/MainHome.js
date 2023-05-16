@@ -27,7 +27,7 @@ function HomeScreen({ navigation }) {
         <Home />
       </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <BottomTab navigation={navigation} />
+        <BottomTab navigation={navigation} tab_state={true} />
       </View>
     </View>
   );
@@ -43,7 +43,7 @@ function MyPageScreen({ navigation }) {
         <Text>My Page Screen</Text>
       </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <BottomTab navigation={navigation} />
+        <BottomTab navigation={navigation} tab={false} />
       </View>
     </View>
   );
