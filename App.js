@@ -14,7 +14,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
 import HomeHeader from "./src/Components/HomeHeader";
-import LoginScreen from "./src/Screen/LoginScreen";
+import Login from "./src/Screen/Login";
 import MainHome from "./src/Screen/MainHome";
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +26,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
-          component={LoginScreen}
+          component={Login}
           options={{
             headerShown: false, // 상단에 흰색 바가 생기고 HOME이라는 글씨가 쓰여있는데 그거 안 보이게 하는 속성
           }}
