@@ -1,9 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Fontisto } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { Shadow } from "react-native-shadow-2";
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Fontisto } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 function BottomTab({ navigation, tab_state }) {
   const [tab, setTab] = useState(tab_state);
@@ -17,7 +16,7 @@ function BottomTab({ navigation, tab_state }) {
         style={styles.tabMenu}
         onPress={() => {
           home;
-          navigation.navigate("Home");
+          navigation.navigate('Home');
         }}
       >
         {tab ? (
@@ -36,7 +35,7 @@ function BottomTab({ navigation, tab_state }) {
         style={styles.tabMenu}
         onPress={() => {
           mypage;
-          navigation.navigate("MyPage");
+          navigation.navigate('MyPage');
         }}
       >
         {!tab ? (
@@ -54,30 +53,30 @@ function BottomTab({ navigation, tab_state }) {
 
 const styles = StyleSheet.create({
   bottomTab: {
-    flexDirection: "row",
+    flexDirection: 'row',
     elevation: 10,
-    alignItems: "center",
-    justifyContent: "space-around",
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   tabMenu: {
     marginTop: 35,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tabAddBtn: {
     shadowRadius: 20,
     shadowOffset: { width: 5, height: 5 },
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowColor: 5,
     shadowOpacity: 0.5,
   },
   tabActiveText: {
-    color: "blue",
-    fontWeight: "bold",
+    color: 'blue',
+    fontWeight: 'bold',
   },
   tabInactiveText: {
-    color: "blue",
-    fontWeight: "normal",
+    color: 'blue',
+    fontWeight: 'normal',
   },
 });
 
