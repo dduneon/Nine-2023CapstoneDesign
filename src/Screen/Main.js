@@ -14,17 +14,17 @@ import { Fontisto } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 
 import BottomTab from '../Components/BottomTab';
-import HomeHeader from '../Components/HomeHeader';
-import Home from '../Screen/Home';
+import Header from '../Components/Header';
+import HomePage from './HomePage';
 
-function HomeScreen({ navigation }) {
+function Main({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, width: '100%' }}>
-        <HomeHeader />
+        <Header />
       </View>
       <View style={{ flex: 4, alignItems: 'center', marginTop: 120 }}>
-        <Home />
+        <HomePage />
       </View>
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <BottomTab navigation={navigation} tab_state={true} />
@@ -37,7 +37,7 @@ function MyPageScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, width: '100%' }}>
-        <HomeHeader />
+        <Header />
       </View>
       <View style={{ flex: 4, alignItems: 'center', marginTop: 120 }}>
         <Text>My Page Screen</Text>
@@ -57,7 +57,7 @@ function MainHome({ navigation }) {
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={Main}
         options={{
           headerShown: false,
         }}
