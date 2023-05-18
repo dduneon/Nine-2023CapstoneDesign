@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { Shadow } from "react-native-shadow-2";
 
 function BottomTab({ navigation, tab_state }) {
   const [tab, setTab] = useState(tab_state);
