@@ -20,55 +20,35 @@ function Login({ navigation }) {
         source={require("../../assets/Nine_image.png")}
         style={styles.Nine_image}
       />
-      <View style={{ alignItems: "center" }}>
-        <Text
-          onPress={() => navigation.navigate("Main_Home")}
-          style={{
-            paddingHorizontal: 20,
-            paddingVertical: 5,
-            marginTop: -60,
-            borderWidth: 3,
-            borderRadius: 10,
-            fontSize: 25,
-            backgroundColor: "yellow",
-            overflow: "hidden",
-          }}
-        >
-          {" "}
-          카카오 로그인{" "}
-        </Text>
-        <Text
-          onPress={() => navigation.navigate("Main_Home")}
-          style={{
-            paddingHorizontal: 20,
-            paddingVertical: 5,
-            marginTop: 35,
-            borderWidth: 2,
-            borderRadius: 10,
-            fontSize: 25,
-            backgroundColor: "#04CF5C",
-            overflow: "hidden", // borderRadius로 테두리 둥글게 깎았을 때 backgroundColor는 안 깎임 그 때 overFlow를 hidden으로 주면 borderRadius를 넘어가는 부분을 잘라내줌
-          }}
-        >
-          {" "}
-          네이버 로그인{" "}
-        </Text>
-        <Text
-          onPress={() => navigation.navigate("Main_Home")}
-          style={{
-            paddingHorizontal: 20,
-            paddingVertical: 5,
-            marginTop: 35,
-            borderWidth: 3,
-            borderRadius: 10,
-            fontSize: 25,
-            backgroundColor: "lightgrey",
-            overflow: "hidden",
-          }}
-        >
-          {"   "}
-          구글 로그인{"   "}
-        </Text>
+      
+      <View style={{ alignContent: "center" }}
+      >
+        <TouchableOpacity 
+        activeOpacity= '0.6'
+        onPress={() => navigation.navigate("Main_Home")}>
+          <Image
+          source={require("../../assets/kakao_login.png")}
+          style={styles.kakao_image}
+        />
+        </TouchableOpacity>
+        <TouchableOpacity
+        activeOpacity= '0.6'
+        onPress={() => navigation.navigate("Main_Home")}>
+        <Image
+          source={require("../../assets/naver_login.png")}
+          style={styles.naver_image}
+        />
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+        activeOpacity= '0.6'
+        onPress={() => navigation.navigate("Main_Home")}>
+          <Image
+          source={require("../../assets/google_login.png")}
+          style={styles.google_image}
+        />
+        </TouchableOpacity>
+
       </View>
       <StatusBar style="auto" />
     </View>
@@ -76,14 +56,30 @@ function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  Nine_image: {
-    width: "80%",
-    marginTop: -20,
-    marginLeft: 25,
-    resizeMode: "contain",
-  },
   LoginScreen: {
     flex: 1,
+  },
+  Nine_image: {
+    width: "80%",
+    marginLeft: 35,
+    resizeMode: "contain",
+  },
+  kakao_image: {
+    width: "83%",
+    marginLeft: 45,
+    resizeMode: "contain",
+  },
+  naver_image: {
+    width: "43%",
+    marginLeft: 130,
+    marginTop: -20,
+    resizeMode: "contain",
+  },
+  google_image: {
+    width: "83%",
+    marginLeft: 45,
+    marginTop: -10,
+    resizeMode: "contain",
   },
 });
 
