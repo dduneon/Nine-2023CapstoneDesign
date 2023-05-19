@@ -201,22 +201,6 @@ function Main({ navigation }) {
   );
 }
 
-function MyPageScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, width: "100%" }}>
-        <Header />
-      </View>
-      <View style={{ flex: 4, alignItems: "center", marginTop: 120 }}>
-        <Text>My Page Screen</Text>
-      </View>
-      <View style={{ flex: 1, backgroundColor: "white" }}>
-        <BottomTab navigation={navigation} tab={false} />
-      </View>
-    </View>
-  );
-}
-
 const Stack = createNativeStackNavigator();
 //const Tab = createBottomTabNavigator();
 
