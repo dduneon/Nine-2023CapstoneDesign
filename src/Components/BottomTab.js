@@ -13,7 +13,7 @@ function BottomTab({ navigation, tab_state }) {
   return (
     <View style={styles.bottomTab}>
       <TouchableOpacity
-        style={styles.tabMenu}
+        style={styles.homeMenu}
         onPress={() => {
           home;
           navigation.navigate("Home");
@@ -28,11 +28,21 @@ function BottomTab({ navigation, tab_state }) {
           HOME
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Ionicons name="add-circle" size={70} color="#445CE9" />
-      </TouchableOpacity>
+      <View style={styles.backgroundCircle}>
+        <TouchableOpacity>
+          <Ionicons
+            style={styles.tabAddBtn}
+            name="add-circle"
+            size={100}
+            color="#445CE9"
+            position="absolute"
+            top={-52}
+            left={-47}
+          ></Ionicons>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity
-        style={styles.tabMenu}
+        style={styles.myMenu}
         onPress={() => {
           mypage;
           navigation.navigate("MyPage");
@@ -58,17 +68,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
   },
-  tabMenu: {
-    marginTop: 35,
+  homeMenu: {
+    marginTop: 10,
+    marginLeft: 20,
     alignItems: "center",
     justifyContent: "center",
   },
-  tabAddBtn: {
-    shadowRadius: 20,
-    shadowOffset: { width: 5, height: 5 },
-    shadowColor: "black",
-    shadowColor: 5,
-    shadowOpacity: 0.5,
+  myMenu: {
+    marginTop: 10,
+    marginRight: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   tabActiveText: {
     color: "blue",
@@ -77,6 +87,16 @@ const styles = StyleSheet.create({
   tabInactiveText: {
     color: "blue",
     fontWeight: "normal",
+  },
+  backgroundCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: "white",
+    marginTop: -20,
+    alignItems: "center",
+    justifyContent: "center", // 수직 정렬을 위해 센터 정렬
+    position: "relative",
   },
 });
 
