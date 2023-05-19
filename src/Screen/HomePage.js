@@ -9,12 +9,7 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Fontisto } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
-
-import BottomTab from '../Components/BottomTab';
-import HomeHeader from '../Components/Header';
 
 function Home({ navigation }) {
   return (

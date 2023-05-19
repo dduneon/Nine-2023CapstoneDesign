@@ -1,30 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-function BottomTab({ navigation, tab_state }) {
-  const [tab, setTab] = useState(tab_state);
+function BottomTab({ onTabChange }) {
+  const [tab, setTab] = useState(0);
 
-  const mypage = () => setTab(false);
-  const home = () => setTab(true);
+  const home = () => {
+    setTab(0);
+    onTabChange(0);
+    console.log(tab);
+  };
+  const mypage = () => {
+    setTab(1);
+    onTabChange(1);
+    console.log(tab);
+  };
 
   return (
     <View style={styles.bottomTab}>
       <TouchableOpacity
         style={styles.homeMenu}
         onPress={() => {
-          home;
-          navigation.navigate('Home');
+          home();
         }}
       >
-        {tab ? (
+        {tab === 0 ? (
           <Ionicons name="home-sharp" size={24} color="#445CE9" />
         ) : (
           <Ionicons name="home-outline" size={24} color="#445CE9" />
         )}
-        <Text style={tab ? styles.tabActiveText : styles.tabInactiveText}>
+        <Text style={tab === 0 ? styles.tabActiveText : styles.tabInactiveText}>
           HOME
         </Text>
       </TouchableOpacity>
@@ -44,16 +51,15 @@ function BottomTab({ navigation, tab_state }) {
       <TouchableOpacity
         style={styles.myMenu}
         onPress={() => {
-          mypage;
-          navigation.navigate('MyPage');
+          mypage();
         }}
       >
-        {!tab ? (
+        {tab === 1 ? (
           <Ionicons name="person-sharp" size={24} color="#445CE9" />
         ) : (
           <Ionicons name="person-outline" size={24} color="#445CE9" />
         )}
-        <Text style={!tab ? styles.tabActiveText : styles.tabInactiveText}>
+        <Text style={tab === 1 ? styles.tabActiveText : styles.tabInactiveText}>
           MY
         </Text>
       </TouchableOpacity>

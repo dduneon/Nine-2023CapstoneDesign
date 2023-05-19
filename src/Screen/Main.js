@@ -7,87 +7,30 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Fontisto } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
 
 import BottomTab from '../Components/BottomTab';
 import Header from '../Components/Header';
 import HomePage from './HomePage';
+import MyPage from './MyPage';
 
 function Main({ navigation }) {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, width: '100%' }}>
         <Header />
       </View>
       <View style={{ flex: 4, alignItems: 'center', marginTop: 120 }}>
-        <HomePage />
+        {activeTab === 0 ? <HomePage /> : <MyPage />}
       </View>
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <BottomTab navigation={navigation} tab_state={true} />
+        <BottomTab onTabChange={(tab) => setActiveTab(tab)} />
       </View>
     </View>
   );
 }
 
-function MyPageScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, width: '100%' }}>
-        <Header />
-      </View>
-      <View style={{ flex: 4, alignItems: 'center', marginTop: 120 }}>
-        <Text>My Page Screen</Text>
-      </View>
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <BottomTab navigation={navigation} tab={false} />
-      </View>
-    </View>
-  );
-}
+const styles = StyleSheet.create({});
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function MainHome({ navigation }) {
-  return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={Main}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="MyPage"
-        component={MyPageScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
-const styles = StyleSheet.create({
-  homeMenu: {
-    backgroundColor: '#CCCCCC',
-    borderRadius: '15%',
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    width: '80%',
-  },
-  homeMenu_detail: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  homeMenu_Text: {
-    fontSize: 18,
-  },
-});
-
-export default MainHome;
+export default Main;
