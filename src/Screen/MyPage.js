@@ -1,23 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { Fontisto } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
-  Text,
   View,
+  Button,
+  Image,
+  Text,
+  StyleSheet,
   TouchableOpacity,
-  TextInput,
-  ScrollView,
-  Alert,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Fontisto } from "@expo/vector-icons";
 
-function MyPage() {
+function My({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ fontSize: 50 }}> My Page </Text>
-      <Text> 나중에 여기에 사용자 정보 표시 </Text>
+    <View>
+      <Text>This is MyPage</Text>
     </View>
   );
 }
 
-export default MyPage;
+const styles = StyleSheet.create({});
+
+export default My;

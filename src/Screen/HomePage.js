@@ -10,7 +10,6 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
 
 function Home({ navigation }) {
   return (
