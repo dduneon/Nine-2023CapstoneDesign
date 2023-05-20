@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -6,10 +6,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Fontisto } from '@expo/vector-icons';
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Fontisto } from "@expo/vector-icons";
 
 function Home({ navigation }) {
   return (
@@ -32,15 +32,15 @@ function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   homeMenu: {
-    backgroundColor: '#CCCCCC',
-    borderRadius: '15%',
+    backgroundColor: "#CCCCCC",
+    borderRadius: "15%",
     paddingHorizontal: 10,
     paddingVertical: 8,
-    width: '80%',
+    width: "80%",
   },
   homeMenu_detail: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   homeMenu_Text: {
     fontSize: 18,

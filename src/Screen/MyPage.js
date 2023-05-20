@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -6,10 +6,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Fontisto } from '@expo/vector-icons';
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Fontisto } from "@expo/vector-icons";
 
 function My({ navigation }) {
   return (

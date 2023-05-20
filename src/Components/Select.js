@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
   Button,
-  Modal,
   Image,
   Text,
   TouchableOpacity,
+  Modal,
   Animated,
 } from "react-native";
 
@@ -49,8 +49,9 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-function Select({ navigation }) {
-  const [visible, setVisible] = React.useState(false);
+function Select({ navigation, visibleState }) {
+  const [visible, setVisible] = React.useState(visibleState);
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ModalPoup visible={visible}>
