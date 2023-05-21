@@ -51,6 +51,10 @@ const ModalSetup = ({ visible, children }) => {
 
 function ModalPopup({ navigation, visibleState, onClose }) {
   const [visible, setVisible] = React.useState(visibleState);
+  useEffect(() => {
+    setVisible(visibleState);
+    console.log('[ModalPopup.js] visibleState: ' + visibleState);
+  }, [visibleState]);
 
   return (
     <ModalSetup visible={visible}>
@@ -84,9 +88,9 @@ function ModalPopup({ navigation, visibleState, onClose }) {
         <TouchableOpacity
           style={styles.cancel}
           onPress={() => {
-            setVisible(false);
             onClose();
-            console.log('onClose() call');
+            setVisible(false);
+            console.log('[ModalPopup.js] visibleState: ' + visibleState);
           }}
         >
           <View>

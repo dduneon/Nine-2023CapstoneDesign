@@ -13,6 +13,7 @@ import Header from '../Components/Header';
 import HomePage from './HomePage';
 import MyPage from './MyPage';
 import ModalPopup from '../Components/ModalPopup';
+
 function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,13 +31,12 @@ function Main({ navigation }) {
           onTabChange={(tab) => setActiveTab(tab)}
           onPlusPress={() => {
             setModalVisible(true);
-            console.log('modalVisible: ' + modalVisible);
           }}
         />
       </View>
       <ModalPopup
         visibleState={modalVisible}
-        onClose={() => console.log('modalVisible: ' + modalVisible)}
+        onClose={() => setModalVisible(false)}
       ></ModalPopup>
     </View>
   );
