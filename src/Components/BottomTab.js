@@ -1,19 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, createContext, useContext } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Modal,
-  Animated,
-} from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function BottomTab({ onTabChange }) {
+function BottomTab({ onTabChange, onPlusPress }) {
   const [tab, setTab] = useState(0);
-  const [visible, setVisible] = useState(false);
 
   const home = () => {
     setTab(0);
@@ -46,7 +36,8 @@ function BottomTab({ onTabChange }) {
       <View style={styles.backgroundCircle}>
         <TouchableOpacity
           onPress={() => {
-            setVisible(true);
+            onPlusPress();
+            console.log('onPlusPress call');
           }}
         >
           <Ionicons
