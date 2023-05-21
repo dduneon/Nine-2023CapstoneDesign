@@ -49,7 +49,7 @@ const ModalSetup = ({ visible, children }) => {
   );
 };
 
-function ModalPopup({ navigation, visibleState, onClose }) {
+function ModalPopup({ visibleState, onClose }) {
   const [visible, setVisible] = React.useState(visibleState);
   useEffect(() => {
     setVisible(visibleState);
