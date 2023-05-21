@@ -25,7 +25,10 @@ function Main({ navigation }) {
         {activeTab === 0 ? <HomePage /> : <MyPage />}
       </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <BottomTab onTabChange={(tab) => setActiveTab(tab)} />
+        <BottomTab
+          navigation={navigation}
+          onTabChange={(tab) => setActiveTab(tab)}
+        />
       </View>
     </View>
   );

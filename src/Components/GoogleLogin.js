@@ -25,7 +25,7 @@ expo prebuild
 WebBrowser.maybeCompleteAuthSession();
 // 사용자가 Google로 로그인하려고 할 때 이벤트 들을 수 있음
 
-export default function GoogleLogin() {
+export default function GoogleLogin({ navigation }) {
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [request, response, promtAsync] = Google.useAuthRequest({
@@ -76,33 +76,17 @@ export default function GoogleLogin() {
 
   return (
     <View style={styles.container}>
-      {user && <ShowUserInfo />}
-      {user === null && (
-        <>
-          <Text style={{ fontSize: 35, fontWeight: "bold" }}>Welcome</Text>
-          <Text
-            style={{
-              fontSize: 25,
-              fontWeight: "bold",
-              marginBottom: 20,
-              color: "grey",
-            }}
-          >
-            Please login
-          </Text>
-          <TouchableOpacity
-            disabled={!request}
-            onPress={() => {
-              promtAsync();
-            }}
-          >
-            <Image
-              source={require("./btn.png")}
-              style={{ width: 300, height: 40 }}
-            />
-          </TouchableOpacity>
-        </>
-      )}
+      <TouchableOpacity
+        disabled={!request}
+        onPress={() => {
+          promtAsync();
+        }}
+      >
+        <Image
+          source={require("../../assets/GoogleLogin.png")}
+          style={{ width: 300, height: 40 }}
+        />
+      </TouchableOpacity>
     </View>
   );
 }

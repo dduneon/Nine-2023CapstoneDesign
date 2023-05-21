@@ -10,49 +10,11 @@ import {
 } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import ModalPopup from "./ModalPopup";
 
-const ModalPoup = ({ visible, children }) => {
-  const [showModal, setShowModal] = React.useState(visible);
-  const scaleValue = React.useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
-    toggleModal();
-  }, [visible]);
-  const toggleModal = () => {
-    if (visible) {
-      setShowModal(true);
-      Animated.spring(scaleValue, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      setTimeout(() => setShowModal(false), 200);
-      Animated.timing(scaleValue, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-  return (
-    <Modal transparent visible={showModal}>
-      <View style={styles.modalBackGround}>
-        <Animated.View
-          style={[
-            styles.modalContainer,
-            { transform: [{ scale: scaleValue }] },
-          ]}
-        >
-          {children}
-        </Animated.View>
-      </View>
-    </Modal>
-  );
-};
-
-function BottomTab({ onTabChange }) {
+function BottomTab({ navigation, onTabChange }) {
   const [tab, setTab] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
 
   const home = () => {
     setTab(0);
@@ -65,54 +27,15 @@ function BottomTab({ onTabChange }) {
     console.log(tab);
   };
 
+  const modal = ModalPopup;
+
   return (
     <View style={styles.bottomTab}>
-      <ModalPoup visible={visible}>
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: "100%",
-              borderBottomWidth: 0.5,
-              borderColor: "lightgrey",
-            }}
-          >
-            <Text style={styles.modal_Text}>카메라</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: "100%",
-              borderBottomWidth: 0.5,
-              borderColor: "lightgrey",
-            }}
-          >
-            <Text style={styles.modal_Text}>앨범</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer_detail}>
-            <Text style={styles.modal_Text}>텍스트</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={styles.cancel}
-            onPress={() => setVisible(false)}
-          >
-            <View>
-              <Text
-                style={{
-                  ...styles.modal_Text,
-                  fontWeight: "bold",
-                }}
-              >
-                취소
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ModalPoup>
-
+      {activeModal ? (
+        <ModalPopup navigation={navigation} activeModal={activeModal} />
+      ) : (
+        <ModalPopup />
+      )}
       <TouchableOpacity
         style={styles.homeMenu}
         onPress={() => {
@@ -131,7 +54,7 @@ function BottomTab({ onTabChange }) {
       <View style={styles.backgroundCircle}>
         <TouchableOpacity
           onPress={() => {
-            setVisible(true);
+            setActiveModal(true);
           }}
         >
           <Ionicons

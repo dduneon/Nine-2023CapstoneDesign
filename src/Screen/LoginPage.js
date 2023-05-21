@@ -13,6 +13,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
+import GoogleLogin from "../Components/GoogleLogin";
+
 function Login({ navigation }) {
   return (
     <View style={styles.LoginScreen}>
@@ -69,6 +71,7 @@ function Login({ navigation }) {
           {"   "}
           구글 로그인{"   "}
         </Text>
+        <GoogleLogin />
       </View>
       <StatusBar style="auto" />
     </View>

@@ -49,58 +49,55 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-function Select({ navigation, visibleState }) {
-  const [visible, setVisible] = React.useState(visibleState);
+function ModalPopup({ navigation, activeModal }) {
+  const [visible, setVisible] = React.useState(activeModal);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ModalPoup visible={visible}>
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: "100%",
-              borderBottomWidth: 0.5,
-              borderColor: "lightgrey",
-            }}
-          >
-            <Text style={styles.modal_Text}>카메라</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: "100%",
-              borderBottomWidth: 0.5,
-              borderColor: "lightgrey",
-            }}
-          >
-            <Text style={styles.modal_Text}>앨범</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer_detail}>
-            <Text style={styles.modal_Text}>텍스트</Text>
-          </TouchableOpacity>
-        </View>
+    <ModalPoup visible={visible}>
+      <View style={styles.textContainer}>
+        <TouchableOpacity
+          style={{
+            ...styles.textContainer_detail,
+            width: "100%",
+            borderBottomWidth: 0.5,
+            borderColor: "lightgrey",
+          }}
+        >
+          <Text style={styles.modal_Text}>카메라</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...styles.textContainer_detail,
+            width: "100%",
+            borderBottomWidth: 0.5,
+            borderColor: "lightgrey",
+          }}
+        >
+          <Text style={styles.modal_Text}>앨범</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.textContainer_detail}>
+          <Text style={styles.modal_Text}>텍스트</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={styles.cancel}
-            onPress={() => setVisible(false)}
-          >
-            <View>
-              <Text
-                style={{
-                  ...styles.modal_Text,
-                  fontWeight: "bold",
-                }}
-              >
-                취소
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ModalPoup>
-      <Button title="Open Modal" onPress={() => setVisible(true)} />
-    </View>
+      <View style={styles.textContainer}>
+        <TouchableOpacity
+          style={styles.cancel}
+          onPress={() => setVisible(false)}
+        >
+          <View>
+            <Text
+              style={{
+                ...styles.modal_Text,
+                fontWeight: "bold",
+              }}
+            >
+              취소
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ModalPoup>
   );
 }
 
@@ -141,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Select;
+export default ModalPopup;
