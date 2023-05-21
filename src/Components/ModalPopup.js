@@ -10,7 +10,7 @@ import {
   Animated,
 } from "react-native";
 
-const ModalPoup = ({ visible, children }) => {
+const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
@@ -49,11 +49,15 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-function ModalPopup({ navigation, visibleState }) {
+function ModalPopup({ navigation, visibleState, onClose }) {
   const [visible, setVisible] = React.useState(visibleState);
+  useEffect(() => {
+    setVisible(visibleState);
+    console.log("[ModalPopup.js] visibleState: " + visibleState);
+  }, [visibleState]);
 
   return (
-    <ModalPoup visible={visible}>
+    <ModalSetup visible={visible}>
       <View style={styles.textContainer}>
         <TouchableOpacity
           style={{
@@ -83,7 +87,10 @@ function ModalPopup({ navigation, visibleState }) {
       <View style={styles.textContainer}>
         <TouchableOpacity
           style={styles.cancel}
-          onPress={() => setVisible(false)}
+          onPress={() => {
+            onClose();
+            setVisible(false);
+          }}
         >
           <View>
             <Text
@@ -97,7 +104,7 @@ function ModalPopup({ navigation, visibleState }) {
           </View>
         </TouchableOpacity>
       </View>
-    </ModalPoup>
+    </ModalSetup>
   );
 }
 

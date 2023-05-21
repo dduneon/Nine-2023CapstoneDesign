@@ -27,7 +27,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 export default function GoogleLogin({ navigation }) {
   const [accessToken, setAccessToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
+  //const [user, setUser] = React.useState(null);
   const [request, response, promtAsync] = Google.useAuthRequest({
     clientId:
       "15200714153-ar2h399ounks1meiuusdsc1pstlf3586.apps.googleusercontent.com",
@@ -37,11 +37,11 @@ export default function GoogleLogin({ navigation }) {
       "15200714153-29ce5qs9bs2afi4i7j9l6odfeqf1lec8.apps.googleusercontent.com",
   });
 
+  let useInfo = null;
+
   React.useEffect(() => {
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
-      console.log(accessToken);
-      console.log("accessToken 성공");
       accessToken && fetchUserInfo();
     }
   }, [response, accessToken]);
@@ -52,30 +52,13 @@ export default function GoogleLogin({ navigation }) {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    const useInfo = await response.json();
-    setUser(useInfo);
-    console.log("user : ");
-    console.log(user);
+    useInfo = await response.json();
+    console.log(useInfo);
+    navigation.navigate("Main_Home", {
+      itemId: 86,
+      otherParam: useInfo,
+    });
   }
-
-  const ShowUserInfo = () => {
-    if (user) {
-      return (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={{ fontSize: 35, fontWeight: "bold", marginBottom: 20 }}>
-            Welcome
-          </Text>
-          <Image
-            source={{ uri: user.picture }}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-          />
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{user.name}</Text>
-        </View>
-      );
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -83,7 +66,6 @@ export default function GoogleLogin({ navigation }) {
         disabled={!request}
         onPress={async () => {
           await promtAsync();
-          navigation.navigate("Main_Home");
         }}
       >
         <Image

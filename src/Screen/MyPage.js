@@ -11,10 +11,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto } from "@expo/vector-icons";
 
-function My({ navigation }) {
+function My({ userData }) {
   return (
-    <View>
-      <Text>This is MyPage</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ fontSize: 35, fontWeight: "bold", marginBottom: 20 }}>
+        Welcome
+      </Text>
+      <Image
+        source={{ uri: userData.picture }}
+        style={{ width: 100, height: 100, borderRadius: 50 }}
+      />
+      <Text style={{ fontSize: 20, fontWeight: "bold" }}>{userData.name}</Text>
     </View>
   );
 }

@@ -8,24 +8,21 @@ import {
   Modal,
   Animated,
 } from "react-native";
-
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import ModalPopup from "./ModalPopup";
 
-function BottomTab({ navigation, onTabChange }) {
+function BottomTab({ onTabChange, onPlusPress }) {
   const [tab, setTab] = useState(0);
-  const [visible, setVisible] = useState(false);
 
   const home = () => {
     setTab(0);
     onTabChange(0);
-    console.log(tab);
+    console.log("[BottomTab.js] Tab: " + tab);
   };
   const mypage = () => {
     setTab(1);
     onTabChange(1);
-    console.log(tab);
+    console.log("[BottomTab.js] Tab: " + tab);
   };
 
   return (
@@ -48,7 +45,7 @@ function BottomTab({ navigation, onTabChange }) {
       <View style={styles.backgroundCircle}>
         <TouchableOpacity
           onPress={() => {
-            setVisible(true);
+            onPlusPress();
           }}
         >
           <Ionicons
@@ -89,18 +86,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   homeMenu: {
+    flex: 1,
     marginTop: 10,
     marginLeft: 20,
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
   },
   myMenu: {
+    flex: 1,
     marginTop: 10,
     marginRight: 20,
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
   },
   tabActiveText: {
     color: "blue",
@@ -120,40 +117,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center", // 수직 정렬을 위해 센터 정렬
     position: "relative",
-  },
-  modalBackGround: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  textContainer: {
-    borderRadius: 12,
-    elevation: 20,
-    marginBottom: 12,
-    backgroundColor: "white",
-  },
-  textContainer_detail: {
-    paddingVertical: 15,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modalContainer: {
-    width: "80%",
-    borderRadius: 20,
-    elevation: 20,
-    marginBottom: 40,
-  },
-  cancel: {
-    paddingVertical: 15,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modal_Text: {
-    fontSize: 22,
-    fontWeight: "500",
-    color: "#445CE9",
   },
 });
 

@@ -26,7 +26,7 @@ function Login({ navigation }) {
       <View style={{ alignContent: "center" }}>
         <TouchableOpacity
           activeOpacity="0.6"
-          onPress={() => navigation.navigate("Main_Home")}
+          //onPress={() =>navigation.navigate("Main_Home")}
         >
           <Image
             source={require("../../assets/kakao_login.png")}
@@ -35,7 +35,7 @@ function Login({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity="0.6"
-          onPress={() => navigation.navigate("Main_Home")}
+          //onPress={() =>navigation.navigate("Main_Home")}
         >
           <Image
             source={require("../../assets/naver_login.png")}
@@ -45,15 +45,16 @@ function Login({ navigation }) {
 
         <TouchableOpacity
           activeOpacity="0.6"
-          onPress={() => navigation.navigate("Main_Home")}
+          //onPress={() =>navigation.navigate("Main_Home")}
         >
           <Image
             source={require("../../assets/google_login.png")}
             style={styles.google_image}
           />
         </TouchableOpacity>
+        <GoogleLogin navigation={navigation} />
       </View>
-      <GoogleLogin navigation={navigation} />
+
       <StatusBar style="auto" />
     </View>
   );
