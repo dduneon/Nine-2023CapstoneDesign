@@ -10,7 +10,7 @@ import {
   Animated,
 } from 'react-native';
 
-const ModalPoup = ({ visible, children }) => {
+const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
@@ -49,57 +49,63 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-function Select({ navigation, visibleState }) {
+function ModalPopup({ navigation, visibleState, onClose }) {
   const [visible, setVisible] = React.useState(visibleState);
+  useEffect(() => {
+    setVisible(visibleState);
+    console.log('[ModalPopup.js] visibleState: ' + visibleState);
+  }, [visibleState]);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ModalPoup visible={visible}>
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: '100%',
-              borderBottomWidth: 0.5,
-              borderColor: 'lightgrey',
-            }}
-          >
-            <Text style={styles.modal_Text}>카메라</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.textContainer_detail,
-              width: '100%',
-              borderBottomWidth: 0.5,
-              borderColor: 'lightgrey',
-            }}
-          >
-            <Text style={styles.modal_Text}>앨범</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.textContainer_detail}>
-            <Text style={styles.modal_Text}>텍스트</Text>
-          </TouchableOpacity>
-        </View>
+    <ModalSetup visible={visible}>
+      <View style={styles.textContainer}>
+        <TouchableOpacity
+          style={{
+            ...styles.textContainer_detail,
+            width: '100%',
+            borderBottomWidth: 0.5,
+            borderColor: 'lightgrey',
+          }}
+        >
+          <Text style={styles.modal_Text}>카메라</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...styles.textContainer_detail,
+            width: '100%',
+            borderBottomWidth: 0.5,
+            borderColor: 'lightgrey',
+          }}
+        >
+          <Text style={styles.modal_Text}>앨범</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.textContainer_detail}>
+          <Text style={styles.modal_Text}>텍스트</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.textContainer}>
-          <TouchableOpacity
-            style={styles.cancel}
-            onPress={() => setVisible(false)}
-          >
-            <View>
-              <Text
-                style={{
-                  ...styles.modal_Text,
-                  fontWeight: 'bold',
-                }}
-              >
-                취소
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ModalPoup>
-    </View>
+      <View style={styles.textContainer}>
+        <TouchableOpacity
+          style={styles.cancel}
+          onPress={() => {
+            onClose();
+            setVisible(false);
+            console.log('[ModalPopup.js] visibleState: ' + visibleState);
+          }}
+        >
+          <View>
+            <Text
+              style={{
+                ...styles.modal_Text,
+                fontWeight: 'bold',
+              }}
+            >
+              취소
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ModalSetup>
   );
 }
 
@@ -140,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalPoup;
+export default ModalPopup;
