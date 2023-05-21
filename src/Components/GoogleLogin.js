@@ -30,17 +30,18 @@ export default function GoogleLogin({ navigation }) {
   const [user, setUser] = React.useState(null);
   const [request, response, promtAsync] = Google.useAuthRequest({
     clientId:
-      "905274518245-pep3udc0n4dh0vhghfgml633u5e9uq0p.apps.googleusercontent.com",
+      "15200714153-ar2h399ounks1meiuusdsc1pstlf3586.apps.googleusercontent.com",
     iosClientId:
-      "905274518245-lvicj88ilgk7fkek1p41t1g12a55p5lu.apps.googleusercontent.com",
+      "15200714153-5o2l9jcjtm8ngpma5v950ugmnuetqfv2.apps.googleusercontent.com",
     androidClientId:
-      "905274518245-tp22sk6ml6rctfqna31cfai50e8s0h0n.apps.googleusercontent.com",
+      "15200714153-29ce5qs9bs2afi4i7j9l6odfeqf1lec8.apps.googleusercontent.com",
   });
 
   React.useEffect(() => {
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
       console.log(accessToken);
+      console.log("accessToken 성공");
       accessToken && fetchUserInfo();
     }
   }, [response, accessToken]);
@@ -53,6 +54,8 @@ export default function GoogleLogin({ navigation }) {
     });
     const useInfo = await response.json();
     setUser(useInfo);
+    console.log("user : ");
+    console.log(user);
   }
 
   const ShowUserInfo = () => {
@@ -78,8 +81,9 @@ export default function GoogleLogin({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity
         disabled={!request}
-        onPress={() => {
-          promtAsync();
+        onPress={async () => {
+          await promtAsync();
+          navigation.navigate("Main_Home");
         }}
       >
         <Image

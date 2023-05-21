@@ -49,8 +49,8 @@ const ModalPoup = ({ visible, children }) => {
   );
 };
 
-function ModalPopup({ navigation, activeModal }) {
-  const [visible, setVisible] = React.useState(activeModal);
+function ModalPopup({ navigation, visibleState }) {
+  const [visible, setVisible] = React.useState(visibleState);
 
   return (
     <ModalPoup visible={visible}>

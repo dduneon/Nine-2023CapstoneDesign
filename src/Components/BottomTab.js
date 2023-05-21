@@ -8,13 +8,14 @@ import {
   Modal,
   Animated,
 } from "react-native";
+
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import ModalPopup from "./ModalPopup";
 
 function BottomTab({ navigation, onTabChange }) {
   const [tab, setTab] = useState(0);
-  const [activeModal, setActiveModal] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const home = () => {
     setTab(0);
@@ -27,15 +28,8 @@ function BottomTab({ navigation, onTabChange }) {
     console.log(tab);
   };
 
-  const modal = ModalPopup;
-
   return (
     <View style={styles.bottomTab}>
-      {activeModal ? (
-        <ModalPopup navigation={navigation} activeModal={activeModal} />
-      ) : (
-        <ModalPopup />
-      )}
       <TouchableOpacity
         style={styles.homeMenu}
         onPress={() => {
@@ -54,7 +48,7 @@ function BottomTab({ navigation, onTabChange }) {
       <View style={styles.backgroundCircle}>
         <TouchableOpacity
           onPress={() => {
-            setActiveModal(true);
+            setVisible(true);
           }}
         >
           <Ionicons
@@ -99,12 +93,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     alignItems: "center",
     justifyContent: "center",
+    flex: 1,
   },
   myMenu: {
     marginTop: 10,
     marginRight: 20,
     alignItems: "center",
     justifyContent: "center",
+    flex: 1,
   },
   tabActiveText: {
     color: "blue",
@@ -115,6 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
   },
   backgroundCircle: {
+    flex: 1,
     width: 100,
     height: 100,
     borderRadius: 50,
