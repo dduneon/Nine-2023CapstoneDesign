@@ -14,8 +14,35 @@ import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
 import GoogleLogin from "../Components/GoogleLogin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@login_id";
 
 function Login({ navigation }) {
+  const [id, setId] = useState("");
+  //id = get_id;
+
+  //get_id;
+  //console.log(get_id);
+  /*if (id != null) {
+      navigation.navigate("Main_Home");
+    }*/
+  /*&const get_id = async () => {
+    setId(await AsyncStorage.getItem(STORAGE_KEY));
+  };*/
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log(useInfo);
+    if (useInfo != null) {
+      navigation.navigate("Main_Home");
+    }
+  };
+
   return (
     <View style={styles.LoginScreen}>
       <Image
@@ -52,9 +79,8 @@ function Login({ navigation }) {
             style={styles.google_image}
           />
         </TouchableOpacity>
-        <GoogleLogin navigation={navigation} />
       </View>
-
+      <GoogleLogin navigation={navigation} />
       <StatusBar style="auto" />
     </View>
   );

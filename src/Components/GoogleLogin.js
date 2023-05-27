@@ -3,6 +3,8 @@ import * as React from "react";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import TextPage from "./../Screen/TextPage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /*
 npx expo install expo-auth-session expo-crypto
@@ -21,6 +23,8 @@ expo prebuild
 //web: 905274518245-pep3udc0n4dh0vhghfgml633u5e9uq0p.apps.googleusercontent.com
 //IOS: 905274518245-lvicj88ilgk7fkek1p41t1g12a55p5lu.apps.googleusercontent.com
 // android: 905274518245-tp22sk6ml6rctfqna31cfai50e8s0h0n.apps.googleusercontent.com
+
+const STORAGE_KEY = "@login_id";
 
 WebBrowser.maybeCompleteAuthSession();
 // 사용자가 Google로 로그인하려고 할 때 이벤트 들을 수 있음
@@ -53,11 +57,8 @@ export default function GoogleLogin({ navigation }) {
       },
     });
     useInfo = await response.json();
-    console.log(useInfo);
-    navigation.navigate("Main_Home", {
-      itemId: 86,
-      otherParam: useInfo,
-    });
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(useInfo.id));
+    navigation.navigate("Main_Home");
   }
 
   return (

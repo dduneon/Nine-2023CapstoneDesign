@@ -14,17 +14,16 @@ import HomePage from "./HomePage";
 import MyPage from "./MyPage";
 import ModalPopup from "../Components/ModalPopup";
 
-function Main({ route, navigation }) {
+function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemId, otherParam } = route.params;
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, width: "100%" }}>
         <Header />
       </View>
       <View style={{ flex: 4, alignItems: "center", marginTop: 120 }}>
-        {activeTab === 0 ? <HomePage /> : <MyPage userData={otherParam} />}
+        {activeTab === 0 ? <HomePage /> : <MyPage />}
       </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <BottomTab
