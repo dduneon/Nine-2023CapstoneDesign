@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Modal,
+  Animated,
+} from "react-native";
+import { Fontisto } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 function BottomTab({ onTabChange, onPlusPress }) {
   const [tab, setTab] = useState(0);
@@ -8,12 +17,12 @@ function BottomTab({ onTabChange, onPlusPress }) {
   const home = () => {
     setTab(0);
     onTabChange(0);
-    console.log('[BottomTab.js] Tab: ' + tab);
+    console.log("[BottomTab.js] Tab: " + tab);
   };
   const mypage = () => {
     setTab(1);
     onTabChange(1);
-    console.log('[BottomTab.js] Tab: ' + tab);
+    console.log("[BottomTab.js] Tab: " + tab);
   };
 
   return (
@@ -71,43 +80,43 @@ function BottomTab({ onTabChange, onPlusPress }) {
 
 const styles = StyleSheet.create({
   bottomTab: {
-    flexDirection: 'row',
+    flexDirection: "row",
     elevation: 10,
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    alignItems: "center",
+    justifyContent: "space-around",
   },
   homeMenu: {
     flex: 1,
     marginTop: 10,
     marginLeft: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   myMenu: {
     flex: 1,
     marginTop: 10,
     marginRight: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   tabActiveText: {
-    color: 'blue',
-    fontWeight: 'bold',
+    color: "blue",
+    fontWeight: "bold",
   },
   tabInactiveText: {
-    color: 'blue',
-    fontWeight: 'normal',
+    color: "blue",
+    fontWeight: "normal",
   },
   backgroundCircle: {
     flex: 1,
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginTop: -20,
-    alignItems: 'center',
-    justifyContent: 'center', // 수직 정렬을 위해 센터 정렬
-    position: 'relative',
+    alignItems: "center",
+    justifyContent: "center", // 수직 정렬을 위해 센터 정렬
+    position: "relative",
   },
 });
 

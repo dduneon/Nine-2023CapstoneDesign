@@ -10,30 +10,12 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function AI({ navigation }) {
+function AIPage({ navigation }) {
   return (
-    <View>
-      <Text style={{ fontSize: 50 }}>AI Page</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ fontSize: 50 }}>여기가 GPT 보여줄 페이지</Text>
     </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function AIPage() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="AI"
-        component={AI}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
   );
 }
 

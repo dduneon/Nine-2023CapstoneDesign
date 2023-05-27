@@ -14,45 +14,64 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
-const {height, width} = Dimensions.get('window');
+import GoogleLogin from "../Components/GoogleLogin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@login_id";
+
+const { height, width } = Dimensions.get("window");
 
 function Login({ navigation }) {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log(useInfo);
+    if (useInfo != null) {
+      navigation.navigate("Main_Home");
+    }
+  };
+
   return (
     <View style={styles.LoginScreen}>
       <Image
         source={require("../../assets/Nine_image.png")}
         style={styles.Nine_image}
       />
-      
-      <View style={{ alignContent: "center" }}
-      >
-        <TouchableOpacity 
-        activeOpacity= '0.6'
-        onPress={() => navigation.navigate("Main_Home")}>
+
+      <View style={{ alignContent: "center" }}>
+        <TouchableOpacity
+          activeOpacity="0.6"
+          //onPress={() =>navigation.navigate("Main_Home")}
+        >
           <Image
-          source={require("../../assets/kakao_login.png")}
-          style={styles.kakao_image}
-        />
+            source={require("../../assets/kakao_login.png")}
+            style={styles.kakao_image}
+          />
         </TouchableOpacity>
         <TouchableOpacity
-        activeOpacity= '0.6'
-        onPress={() => navigation.navigate("Main_Home")}>
-        <Image
-          source={require("../../assets/naver_login.png")}
-          style={styles.naver_image}
-        />
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-        activeOpacity= '0.6'
-        onPress={() => navigation.navigate("Main_Home")}>
+          activeOpacity="0.6"
+          //onPress={() =>navigation.navigate("Main_Home")}
+        >
           <Image
-          source={require("../../assets/google_login.png")}
-          style={styles.google_image}
-        />
+            source={require("../../assets/naver_login.png")}
+            style={styles.naver_image}
+          />
         </TouchableOpacity>
 
+        <TouchableOpacity
+          activeOpacity="0.6"
+          //onPress={() =>navigation.navigate("Main_Home")}
+        >
+          <Image
+            source={require("../../assets/google_login.png")}
+            style={styles.google_image}
+          />
+        </TouchableOpacity>
       </View>
+      <GoogleLogin navigation={navigation} />
       <StatusBar style="auto" />
     </View>
   );
@@ -68,18 +87,18 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   kakao_image: {
-    width: width-65,
+    width: width - 65,
     marginLeft: 45,
     resizeMode: "contain",
   },
   naver_image: {
-    width: width-234,
+    width: width - 234,
     marginLeft: 130,
     marginTop: 60,
     resizeMode: "contain",
   },
   google_image: {
-    width: width-65,
+    width: width - 65,
     marginLeft: 45,
     marginTop: 60,
     resizeMode: "contain",

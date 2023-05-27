@@ -10,30 +10,12 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function Input({ navigation }) {
+function TextPage({ navigation }) {
   return (
-    <View>
-      <Text style={{ fontSize: 50 }}> Text Input Page </Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ fontSize: 50 }}> 텍스트 직접 입력할 페이지 </Text>
     </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function TextPage() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Input"
-        component={Input}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
   );
 }
 

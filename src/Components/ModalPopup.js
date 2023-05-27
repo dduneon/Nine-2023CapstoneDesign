@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   Animated,
-} from 'react-native';
+} from "react-native";
 
 const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -49,12 +49,17 @@ const ModalSetup = ({ visible, children }) => {
   );
 };
 
-function ModalPopup({ visibleState, onClose }) {
+function ModalPopup({ visibleState, onClose, navigation }) {
   const [visible, setVisible] = React.useState(visibleState);
   useEffect(() => {
     setVisible(visibleState);
-    console.log('[ModalPopup.js] visibleState: ' + visibleState);
+    console.log("[ModalPopup.js] visibleState: " + visibleState);
   }, [visibleState]);
+
+  const closeModal = () => {
+    onClose();
+    setVisible(false);
+  };
 
   return (
     <ModalSetup visible={visible}>
@@ -62,9 +67,13 @@ function ModalPopup({ visibleState, onClose }) {
         <TouchableOpacity
           style={{
             ...styles.textContainer_detail,
-            width: '100%',
+            width: "100%",
             borderBottomWidth: 0.5,
-            borderColor: 'lightgrey',
+            borderColor: "lightgrey",
+          }}
+          onPress={() => {
+            navigation.navigate("AI");
+            closeModal();
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
@@ -72,14 +81,24 @@ function ModalPopup({ visibleState, onClose }) {
         <TouchableOpacity
           style={{
             ...styles.textContainer_detail,
-            width: '100%',
+            width: "100%",
             borderBottomWidth: 0.5,
-            borderColor: 'lightgrey',
+            borderColor: "lightgrey",
+          }}
+          onPress={() => {
+            navigation.navigate("AI");
+            closeModal();
           }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.textContainer_detail}>
+        <TouchableOpacity
+          style={styles.textContainer_detail}
+          onPress={() => {
+            navigation.navigate("TextInput");
+            closeModal();
+          }}
+        >
           <Text style={styles.modal_Text}>텍스트</Text>
         </TouchableOpacity>
       </View>
@@ -90,14 +109,13 @@ function ModalPopup({ visibleState, onClose }) {
           onPress={() => {
             onClose();
             setVisible(false);
-            console.log('[ModalPopup.js] visibleState: ' + visibleState);
           }}
         >
           <View>
             <Text
               style={{
                 ...styles.modal_Text,
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
               취소
@@ -112,37 +130,37 @@ function ModalPopup({ visibleState, onClose }) {
 const styles = StyleSheet.create({
   modalBackGround: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   textContainer: {
     borderRadius: 12,
     elevation: 20,
     marginBottom: 12,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   textContainer_detail: {
     paddingVertical: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalContainer: {
-    width: '80%',
+    width: "80%",
     borderRadius: 20,
     elevation: 20,
     marginBottom: 40,
   },
   cancel: {
     paddingVertical: 15,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   modal_Text: {
     fontSize: 22,
-    fontWeight: '500',
-    color: '#445CE9',
+    fontWeight: "500",
+    color: "#445CE9",
   },
 });
 
