@@ -36,6 +36,7 @@ function Main({ navigation }) {
       <ModalPopup
         visibleState={modalVisible}
         onClose={() => setModalVisible(false)}
+        navigation={navigation}
       ></ModalPopup>
     </View>
   );

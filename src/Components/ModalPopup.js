@@ -49,12 +49,17 @@ const ModalSetup = ({ visible, children }) => {
   );
 };
 
-function ModalPopup({ visibleState, onClose }) {
+function ModalPopup({ visibleState, onClose, navigation }) {
   const [visible, setVisible] = React.useState(visibleState);
   useEffect(() => {
     setVisible(visibleState);
     console.log("[ModalPopup.js] visibleState: " + visibleState);
   }, [visibleState]);
+
+  const closeModal = () => {
+    onClose();
+    setVisible(false);
+  };
 
   return (
     <ModalSetup visible={visible}>
@@ -66,6 +71,10 @@ function ModalPopup({ visibleState, onClose }) {
             borderBottomWidth: 0.5,
             borderColor: "lightgrey",
           }}
+          onPress={() => {
+            navigation.navigate("AI");
+            closeModal();
+          }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
         </TouchableOpacity>
@@ -76,10 +85,20 @@ function ModalPopup({ visibleState, onClose }) {
             borderBottomWidth: 0.5,
             borderColor: "lightgrey",
           }}
+          onPress={() => {
+            navigation.navigate("AI");
+            closeModal();
+          }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.textContainer_detail}>
+        <TouchableOpacity
+          style={styles.textContainer_detail}
+          onPress={() => {
+            navigation.navigate("TextInput");
+            closeModal();
+          }}
+        >
           <Text style={styles.modal_Text}>텍스트</Text>
         </TouchableOpacity>
       </View>

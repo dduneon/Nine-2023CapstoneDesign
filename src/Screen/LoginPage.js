@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -18,19 +19,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@login_id";
 
+const { height, width } = Dimensions.get("window");
+
 function Login({ navigation }) {
-  const [id, setId] = useState("");
-  //id = get_id;
-
-  //get_id;
-  //console.log(get_id);
-  /*if (id != null) {
-      navigation.navigate("Main_Home");
-    }*/
-  /*&const get_id = async () => {
-    setId(await AsyncStorage.getItem(STORAGE_KEY));
-  };*/
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -96,20 +87,20 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   kakao_image: {
-    width: "83%",
+    width: width - 65,
     marginLeft: 45,
     resizeMode: "contain",
   },
   naver_image: {
-    width: "43%",
+    width: width - 234,
     marginLeft: 130,
-    marginTop: -20,
+    marginTop: 60,
     resizeMode: "contain",
   },
   google_image: {
-    width: "83%",
+    width: width - 65,
     marginLeft: 45,
-    marginTop: -10,
+    marginTop: 60,
     resizeMode: "contain",
   },
 });

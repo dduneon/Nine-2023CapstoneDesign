@@ -13,9 +13,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
-import HomeHeader from "./src/Components/Header";
 import LoginPage from "./src/Screen/LoginPage";
 import Main from "./src/Screen/Main";
+import AIPage from "./src/Screen/AIPage";
+import TextPage from "./src/Screen/TextPage";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,8 +36,21 @@ export default function App() {
           name="Main_Home"
           component={Main}
           options={{
+            gestureEnabled: false,
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+          name="AI"
+          component={AIPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="TextInput"
+          component={TextPage}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
       <StatusBar style="auto" />
