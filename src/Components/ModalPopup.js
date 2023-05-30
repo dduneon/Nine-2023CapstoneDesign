@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   Modal,
   Animated,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -51,6 +52,9 @@ const ModalSetup = ({ visible, children }) => {
 
 function ModalPopup({ visibleState, onClose, navigation }) {
   const [visible, setVisible] = React.useState(visibleState);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
+  const [hasCameraPermission, setHasCameraPermisson] = useState(null);
+
   useEffect(() => {
     setVisible(visibleState);
     console.log("[ModalPopup.js] visibleState: " + visibleState);
@@ -59,6 +63,38 @@ function ModalPopup({ visibleState, onClose, navigation }) {
   const closeModal = () => {
     onClose();
     setVisible(false);
+  };
+
+  const handleImagePicker = async () => {
+    console.log("camera 켜짐");
+    const result = await ImagePicker.launchCameraAsync({
+      base64: true,
+    });
+
+    if (!result.canceled) {
+      navigation.navigate("TextInput", {
+        itemId: 1000,
+        otherParam: result.assets[0].base64,
+      });
+    }
+  };
+
+  const pickImage = async () => {
+    console.log("gallery 켜짐");
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+      base64: true,
+    });
+
+    if (!result.canceled) {
+      navigation.navigate("TextInput", {
+        itemId: 1001,
+        otherParam: result.assets[0].base64,
+      });
+    }
   };
 
   return (
@@ -72,8 +108,16 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             borderColor: "lightgrey",
           }}
           onPress={() => {
-            navigation.navigate("AI");
+            (async () => {
+              const cameraStatus =
+                await ImagePicker.requestCameraPermissionsAsync();
+              setHasCameraPermisson(cameraStatus.status === "granted");
+            })();
+
             closeModal();
+            setTimeout(function () {
+              handleImagePicker();
+            }, 350);
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
@@ -86,8 +130,16 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             borderColor: "lightgrey",
           }}
           onPress={() => {
-            navigation.navigate("AI");
+            (async () => {
+              const galleryStatus =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+              setHasGalleryPermission(galleryStatus.status === "granted");
+            })();
+
             closeModal();
+            setTimeout(function () {
+              pickImage();
+            }, 350);
           }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
@@ -95,7 +147,10 @@ function ModalPopup({ visibleState, onClose, navigation }) {
         <TouchableOpacity
           style={styles.textContainer_detail}
           onPress={() => {
-            navigation.navigate("TextInput");
+            navigation.navigate("TextInput", {
+              itemId: 1002,
+              otherParam: "",
+            });
             closeModal();
           }}
         >

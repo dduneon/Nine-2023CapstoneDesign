@@ -69,10 +69,7 @@ export default function GoogleLogin({ navigation }) {
           await promtAsync();
         }}
       >
-        <Image
-          source={require("../../assets/GoogleLogin.png")}
-          style={{ width: 300, height: 40 }}
-        />
+        <Image source={require("../../assets/google_login.png")} />
       </TouchableOpacity>
     </View>
   );
