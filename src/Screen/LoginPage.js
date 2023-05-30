@@ -14,6 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
+//import KakaoLogin from "../Components/KakaoLogin";
 import GoogleLogin from "../Components/GoogleLogin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -61,17 +62,11 @@ function Login({ navigation }) {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          activeOpacity="0.6"
-          //onPress={() =>navigation.navigate("Main_Home")}
-        >
-          <Image
-            source={require("../../assets/google_login.png")}
-            style={styles.google_image}
-          />
+        <TouchableOpacity activeOpacity="0.6">
+          <GoogleLogin style={styles.google_image} navigation={navigation} />
         </TouchableOpacity>
       </View>
-      <GoogleLogin navigation={navigation} />
+
       <StatusBar style="auto" />
     </View>
   );

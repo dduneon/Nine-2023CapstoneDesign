@@ -4,54 +4,12 @@ import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// other import settings...
-
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
-const Redirect_URI = "https://auth.expo.io/@seonghyeon_lee/KaKaoLogin";
+const Redirect_URI = "https://auth.expo.io/@htj7425/Nine";
 
 const KakaoLogin = ({ navigation }) => {
   function LogInProgress(data) {
-    // access code는 url에 붙어 장황하게 날아온다.
-    // substringd으로 url에서 code=뒤를 substring하면 된다.
-    /*
-        var client_key = "none";
-        var Data = "none";
-        var code = "none";
-        try{
-          const response = axios.get(data, {
-            params:{
-              client_id: client_key,
-              redirect_uri: Data,
-              response_type: code,
-            },
-          });
-          console.log(response);
-        } catch(error){
-            console.log(error);
-        };
-        */
-    /*
-        var client_key = "none";
-        var Data = "none";
-        var code = "none";
-        axios({
-          method: "GET",
-          url: data,
-          params: {
-              client_id: client_key,
-              redirect_uri: Data,
-              response_type: code,
-          },
-      }).then(function (response) {
-          console.log(response);
-          const exp = "code=";
-          var condition = data.indexOf(exp);
-          console.log(condition);
-      }).catch(function (error) {
-          console.log('error', error);
-      });*/
-
     console.log("data: ", data);
     const exp = "code=";
     var condition = data.indexOf(exp);
