@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Button,
@@ -6,17 +6,17 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Fontisto } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Fontisto } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
-import LoginPage from "./src/Screen/LoginPage";
-import Main from "./src/Screen/Main";
-import AIPage from "./src/Screen/AIPage";
-import TextPage from "./src/Screen/TextPage";
+import LoginPage from './src/Screen/LoginPage';
+import Main from './src/Screen/Main';
+import AIPage from './src/Screen/AIPage';
+import TextPage from './src/Screen/TextPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Main_Home">
         <Stack.Screen
           name="Login"
           component={LoginPage}

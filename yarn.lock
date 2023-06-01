@@ -3341,6 +3341,11 @@ expo-status-bar@~1.4.4:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.4.4.tgz"
   integrity sha512-5DV0hIEWgatSC3UgQuAZBoQeaS9CqeWRZ3vzBR9R/+IUD87Adbi4FGhU10nymRqFXOizGsureButGZIXPs7zEA==
 
+expo-text@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.npmjs.org/expo-text/-/expo-text-0.0.0.tgz"
+  integrity sha512-iLMxTQ2uiIkYeWt0PD6ABHkeq+XyvJkfGFgoIzcyYeGrretHOS9lzLod1dY5ZPYu7XV0sBzlpyXpElpHqq4HPQ==
+
 expo-web-browser@~12.1.0, expo-web-browser@~12.1.1:
   version "12.1.1"
   resolved "https://registry.npmjs.org/expo-web-browser/-/expo-web-browser-12.1.1.tgz"
@@ -3660,6 +3665,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 function-bind@^1.1.1:
   version "1.1.1"
@@ -5801,10 +5811,10 @@ react-native-svg@>=12.1.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
-react-native-webview@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-12.1.0.tgz"
-  integrity sha512-fuMyF4PBSIHHxv/3GgWO0LQbd7hRkLLDvZZIZw7gplSvH1YTahzw2wxnAt2K4Ua9UmsZ3w2MKgDamQCrdk4tdw==
+react-native-webview@11.26.0:
+  version "11.26.0"
+  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.26.0.tgz"
+  integrity sha512-4T4CKRm8xlaQDz9h/bCMPGAvtkesrhkRWqCX9FDJEzBToaVUIsV0ZOqtC4w/JSnCtFKKYiaC1ReJtCGv+4mFeQ==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
