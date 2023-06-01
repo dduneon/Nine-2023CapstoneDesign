@@ -68,11 +68,11 @@ function TextPage({ route, navigation }) {
           >
             <Text
               style={{
-                fontSize: 29,
+                fontSize: 30,
                 fontFamily: 'SUITE-Medium',
               }}
             >
-              이미지를 바탕으로 문제를 구성했어요
+              이미지로 문제를 구성했어요
             </Text>
             <Text
               style={{
