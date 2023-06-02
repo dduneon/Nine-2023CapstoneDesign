@@ -1,14 +1,24 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import { View, Dimensions, TouchableOpacity } from "react-native";
 import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const { height, width } = Dimensions.get("window");
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
 const Redirect_URI = "https://auth.expo.io/@htj7425/Nine";
 
-const KakaoLogin = ({ navigation }) => {
+const STORAGE_KEY = "@login_id";
+
+export default function KakaoLogin({ navigation }) {
+  const [press, setpress] = useState(0);
+
+  const change = () => {
+    setpress(1);
+  };
+  
   function LogInProgress(data) {
     console.log("data: ", data);
     const exp = "code=";
@@ -47,8 +57,9 @@ const KakaoLogin = ({ navigation }) => {
       });
   };
 
+  var user_id;
   //  정보 조회 함수
-  function requestUserInfo(Access_Token) {
+  async function requestUserInfo(Access_Token) {
     axios({
       method: "GET",
       url: "https://kapi.kakao.com/v2/user/me",
@@ -59,7 +70,7 @@ const KakaoLogin = ({ navigation }) => {
       .then((response) => {
         console.log("token response:", response);
 
-        var user_id = response.data.id;
+        user_id = response.data.id;
         var user_ninkname = response.data.kakao_account.profile.nickname;
         var user_image = response.data.kakao_account.profile.profile_image_url;
         console.log("user_id: ", user_id);
@@ -69,20 +80,29 @@ const KakaoLogin = ({ navigation }) => {
       .catch(function (error) {
         console.log("error", error);
       });
+    await AsyncStorage.setItem(STORAGE_KEY, useInfo.id);
+    navigation.navigate("Main_Home");
   }
 
-  // asyncstorage 에 토큰 저장
+  /* asyncstorage 에 토큰 저장
   const storeData = async (returnValue) => {
     try {
       await AsyncStorage.setItem("userAccessToken", returnValue);
     } catch (error) {}
-  };
+  };*/
   return (
     <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        onPress={() => {
+          change();
+        }}
+      >
+        <Image source={require("../../assets/kakao_login.png")} />
+      </TouchableOpacity>
       <WebView
         originWhitelist={["*"]}
         scalesPageToFit={false}
-        style={{ marginTop: 30 }}
+        style={{ marginTop: 30, flex: 1, width: width, height: height }}
         source={{
           uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${API_KEY}&redirect_uri=${Redirect_URI}`,
         }}
@@ -95,6 +115,4 @@ const KakaoLogin = ({ navigation }) => {
       />
     </View>
   );
-};
-
-export default KakaoLogin;
+}
