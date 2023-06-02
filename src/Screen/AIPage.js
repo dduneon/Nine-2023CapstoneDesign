@@ -1,21 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { Fontisto } from "@expo/vector-icons";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-  Alert,
-} from "react-native";
+import { Text, View } from 'react-native';
 
-function AIPage({ navigation }) {
+function AIPage({ navigation, route }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ fontSize: 50 }}>여기가 GPT 보여줄 페이지</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#DCE2F0' }}>
+      <Text style={{ fontSize: 15 }}>Test</Text>
+    </SafeAreaView>
   );
 }
 

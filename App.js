@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Button,
@@ -6,23 +6,44 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Fontisto } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StatusBar } from 'expo-status-bar';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 
-import KakaoLogin from "./src/Components/KakaoLogin";
-import LoginPage from "./src/Screen/LoginPage";
-import Main from "./src/Screen/Main";
-import AIPage from "./src/Screen/AIPage";
-import TextPage from "./src/Screen/TextPage";
+import KakaoLogin from './src/Components/KakaoLogin';
+import LoginPage from './src/Screen/LoginPage';
+import Main from './src/Screen/Main';
+import AIPage from './src/Screen/AIPage';
+import TextPage from './src/Screen/TextPage';
+import AILoadingPage from './src/Screen/AILoadingPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const loadFonts = async () => {
+  await Font.loadAsync({
+    'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
+    'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
+  });
+};
+
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(error) => console.log(error)}
+      />
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
@@ -44,6 +65,13 @@ export default function App() {
         <Stack.Screen
           name="AI"
           component={AIPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Loading"
+          component={AILoadingPage}
           options={{
             headerShown: false,
           }}
