@@ -22,6 +22,7 @@ function TextPage({ route, navigation }) {
   const [textData, setTextData] = useState("");
   const onChangeText = (payload) => setTextData(payload);
   const [isReady, setIsReady] = useState(false);
+  const [mainText, setMainText] = useState('이미지를 분석 중이에요');
 
   const loadFonts = async () => {
     await Font.loadAsync({
@@ -37,15 +38,17 @@ function TextPage({ route, navigation }) {
   }, []);
 
   const fetchData = async () => {
-    if (otherParam != "") {
-      setTextData("Loading ... ");
+    if (otherParam != '') {
       const responseData = await callGoogleVisionAsync(otherParam);
       setTextData(responseData.text);
       console.log(responseData.text);
+      setMainText('이미지로 문제를 구성했어요');
+    } else {
+      setMainText('문제를 입력해주세요');
     }
   };
 
-  if (isReady && textData != "") {
+  if (isReady) {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "#DCE2F0" }}>
         <KeyboardAvoidingView
@@ -67,12 +70,14 @@ function TextPage({ route, navigation }) {
             }}
           >
             <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
               style={{
-                fontSize: 30,
-                fontFamily: "SUITE-Medium",
+                fontSize: 35,
+                fontFamily: 'SUITE-Medium',
               }}
             >
-              이미지로 문제를 구성했어요
+              {mainText}
             </Text>
             <Text
               style={{
@@ -81,7 +86,7 @@ function TextPage({ route, navigation }) {
                 marginTop: 10,
               }}
             >
-              아래 변환된 문제에 오탈자가 없는지 검수한 후
+              아래 문제에 오탈자가 없는지 검수한 후
             </Text>
             <Text
               style={{
