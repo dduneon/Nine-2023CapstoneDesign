@@ -4,7 +4,11 @@ import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+<<<<<<< HEAD
 const { height, width } = Dimensions.get("window");
+=======
+const STORAGE_KEY = "@login_id";
+>>>>>>> 02c0baf41976f8ed0a3318e8786dfb02ed98d051
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
@@ -48,7 +52,7 @@ export default function KakaoLogin({ navigation }) {
     })
       .then(function (response) {
         Access_Token = response.data.access_token;
-        console.log("Access_Token: ", Access_Token);
+        //console.log("Access_Token: ", Access_Token);
         requestUserInfo(Access_Token);
       })
       .catch(function (error) {
@@ -66,15 +70,23 @@ export default function KakaoLogin({ navigation }) {
         Authorization: `Bearer ${Access_Token}`,
       },
     })
-      .then((response) => {
-        console.log("token response:", response);
+      .then(async (response) => {
+        //console.log("token response:", response);
 
+<<<<<<< HEAD
         user_id = response.data.id;
         var user_ninkname = response.data.kakao_account.profile.nickname;
         var user_image = response.data.kakao_account.profile.profile_image_url;
         console.log("user_id: ", user_id);
         console.log("user_nickname: ", user_ninkname);
         console.log("user_image", user_image);
+=======
+        await AsyncStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(response.data.id)
+        );
+        navigation.navigate("Main_Home");
+>>>>>>> 02c0baf41976f8ed0a3318e8786dfb02ed98d051
       })
       .catch(function (error) {
         console.log("error", error);
@@ -83,12 +95,15 @@ export default function KakaoLogin({ navigation }) {
       navigation.navigate("Main_Home");
   }
 
+<<<<<<< HEAD
   /* asyncstorage 에 토큰 저장
   const storeData = async (returnValue) => {
     try {
       await AsyncStorage.setItem("userAccessToken", returnValue);
     } catch (error) {}
   };*/
+=======
+>>>>>>> 02c0baf41976f8ed0a3318e8786dfb02ed98d051
   return (
     <View style={{ flex: 1 }}>
       <TouchableOpacity onPress={() => { change(); }}>
