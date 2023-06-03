@@ -29,8 +29,6 @@ export default function NaverLogin({ navigation }) {
     if (result.type === "success") {
       const code = result.params.code;
       state_value = result.params.state;
-      console.log(result);
-      console.log(code);
       //mutate({
       //  id_token: code,
       //  provider: "NAVER",
@@ -42,7 +40,6 @@ export default function NaverLogin({ navigation }) {
   const requestToken = async (request_code) => {
     var Access_Token = "none";
     var request_token_url = `https://nid.naver.com/oauth2.0/token?`;
-    console.log("두 번째 함수 시작");
     axios({
       methos: "post",
       url: request_token_url,
@@ -55,7 +52,6 @@ export default function NaverLogin({ navigation }) {
       },
     })
       .then(function (response) {
-        console.log("토큰 받기 함수 결과: ", response);
         Access_Token = response.data.access_token;
         //console.log(Access_Token);
         requestUserInfo(Access_Token);
@@ -66,7 +62,6 @@ export default function NaverLogin({ navigation }) {
   };
 
   const requestUserInfo = async (Access_Token) => {
-    console.log("세 번쨰 함수 시작");
     axios({
       method: "GET",
       url: "https://openapi.naver.com/v1/nid/me",
@@ -75,7 +70,6 @@ export default function NaverLogin({ navigation }) {
       },
     })
       .then(async (response) => {
-        console.log("회원 프로필 조회 결과: ", response);
         await AsyncStorage.setItem(
             STORAGE_KEY,
             JSON.stringify(response.data.response.id)

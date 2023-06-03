@@ -10,10 +10,15 @@ import {
   ScrollView,
   TextInput,
   FlatList,
+  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
+
+import { folders } from "../Data/data";
+
+const { height, width } = Dimensions.get("window");
 
 function Home({ navigation }) {
   // 폰트 로드
@@ -31,29 +36,22 @@ function Home({ navigation }) {
     loadFonts();
   }, []);
 
+//--------------------------------------------------------------------------
+// Flatlist 정상 작동되는지 확인용 코드
+  const [folder, setFolder] = useState(folders)
+  const [id_num, setId_num] = useState(4)
 
-  const folders = [
-    {
-      id: "1", //각 폴더의 고유 id값
-      text: "20230531", //각 폴더의 제목 string값
-    },
-    {
-      id: "2",
-      text: "20230602",
-    },
-    {
-      id: "3",
-      text: "20230605",
-    },
-    {
-      id: "4",
-      text: "20230605",
-    },
-    {
-      id: "5",
-      text: "20230605",
-    },
-  ]
+  function update_Folder(){
+    const newfolder = {
+      id: id_num,
+      text: "20230707202020",
+    }
+    setFolder([...folder, newfolder])
+    setId_num(id_num + 1)
+  }
+  console.log(folder);
+//--------------------------------------------------------------------------
+
   const folder_components = ({ item }) => (
     <View
       style={{
@@ -65,7 +63,7 @@ function Home({ navigation }) {
       <TouchableOpacity>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image source={require("../../assets/folder_image.png")} />
-          <View style={{ width: 60 }}>
+          <View style={{ width: width / 4, height: height / 64}}>
             <Text style={{ textAlign: "center" }}>{item.text} </Text>
           </View>
         </View>
@@ -79,12 +77,12 @@ function Home({ navigation }) {
     <View>
       <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
       <Text style = {styles.text_style}>📖오답노트📖</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={update_Folder}>
           <Text style={styles.text_style}>폴더 추가하기</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data = {folders}
+        data = {folder}
         renderItem={folder_components}
         numColumns={2}
         keyExtractor={(text) => text.id }

@@ -32,7 +32,7 @@ function Login({ navigation }) {
     const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(useInfo);
     if (useInfo != null) {
-      //navigation.navigate("Main_Home");
+      navigation.navigate("Main_Home");
     }
   };
 

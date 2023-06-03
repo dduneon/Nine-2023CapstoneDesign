@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     width: width,
     marginLeft: 15,
     marginTop: 180,
-    resizeMode: "contain",
+    resizeMode: "contain",  
   }
 });
