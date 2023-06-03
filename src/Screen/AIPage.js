@@ -23,10 +23,12 @@ function AIPage({ navigation, route }) {
         messages: [
           {
             role: 'user',
-            content: otherParam + '\n이 문제의 답과 해설을 알려줘',
+            content:
+              otherParam +
+              "\n이 문제의 답과 해설을\n'답: (보기들 중 하나)\n해설: ~\n' 형식으로 알려줘",
           },
         ],
-        max_tokens: 600,
+        max_tokens: 1000,
         temperature: 0.7,
       }),
     })
@@ -40,9 +42,14 @@ function AIPage({ navigation, route }) {
         console.error(error);
       });
   };
+
+  const handleData = () => {
+    //answer.
+  };
+
   useEffect(() => {
     handleSend();
-    console.log(answer);
+    handleData();
   }, []);
 
   // 해야할점 : 데이터 token 수 조정하기
@@ -51,10 +58,28 @@ function AIPage({ navigation, route }) {
       style={{
         flex: 1,
         backgroundColor: '#DCE2F0',
-        alignItems: 'center',
       }}
     >
-      <Text style={{ fontSize: 15 }}>{otherParam}</Text>
+      <Text style={{ fontSize: 15, fontFamily: 'SUITE-Light' }}>
+        {otherParam}
+      </Text>
+
+      <Text
+        style={{
+          fontSize: 25,
+          fontFamily: 'SUITE-Medium',
+          marginTop: 40,
+          marginBottom: 20,
+        }}
+      >
+        인공지능 나인이 제공한 답과 해설이에요
+      </Text>
+      <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>
+        {answer.split('\n')[0]}
+      </Text>
+      <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>
+        {answer.split('\n')[2]}
+      </Text>
     </SafeAreaView>
   );
 }
