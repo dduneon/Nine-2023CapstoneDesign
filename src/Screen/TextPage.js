@@ -22,6 +22,7 @@ function TextPage({ route, navigation }) {
   const [textData, setTextData] = useState('');
   const onChangeText = (payload) => setTextData(payload);
   const [mainText, setMainText] = useState('이미지를 분석 중이에요');
+  // @dduneon : 나인에게 물어보기 버튼이 fetchData 전에 누를수 없도록 설정하기
 
   useEffect(() => {
     fetchData();
@@ -38,7 +39,7 @@ function TextPage({ route, navigation }) {
   };
 
   const onPressAskBtn = () => {
-    navigation.navigate('Loading', {
+    navigation.navigate('AI', {
       itemId: 2000,
       otherParam: textData,
     });
