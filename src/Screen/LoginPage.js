@@ -17,6 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import KakaoLogin from "../Components/KakaoLogin";
 import GoogleLogin from "../Components/GoogleLogin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NaverLogin from "../Components/NaverLogin";
 
 const STORAGE_KEY = "@login_id";
 
@@ -31,7 +32,7 @@ function Login({ navigation }) {
     const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(useInfo);
     if (useInfo != null) {
-      navigation.navigate("Main_Home");
+      //navigation.navigate("Main_Home");
     }
   };
 
@@ -54,12 +55,8 @@ function Login({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity="0.6"
-          //onPress={() =>navigation.navigate("Main_Home")}
         >
-          <Image
-            source={require("../../assets/naver_login.png")}
-            style={styles.naver_image}
-          />
+          <NaverLogin style={styles.naver_image} navigation={navigation}/>
         </TouchableOpacity>
 
         <TouchableOpacity activeOpacity="0.6">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Dimensions, TouchableOpacity, Image, width, height } from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -82,13 +82,6 @@ export default function KakaoLogin({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity
-        onPress={() => {
-          change();
-        }}
-      >
-        <Image source={require('../../assets/kakao_login.png')} />
-      </TouchableOpacity>
       <WebView
         originWhitelist={['*']}
         scalesPageToFit={false}
