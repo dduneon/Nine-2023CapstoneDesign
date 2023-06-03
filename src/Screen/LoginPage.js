@@ -32,7 +32,7 @@ function Login({ navigation }) {
     const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(useInfo);
     if (useInfo != null) {
-      //navigation.navigate("Main_Home");
+      navigation.navigate("Main_Home");
     }
   };
 
@@ -42,7 +42,6 @@ function Login({ navigation }) {
         source={require("../../assets/Nine_image.png")}
         style={styles.Nine_image}
       />
-
       <View style={{ alignContent: "center" }}>
         <TouchableOpacity
           activeOpacity="0.6"
@@ -53,14 +52,11 @@ function Login({ navigation }) {
             style={styles.kakao_image}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity="0.6"
-        >
-          <NaverLogin style={styles.naver_image} navigation={navigation}/>
-        </TouchableOpacity>
-
         <TouchableOpacity activeOpacity="0.6">
-          <GoogleLogin style={styles.google_image} navigation={navigation} />
+          <NaverLogin navigation={navigation}/>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity="0.6">
+          <GoogleLogin navigation={navigation}/>
         </TouchableOpacity>
       </View>
 
@@ -81,18 +77,6 @@ const styles = StyleSheet.create({
   kakao_image: {
     width: width - 65,
     marginLeft: 45,
-    resizeMode: "contain",
-  },
-  naver_image: {
-    width: width - 234,
-    marginLeft: 130,
-    marginTop: 60,
-    resizeMode: "contain",
-  },
-  google_image: {
-    width: width - 65,
-    marginLeft: 45,
-    marginTop: 60,
     resizeMode: "contain",
   },
 });

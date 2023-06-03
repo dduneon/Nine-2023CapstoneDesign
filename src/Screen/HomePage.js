@@ -10,50 +10,33 @@ import {
   ScrollView,
   TextInput,
   FlatList,
+  Dimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
 
+import { folders } from "../Data/data";
+
+const { height, width } = Dimensions.get("window");
+
 function Home({ navigation }) {
-  // 폰트 로드
-  const [isReady, setIsReady] = useState(false);
+//--------------------------------------------------------------------------
+// Flatlist 정상 작동되는지 확인용 코드 (추후 데이터베이스 연동 후 변경예정)
+  const [folder, setFolder] = useState(folders)
+  const [id_num, setId_num] = useState(4)
 
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      'SUITE-Light': require('../../assets/fonts/SUITE-Light.otf'),
-      'SUITE-Medium': require('../../assets/fonts/SUITE-Medium.otf'),
-    });
-    setIsReady(true);
-  };
+  function update_Folder(){
+    const newfolder = {
+      id: id_num,
+      text: "20230707202020", //글자수 짤리는지 확인용 길게해놓음
+    }
+    setFolder([...folder, newfolder])
+    setId_num(id_num + 1)
+  }
+  console.log(folder);
+//--------------------------------------------------------------------------
 
-  useEffect(() => {
-    loadFonts();
-  }, []);
-
-
-  const folders = [
-    {
-      id: "1", //각 폴더의 고유 id값
-      text: "20230531", //각 폴더의 제목 string값
-    },
-    {
-      id: "2",
-      text: "20230602",
-    },
-    {
-      id: "3",
-      text: "20230605",
-    },
-    {
-      id: "4",
-      text: "20230605",
-    },
-    {
-      id: "5",
-      text: "20230605",
-    },
-  ]
   const folder_components = ({ item }) => (
     <View
       style={{
@@ -65,7 +48,7 @@ function Home({ navigation }) {
       <TouchableOpacity>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image source={require("../../assets/folder_image.png")} />
-          <View style={{ width: 60 }}>
+          <View style={{ width: width / 4, height: height / 64}}>
             <Text style={{ textAlign: "center" }}>{item.text} </Text>
           </View>
         </View>
@@ -74,17 +57,16 @@ function Home({ navigation }) {
   );
 
 
-  if (isReady != '') {
   return (
     <View>
       <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
       <Text style = {styles.text_style}>📖오답노트📖</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={update_Folder}>
           <Text style={styles.text_style}>폴더 추가하기</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data = {folders}
+        data = {folder}
         renderItem={folder_components}
         numColumns={2}
         keyExtractor={(text) => text.id }
@@ -93,7 +75,7 @@ function Home({ navigation }) {
     </View>
   );
 }
-}
+
 
 const styles = StyleSheet.create({
   font_style: {
