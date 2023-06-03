@@ -1,6 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { 
+    StyleSheet,
+    View, 
+    Image, 
+    TouchableOpacity,
+    Dimensions
+} from "react-native";
 import * as AuthSession from "expo-auth-session";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,6 +18,7 @@ const REDIRECT_URL = "https://auth.expo.io/@seonghyeon_lee/Nine";
 const CLIENT_SECRET = "j3iOBc9PWy";
 var state_value = "";
 
+const { height, width } = Dimensions.get("window");
 
 export default function NaverLogin({ navigation }) {
   const login = async () => {
@@ -85,7 +92,7 @@ export default function NaverLogin({ navigation }) {
       <TouchableOpacity onPress={login}>
         <Image
           source={require("../../assets/naver_login.png")}
-          style={{ width: 300, height: 40 }}
+          style={styles.Naver_image}
         />
       </TouchableOpacity>
     </View>
@@ -99,4 +106,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  Naver_image: {
+    width: width,
+    marginTop: 60,
+    marginLeft: 20,
+    resizeMode: "contain"
+  }
 });

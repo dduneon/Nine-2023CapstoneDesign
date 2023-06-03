@@ -2,7 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity,
+  Dimensions} from "react-native";
 import TextPage from "./../Screen/TextPage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -23,6 +24,8 @@ expo prebuild
 //web: 905274518245-pep3udc0n4dh0vhghfgml633u5e9uq0p.apps.googleusercontent.com
 //IOS: 905274518245-lvicj88ilgk7fkek1p41t1g12a55p5lu.apps.googleusercontent.com
 // android: 905274518245-tp22sk6ml6rctfqna31cfai50e8s0h0n.apps.googleusercontent.com
+
+const { height, width } = Dimensions.get("window");
 
 const STORAGE_KEY = "@login_id";
 
@@ -69,7 +72,8 @@ export default function GoogleLogin({ navigation }) {
           await promtAsync();
         }}
       >
-        <Image source={require("../../assets/google_login.png")} />
+        <Image source={require("../../assets/google_login.png")}
+      style = {styles.google_image} />
       </TouchableOpacity>
     </View>
   );
@@ -82,4 +86,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  google_image:{
+    width: width,
+    marginLeft: 15,
+    marginTop: 180,
+    resizeMode: "contain",
+  }
 });
