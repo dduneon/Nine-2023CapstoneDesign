@@ -21,30 +21,15 @@ import { folders } from "../Data/data";
 const { height, width } = Dimensions.get("window");
 
 function Home({ navigation }) {
-  // 폰트 로드
-  const [isReady, setIsReady] = useState(false);
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      'SUITE-Light': require('../../assets/fonts/SUITE-Light.otf'),
-      'SUITE-Medium': require('../../assets/fonts/SUITE-Medium.otf'),
-    });
-    setIsReady(true);
-  };
-
-  useEffect(() => {
-    loadFonts();
-  }, []);
-
 //--------------------------------------------------------------------------
-// Flatlist 정상 작동되는지 확인용 코드
+// Flatlist 정상 작동되는지 확인용 코드 (추후 데이터베이스 연동 후 변경예정)
   const [folder, setFolder] = useState(folders)
   const [id_num, setId_num] = useState(4)
 
   function update_Folder(){
     const newfolder = {
       id: id_num,
-      text: "20230707202020",
+      text: "20230707202020", //글자수 짤리는지 확인용 길게해놓음
     }
     setFolder([...folder, newfolder])
     setId_num(id_num + 1)
@@ -72,7 +57,6 @@ function Home({ navigation }) {
   );
 
 
-  if (isReady != '') {
   return (
     <View>
       <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
@@ -91,7 +75,7 @@ function Home({ navigation }) {
     </View>
   );
 }
-}
+
 
 const styles = StyleSheet.create({
   font_style: {
