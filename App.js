@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Button,
-  Image,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+import * as SplashScreen from 'expo-splash-screen';
 
 import KakaoLogin from './src/Components/KakaoLogin';
 import LoginPage from './src/Screen/LoginPage';
@@ -22,27 +15,36 @@ import TextPage from './src/Screen/TextPage';
 import AILoadingPage from './src/Screen/AILoadingPage';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
-    'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
-  });
-};
-
+SplashScreen.preventAutoHideAsync();
 export default function App() {
-  const [fontLoaded, setFontLoaded] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
 
-  if (!fontLoaded) {
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setFontLoaded(true)}
-        onError={(error) => console.log(error)}
-      />
-    );
-  }
+  // 폰트 불러오는 작업 실행 , 실행 완료시 스플래시 스크린 종료
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync({
+          'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
+          'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
+        });
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  useEffect(() => {
+    if (appIsReady) {
+      console.log('[App.js] prepare is OK');
+      SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
 
   return (
     <NavigationContainer>
