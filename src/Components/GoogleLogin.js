@@ -28,6 +28,7 @@ expo prebuild
 const { height, width } = Dimensions.get("window");
 
 const STORAGE_KEY = "@login_id";
+const MYPATH = '@path';
 
 WebBrowser.maybeCompleteAuthSession();
 // 사용자가 Google로 로그인하려고 할 때 이벤트 들을 수 있음
@@ -61,6 +62,7 @@ export default function GoogleLogin({ navigation }) {
     });
     useInfo = await response.json();
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(useInfo.id));
+    await AsyncStorage.setItem(MYPATH, "G");
     navigation.navigate("Main_Home");
   }
 
@@ -90,6 +92,6 @@ const styles = StyleSheet.create({
     width: width,
     marginLeft: 15,
     marginTop: 180,
-    resizeMode: "contain",
+    resizeMode: "contain",  
   }
 });

@@ -25,14 +25,22 @@ const { height, width } = Dimensions.get("window");
 
 function Login({ navigation }) {
   useEffect(() => {
+    //deleteData('@login_image')
     fetchData();
   }, []);
-
+/*
+  const deleteData = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key);
+    } catch (error) {
+    }
+  };
+*/
   const fetchData = async () => {
     const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(useInfo);
     if (useInfo != null) {
-      //navigation.navigate("Main_Home");
+      navigation.navigate("Main_Home");
     }
   };
 
