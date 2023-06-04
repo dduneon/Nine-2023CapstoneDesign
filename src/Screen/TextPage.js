@@ -32,7 +32,7 @@ function TextPage({ route, navigation }) {
     if (otherParam != '') {
       const responseData = await callGoogleVisionAsync(otherParam);
       setTextData(responseData.text);
-      setMainText('이미지로 문제를 구성했어요');
+      setMainText('나인이 이미지로\n문제를 구성해 보았어요');
     } else {
       setMainText('문제를 입력해주세요');
     }
@@ -66,10 +66,8 @@ function TextPage({ route, navigation }) {
           }}
         >
           <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
             style={{
-              fontSize: 35,
+              fontSize: 34,
               fontFamily: 'SUITE-Medium',
             }}
           >
@@ -96,11 +94,10 @@ function TextPage({ route, navigation }) {
         <View
           style={{
             flex: 1,
-            borderRadius: 30,
+            borderRadius: 10,
             backgroundColor: '#F0EDCC',
             width: '96%',
             padding: 10,
-            paddingTop: 25,
             marginBottom: 30,
           }}
         >
@@ -112,6 +109,7 @@ function TextPage({ route, navigation }) {
               multiline={true}
               placeholder="문제를 입력해주세요."
               color="#02343F"
+              style={{ fontSize: 15 }}
             />
           </ScrollView>
         </View>
