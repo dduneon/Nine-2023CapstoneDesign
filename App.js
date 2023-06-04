@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar } from 'expo-status-bar';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { StatusBar } from "expo-status-bar";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
-import KakaoLogin from './src/Components/KakaoLogin';
-import LoginPage from './src/Screen/LoginPage';
-import Main from './src/Screen/Main';
-import AIPage from './src/Screen/AIPage';
-import TextPage from './src/Screen/TextPage';
+import KakaoLogin from "./src/Components/KakaoLogin";
+import LoginPage from "./src/Screen/LoginPage";
+import Main from "./src/Screen/Main";
+import AIPage from "./src/Screen/AIPage";
+import TextPage from "./src/Screen/TextPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +24,8 @@ export default function App() {
     async function prepare() {
       try {
         await Font.loadAsync({
-          'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
-          'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
+          "SUITE-Light": require("./assets/fonts/SUITE-Light.otf"),
+          "SUITE-Medium": require("./assets/fonts/SUITE-Medium.otf"),
         });
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
@@ -40,7 +40,7 @@ export default function App() {
 
   useEffect(() => {
     if (appIsReady) {
-      console.log('[App.js] prepare is OK');
+      console.log("[App.js] prepare is OK");
       SplashScreen.hideAsync();
     }
   }, [appIsReady]);
