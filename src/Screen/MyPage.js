@@ -15,9 +15,9 @@ import { Fontisto } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { folders } from "../Data/data";
 
-const MYNAME = '@name';
-const MYPICTURE = '@login_image';
-const MYPATH = '@path';
+const MYNAME = "@name";
+const MYPICTURE = "@login_image";
+const MYPATH = "@path";
 const STORAGE_KEY = "@login_id";
 
 const { height, width } = Dimensions.get("window");
@@ -53,25 +53,25 @@ function My({ navigation }) {
 
   const picture_check = async () => {
     const image_url = await AsyncStorage.getItem(MYPICTURE);
-    if (image_url === null){
+    if (image_url === null) {
       setImage_have(0);
-      return
-    } else{
+      return;
+    } else {
       setImage_have(1);
       setImageUrl(JSON.parse(image_url));
     }
-  }
+  };
 
   const login_path = async () => {
     const id = await AsyncStorage.getItem(MYPATH);
-    if(id === "K"){
-      setPath("카카오")
-    }else if(id === "N"){
-      setPath("네이버")
-    }else if(id === "G"){
-      setPath("구글")
+    if (id === "K") {
+      setPath("카카오");
+    } else if (id === "N") {
+      setPath("네이버");
+    } else if (id === "G") {
+      setPath("구글");
     }
-  }
+  };
 
   const change_name = async () => {
     if (name === "") {
@@ -86,24 +86,24 @@ function My({ navigation }) {
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       navigation.navigate("Login");
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.user_container}>
         <TouchableOpacity>
-          {image_have === 1 ?
-          <Image
-            src = {image_url}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-          /> : <Image
-            source={require("../../assets/MyPage_User_icon.png")}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-          />
-          }
-          
+          {image_have === 1 ? (
+            <Image
+              src={image_url}
+              style={{ width: 100, height: 100, borderRadius: 50 }}
+            />
+          ) : (
+            <Image
+              source={require("../../assets/MyPage_User_icon.png")}
+              style={{ width: 100, height: 100, borderRadius: 50 }}
+            />
+          )}
         </TouchableOpacity>
         <TextInput
           style={{ fontSize: 20, fontWeight: "bold", marginTop: 15 }}
@@ -117,12 +117,21 @@ function My({ navigation }) {
       <View style={styles.info_container}>
         <View style={styles.text_container}></View>
         <Text style={styles.problem_text}> 로그인 경로는 {path} 입니다! </Text>
-        <Text style={styles.problem_text}> 지금까지 질문한 문제: {num} 개에요!</Text>
+        <Text style={styles.problem_text}>
+          {" "}
+          지금까지 질문한 문제: {num} 개에요!
+        </Text>
       </View>
-        
-      <View style={{flexDirection:"row", justifyContent: "flex-end"}}>
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          marginBottom: 15,
+        }}
+      >
         <TouchableOpacity onPress={Logout}>
-          <Text style={{marginRight: 30}}>로그아웃하기</Text>
+          <Text style={{ marginRight: 30 }}>로그아웃하기</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -135,12 +144,12 @@ const styles = StyleSheet.create({
   },
   user_container: {
     flex: 1,
+    marginTop: 25,
     alignItems: "center",
     justifyContent: "center",
   },
   info_container: {
     marginTop: 60,
-    marginLeft: -30,
     flex: 9,
     borderTopWidth: 2,
     borderColor: "lightgrey",
@@ -150,11 +159,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     justifyContent: "space-evenly",
   },
-  problem_text:{
+  problem_text: {
     margin: 10,
-    fontFamily: 'SUITE-Medium',
+    fontFamily: "SUITE-Medium",
     fontSize: 20,
-  }
+  },
 });
 
 export default My;
