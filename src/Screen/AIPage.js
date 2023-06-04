@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 
 function AIPage({ navigation, route }) {
   const { itemId, otherParam } = route.params;
@@ -25,7 +32,7 @@ function AIPage({ navigation, route }) {
             role: 'user',
             content:
               otherParam +
-              "\n이 문제의 답과 해설을\n'답: (보기들 중 하나)\n해설: ~\n' 형식으로 알려줘",
+              "\n이 문제의 답과 해설에 대해 다음과 같은 양식으로 알려줘\n- 답은 첫째줄, 해설은 둘째 줄에 알려줄 것(답과 해설을 합치면 두줄이며 답과 해설은 계행을 통하여 구분됨)\n- 해설은 최대한 답에 대한 근거를 말해줄 것\n- 답과 해설을 포함한 두 줄 이외의 답변은 주지 않을 것\n- '답: '이나 '해설: ' 로 답의 시작이나 해설의 시작을 알려줄 것",
           },
         ],
         max_tokens: 1000,
@@ -46,8 +53,10 @@ function AIPage({ navigation, route }) {
   const handleData = () => {};
 
   useEffect(() => {
-    handleSend();
-    handleData();
+    if (!answer) {
+      handleSend();
+    }
+    //handleData();
   }, []);
 
   // 해야할점 : 데이터 token 수 조정하기
@@ -63,13 +72,21 @@ function AIPage({ navigation, route }) {
           fontSize: 30,
           fontFamily: 'SUITE-Medium',
           margin: 10,
-          marginBottom: 20,
         }}
       >
         인공지능 나인이 제공한{'\n'}답과 해설이에요
       </Text>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ alignItems: 'center' }}>
+      <View
+        style={{
+          flex: 0.5,
+          backgroundColor: 'yellow',
+          padding: 10,
+          marginBottom: 10,
+          backgroundColor: '#ACA7CA',
+          borderRadius: 10,
+        }}
+      >
+        <ScrollView style={{ flex: 1 }}>
           <Text
             style={{
               fontSize: 12,
@@ -78,20 +95,76 @@ function AIPage({ navigation, route }) {
           >
             {otherParam}
           </Text>
-        </View>
-      </ScrollView>
-      <ScrollView style={{ flex: 1 }}>
-        <View>
+        </ScrollView>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#CE9EA8',
+          padding: 10,
+          borderRadius: 10,
+        }}
+      >
+        <ScrollView style={{ flex: 1, color: '#02343F' }}>
           <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>
             {answer.split('\n')[0]}
           </Text>
           <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>
-            {answer.split('\n')[2]}
+            {answer.split('\n')[1]}
           </Text>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginLeft: 10,
+          marginRight: 10,
+          marginTop: 10,
+          justifyContent: 'padding-between',
+        }}
+      >
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
+            },
+          ]}
+        >
+          <Text style={styles.text}>홈화면으로 이동하기</Text>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
+            },
+          ]}
+        >
+          <Text style={styles.text}>내 오답노트에 추가하기</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+  button: {
+    width: '50%',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'black',
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+    fontFamily: 'SUITE-Medium',
+  },
+});
 
 export default AIPage;
