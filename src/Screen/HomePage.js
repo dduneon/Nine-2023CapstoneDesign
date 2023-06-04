@@ -34,7 +34,7 @@ function Home({ navigation }) {
     setFolder([...folder, newfolder])
     setId_num(id_num + 1)
   }
-  console.log(folder);
+  //console.log(folder);
 //--------------------------------------------------------------------------
 
   const folder_components = ({ item }) => (
