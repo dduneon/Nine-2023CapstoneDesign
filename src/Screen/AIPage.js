@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView } from 'react-native';
 
 function AIPage({ navigation, route }) {
   const { itemId, otherParam } = route.params;
@@ -43,9 +43,7 @@ function AIPage({ navigation, route }) {
       });
   };
 
-  const handleData = () => {
-    //answer.
-  };
+  const handleData = () => {};
 
   useEffect(() => {
     handleSend();
@@ -60,26 +58,38 @@ function AIPage({ navigation, route }) {
         backgroundColor: '#DCE2F0',
       }}
     >
-      <Text style={{ fontSize: 15, fontFamily: 'SUITE-Light' }}>
-        {otherParam}
-      </Text>
-
       <Text
         style={{
-          fontSize: 25,
+          fontSize: 30,
           fontFamily: 'SUITE-Medium',
-          marginTop: 40,
+          margin: 10,
           marginBottom: 20,
         }}
       >
-        인공지능 나인이 제공한 답과 해설이에요
+        인공지능 나인이 제공한{'\n'}답과 해설이에요
       </Text>
-      <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>
-        {answer.split('\n')[0]}
-      </Text>
-      <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>
-        {answer.split('\n')[2]}
-      </Text>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ alignItems: 'center' }}>
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'SUITE-Light',
+            }}
+          >
+            {otherParam}
+          </Text>
+        </View>
+      </ScrollView>
+      <ScrollView style={{ flex: 1 }}>
+        <View>
+          <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>
+            {answer.split('\n')[0]}
+          </Text>
+          <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>
+            {answer.split('\n')[2]}
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
