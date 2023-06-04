@@ -13,22 +13,28 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { folders } from "../Data/data";
 
 const MYNAME = '@name';
 const MYPICTURE = '@login_image';
+const MYPATH = '@path';
+const STORAGE_KEY = "@login_id";
 
 const { height, width } = Dimensions.get("window");
 
-function My() {
+function My({ navigation }) {
   const [name, setName] = useState("");
   const [tempName, setTempName] = useState("");
   const [image_have, setImage_have] = useState(0);
   const [image_url, setImageUrl] = useState("");
+  const [num, setNum] = useState(folders.length); // 지금까지 질문한 문제 수
+  const [path, setPath] = useState("");
   const onChangeName = (payload) => setName(payload);
 
   useEffect(() => {
     name_check();
     picture_check();
+    login_path();
   }, []);
 
   const name_check = async () => {
@@ -55,7 +61,17 @@ function My() {
       setImageUrl(JSON.parse(image_url));
     }
   }
-  
+
+  const login_path = async () => {
+    const id = await AsyncStorage.getItem(MYPATH);
+    if(id === "K"){
+      setPath("카카오")
+    }else if(id === "N"){
+      setPath("네이버")
+    }else if(id === "G"){
+      setPath("구글")
+    }
+  }
 
   const change_name = async () => {
     if (name === "") {
@@ -64,6 +80,14 @@ function My() {
     }
     setTempName(name);
     await AsyncStorage.setItem(MYNAME, JSON.stringify(name));
+  };
+
+  const Logout = async () => {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      navigation.navigate("Login");
+    } catch (error) {
+    }
   };
 
   return (
@@ -92,6 +116,14 @@ function My() {
 
       <View style={styles.info_container}>
         <View style={styles.text_container}></View>
+        <Text style={styles.problem_text}> 로그인 경로는 {path} 입니다! </Text>
+        <Text style={styles.problem_text}> 지금까지 질문한 문제: {num} 개에요!</Text>
+      </View>
+        
+      <View style={{flexDirection:"row", justifyContent: "flex-end"}}>
+        <TouchableOpacity onPress={Logout}>
+          <Text style={{marginRight: 30}}>로그아웃하기</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -118,6 +150,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     justifyContent: "space-evenly",
   },
+  problem_text:{
+    margin: 10,
+    fontFamily: 'SUITE-Medium',
+    fontSize: 20,
+  }
 });
 
 export default My;

@@ -16,6 +16,8 @@ const STORAGE_KEY = '@login_id';
 const CLIENT_ID = "Mzd3dap0KLih9pAZ86Qk";
 const REDIRECT_URL = "https://auth.expo.io/@seonghyeon_lee/Nine";
 const CLIENT_SECRET = "j3iOBc9PWy";
+const MYPATH = '@path';
+
 var state_value = "";
 
 const { height, width } = Dimensions.get("window");
@@ -74,6 +76,7 @@ export default function NaverLogin({ navigation }) {
             STORAGE_KEY,
             JSON.stringify(response.data.response.id)
           );
+        await AsyncStorage.setItem(MYPATH,"N");
         navigation.navigate('Main_Home');
       })
       .catch(function (error) {

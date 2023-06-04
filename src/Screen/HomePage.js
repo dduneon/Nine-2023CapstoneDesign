@@ -65,6 +65,7 @@ function Home({ navigation }) {
           <Text style={styles.text_style}>폴더 추가하기</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.dividing_line}/>
       <FlatList
         data = {folder}
         renderItem={folder_components}
@@ -94,6 +95,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 5,
   },
+  dividing_line:{
+    marginTop: 20,
+    marginLeft: -30,
+    borderTopWidth: 1,
+    borderColor: "lightgrey",
+    width: width - 20,
+  }
 });
 
 export default Home;

@@ -23,7 +23,7 @@ function Main({ navigation }) {
         <Header />
       </View>
       <View style={{ flex: 5, alignItems: "baseline", marginTop: -30 ,padding: 30 }}>
-        {activeTab === 0 ? <HomePage /> : <MyPage />}
+        {activeTab === 0 ? <HomePage /> : <MyPage navigation={navigation}/>}
       </View>
       <View style={{ flex: 0.8, backgroundColor: "white" }}>
         <BottomTab
