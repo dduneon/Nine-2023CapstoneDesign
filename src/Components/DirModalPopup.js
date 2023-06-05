@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   Button,
-  Image,
+  Pressable,
   Text,
   TouchableOpacity,
   Modal,
@@ -78,6 +78,8 @@ function ModalPopup({
   const [visible, setVisible] = React.useState(visibleState);
   const [userId, setUserId] = useState();
   const [newName, setNewName] = useState('');
+  const [selIndex, setselIndex] = useState();
+
   const onChangeText = (payload) => {
     setNewName(payload);
     getData(userId);
@@ -202,18 +204,27 @@ function ModalPopup({
                     data={Object.keys(jsonData)}
                     renderItem={({ item, index }) => (
                       <View style={styles.page} key={index}>
-                        <View style={styles.pageInView}>
-                          <TouchableOpacity style={{ flex: 1 }}>
-                            <Text
-                              style={{
-                                fontFamily: 'SUITE-Medium',
-                                fontSize: 14,
-                              }}
-                            >
-                              {item}
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
+                        <Pressable
+                          style={({ pressed }) => [
+                            styles.pageInView,
+                            {
+                              backgroundColor:
+                                selIndex == index ? '#AAB6BE' : '#f2f2f2', // 클릭 시 배경색 변경
+                            },
+                          ]}
+                          onPress={() => {
+                            setselIndex(index);
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontFamily: 'SUITE-Medium',
+                              fontSize: 14,
+                            }}
+                          >
+                            {item}
+                          </Text>
+                        </Pressable>
                       </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
