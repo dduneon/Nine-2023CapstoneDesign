@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Dimensions, TouchableOpacity, Image, width, height } from 'react-native';
+import {
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+  width,
+  height,
+} from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,7 +18,7 @@ const MYPATH = '@path';
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = '2488a8ac518d2e78a0b20d947d538554';
-const Redirect_URI = 'https://auth.expo.io/@htj7425/Nine';
+const Redirect_URI = 'https://auth.expo.io/@dduneon/Nine';
 
 export default function KakaoLogin({ navigation }) {
   const [press, setpress] = useState(0);
@@ -83,7 +90,7 @@ export default function KakaoLogin({ navigation }) {
           MYPICTURE,
           JSON.stringify(response.data.properties.profile_image)
         );
-        await AsyncStorage.setItem(MYPATH,"K");
+        await AsyncStorage.setItem(MYPATH, 'K');
         navigation.navigate('Main_Home');
       })
       .catch(function (error) {

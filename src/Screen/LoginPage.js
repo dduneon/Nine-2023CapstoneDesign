@@ -44,13 +44,20 @@ function Login({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerItems}>
-        <Image
-          source={require('../../assets/Nine_image.png')}
-          style={styles.Nine_image}
-        />
+        <View style={styles.headerLogo}>
+          <Text style={{ fontFamily: 'SUITE-Medium', fontSize: 28 }}>
+            찍고, 물어보면, 알려주는{'\n'}나만의 인공지능 학습 플랫폼
+          </Text>
+          <Image
+            source={require('../../assets/icons/icon_nine.png')}
+            style={styles.icon_nine}
+          />
+        </View>
+        <View style={{ flex: 1 }}></View>
       </View>
+
       <View style={styles.loginItems}>
-        <Text style={{ fontFamily: 'SUITE-Medium', fontSize: 15 }}>
+        <Text style={{ fontFamily: 'SUITE-Medium', fontSize: 18 }}>
           SNS 계정으로 간편 가입하기
         </Text>
         <View style={styles.loginIcons}>
@@ -69,58 +76,63 @@ function Login({ navigation }) {
               source={require('../../assets/icons/icon_kakao.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity="0.6">
-            <NaverLogin style={styles.icon_naver} navigation={navigation} />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity="0.6">
-            <GoogleLogin style={styles.icon_google} navigation={navigation} />
-          </TouchableOpacity>
-        </View>
-      </View>
 
+          <NaverLogin style={styles.icon_naver} navigation={navigation} />
+          <GoogleLogin style={styles.icon_google} navigation={navigation} />
+        </View>
+        <Text
+          style={{
+            marginBottom: 20,
+            fontFamily: 'SUITE-Light',
+            fontSize: 13,
+            marginLeft: 20,
+            marginRight: 20,
+          }}
+        >
+          회원가입 없이 소셜 계정을 통해 바로 이용 가능하며 첫 로그인시 이용약관
+          및 개인정보처리방침 동의로 간주됩니다.
+        </Text>
+      </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, width: '100%', backgroundColor: 'green' },
+  container: { flex: 1, width: '100%' },
   headerItems: {
-    width: '100%',
     flex: 2,
-    backgroundColor: 'yellow',
+    flexDirection: 'column',
   },
-  Nine_image: {
+  headerLogo: {
+    flex: 3,
+    paddingLeft: 30,
+    paddingTop: 90,
+    alignItems: 'flex-start',
+  },
+  icon_nine: {
+    marginTop: 10,
     resizeMode: 'contain',
-    width: '70%',
+    width: '50%',
+    height: '20%',
   },
   loginItems: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: 'red',
   },
   loginIcons: {
+    marginTop: 10,
     flex: 1,
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row',
   },
   icon_kakao: {
-    marginRight: 20,
-    height: '20%',
-    width: '20%',
-    backgroundColor: 'blue',
+    height: '40%',
+    width: '21%',
   },
-  icon_naver: {
-    marginRight: 20,
-    height: '20%',
-    width: '20%',
-    backgroundColor: 'orange',
-  },
-  icon_google: {},
 });
 
 export default Login;

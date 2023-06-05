@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const STORAGE_KEY = '@login_id';
 
 const CLIENT_ID = 'Mzd3dap0KLih9pAZ86Qk';
-const REDIRECT_URL = 'https://auth.expo.io/@seonghyeon_lee/Nine';
+const REDIRECT_URL = 'https://auth.expo.io/@dduneon/Nine';
 const CLIENT_SECRET = 'j3iOBc9PWy';
 const MYPATH = '@path';
 
@@ -85,7 +85,11 @@ export default function NaverLogin({ navigation }) {
   };
 
   return (
-    <TouchableOpacity onPress={login}>
+    <TouchableOpacity
+      style={styles.icon_naver}
+      onPress={login}
+      activeOpacity="0.6"
+    >
       <Image
         source={require('../../assets/icons/icon_naver.png')}
         style={styles.Naver_image}
@@ -100,5 +104,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: '100%',
     height: '100%',
+  },
+  icon_naver: {
+    height: '40%',
+    width: '21%',
   },
 });

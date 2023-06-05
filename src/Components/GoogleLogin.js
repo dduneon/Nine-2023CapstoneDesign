@@ -74,6 +74,8 @@ export default function GoogleLogin({ navigation }) {
 
   return (
     <TouchableOpacity
+      style={styles.icon_google}
+      activeOpacity="0.6"
       disabled={!request}
       onPress={async () => {
         await promtAsync();
@@ -89,8 +91,13 @@ export default function GoogleLogin({ navigation }) {
 
 const styles = StyleSheet.create({
   google_image: {
+    flex: 1,
     resizeMode: 'contain',
     width: '100%',
     height: '100%',
+  },
+  icon_google: {
+    height: '40%',
+    width: '21%',
   },
 });
