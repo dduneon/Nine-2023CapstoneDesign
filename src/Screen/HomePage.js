@@ -15,98 +15,122 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
 
-import { folders } from "../Data/data";
+import { getDatabase, ref, onValue, set, query } from "firebase/database";
+import { db } from "../firebase/config";
+import {
+  getJSON,
+  getData,
+  makeFolder,
+  userLoad,
+} from "../Functions/DataFunction";
 
 const { height, width } = Dimensions.get("window");
 
 function Home({ navigation }) {
-  //--------------------------------------------------------------------------
-  // Flatlist 정상 작동되는지 확인용 코드 (추후 데이터베이스 연동 후 변경예정)
-  const [folder, setFolder] = useState(folders);
-  const [id_num, setId_num] = useState(4);
+  const [jsonData, setJsonData] = useState(null);
+  const [jsonDataState, setJsonDataState] = useState("Loading ...");
 
-  function update_Folder() {
-    const newfolder = {
-      id: id_num,
-      text: "20230707202020", //글자수 짤리는지 확인용 길게해놓음
-    };
-    setFolder([...folder, newfolder]);
-    setId_num(id_num + 1);
+  useEffect(() => {
+    uploadData();
+  }, []);
+
+  useEffect(() => {
+    if (jsonData === null) {
+      setJsonDataState("문제를 등록해주세요!");
+    }
+  }, [jsonData]);
+
+  async function uploadData() {
+    setJsonData(await getJSON());
   }
-  //console.log(folder);
-  //--------------------------------------------------------------------------
 
-  const folder_components = ({ item }) => (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "center",
-        margin: 20,
-      }}
-    >{ id_num === 0 ?
-      <AntDesign name="pluscircleo" size={24} color="black" />: 
-      <TouchableOpacity>
-        <View style={{ justifyContent: "center", alignItems: "cent ber" }}>
-          <Image source={require("../../assets/folder_image.png")} />
-          <View style={{ width: width / 4, height: height / 64 }}>
-            <Text style={{ textAlign: "center" }}>{item.text} </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-}
-      
-
-    </View>
-  );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, width: "100%" }}>
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
+          flex: 0.4,
+          alignItems: "center",
+          marginTop: -40,
         }}
       >
-        <Text style={styles.text_style}>📖오답노트📖</Text>
-        <TouchableOpacity onPress={update_Folder}>
-          <Text style={styles.text_style}>폴더 추가하기</Text>
-        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 30,
+            fontFamily: "SUITE-Medium",
+          }}
+        >
+          Nine
+        </Text>
       </View>
       <View style={styles.dividing_line} />
-      <FlatList
-        data={folder}
-        renderItem={folder_components}
-        numColumns={2}
-        keyExtractor={(text) => text.id}
-        style={{ margin: 25 }}
-      />
-      
+      <View style={{ flex: 5, alignItems: "center" }}>
+        {jsonData ? (
+          <FlatList
+            numColumns={2}
+            data={Object.keys(jsonData)}
+            renderItem={({ item, index }) => (
+              <View style={styles.page} key={index}>
+                <View style={styles.pageInView}>
+                  <TouchableOpacity style={{ flex: 1 }}>
+                    <Image source={require("../../assets/folder_image.png")} />
+                    <Text
+                      style={{
+                        fontFamily: "SUITE-Medium",
+                        fontSize: 14,
+                        marginLeft: "5%",
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        ) : (
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <Text style={{ fontSize: 35, fontFamily: "SUITE-Light" }}>
+              {jsonDataState}
+            </Text>
+          </View>
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  font_style: {
-    fontSize: 25,
-    fontFamily: "SUITE-Medium",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  text_style: {
-    fontSize: 20,
-    fontFamily: "SUITE-Light",
-    marginLeft: 20,
-  },
-  touch_style: {
-    backgroundColor: "#D8D8D8",
-    borderRadius: 15,
-    margin: 5,
-  },
   dividing_line: {
-    marginTop: 20,
-    borderTopWidth: 1,
+    borderTopWidth: 1.5,
     borderColor: "lightgrey",
+  },
+  page: {
+    margin: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    elevation: 9,
+  },
+  pageInView: {
+    flex: 1,
+    backgroundColor: "#f2f2f2",
+    borderWidth: 0.3,
+    borderRadius: 15,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

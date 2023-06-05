@@ -6,6 +6,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import * as FileSystem from "expo-file-system";
+import { getDatabase, ref, onValue, set, query } from "firebase/database";
+import { db } from "./src/firebase/config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import KakaoLogin from "./src/Components/KakaoLogin";
 import LoginPage from "./src/Screen/LoginPage";
@@ -14,12 +18,15 @@ import AIPage from "./src/Screen/AIPage";
 import TextPage from "./src/Screen/TextPage";
 import Information from "./src/Screen/Information";
 
+import { getData } from "./src/Functions/DataFunction";
+
 const Stack = createNativeStackNavigator();
+const STORAGE_KEY = "@login_id";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
+  const [userId, setUserId] = useState();
   // 폰트 불러오는 작업 실행 , 실행 완료시 스플래시 스크린 종료
   useEffect(() => {
     async function prepare() {
@@ -28,6 +35,9 @@ export default function App() {
           "SUITE-Light": require("./assets/fonts/SUITE-Light.otf"),
           "SUITE-Medium": require("./assets/fonts/SUITE-Medium.otf"),
         });
+
+        userLoad();
+
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -40,11 +50,20 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log("[App.js] userId", userId);
+    getData(userId);
+  }, [userId]);
+
+  useEffect(() => {
     if (appIsReady) {
       console.log("[App.js] prepare is OK");
       SplashScreen.hideAsync();
     }
   }, [appIsReady]);
+
+  async function userLoad() {
+    setUserId(await AsyncStorage.getItem(STORAGE_KEY));
+  }
 
   return (
     <NavigationContainer>

@@ -28,7 +28,7 @@ function Login({ navigation }) {
     //deleteData('@login_image')
     fetchData();
   }, []);
-/*
+  /*
   const deleteData = async (key) => {
     try {
       await AsyncStorage.removeItem(key);
@@ -61,10 +61,10 @@ function Login({ navigation }) {
           />
         </TouchableOpacity>
         <TouchableOpacity activeOpacity="0.6">
-          <NaverLogin navigation={navigation}/>
+          <NaverLogin navigation={navigation} />
         </TouchableOpacity>
         <TouchableOpacity activeOpacity="0.6">
-          <GoogleLogin navigation={navigation}/>
+          <GoogleLogin navigation={navigation} />
         </TouchableOpacity>
       </View>
 
