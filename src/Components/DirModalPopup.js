@@ -179,6 +179,27 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "500",
   },
+  page: {
+    margin: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    elevation: 9,
+  },
+  pageInView: {
+    flex: 1,
+    backgroundColor: "#f2f2f2",
+    borderWidth: 0.3,
+    borderRadius: 15,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 export default ModalPopup;

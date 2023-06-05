@@ -59,7 +59,6 @@ export default function NaverLogin({ navigation }) {
         requestUserInfo(Access_Token);
       })
       .catch(function (error) {
-        navigation.goBack();
         console.log("error", error);
       });
   };
@@ -78,10 +77,9 @@ export default function NaverLogin({ navigation }) {
           JSON.stringify(response.data.response.id)
         );
         await AsyncStorage.setItem(MYPATH, "N");
-        navigation.goBack();
+        navigation.navigate("Main_Home");
       })
       .catch(function (error) {
-        navigation.goBack();
         console.log("error", error);
       });
   };

@@ -27,8 +27,6 @@ import {
   userLoad,
 } from "../Functions/DataFunction";
 
-const STORAGE_KEY = "@login_id";
-
 const { height, width } = Dimensions.get("window");
 
 function Home({ navigation }) {
@@ -147,22 +145,6 @@ function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  font_style: {
-    fontSize: 25,
-    fontFamily: "SUITE-Medium",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  text_style: {
-    fontSize: 20,
-    fontFamily: "SUITE-Light",
-    marginLeft: 20,
-  },
-  touch_style: {
-    backgroundColor: "#D8D8D8",
-    borderRadius: 15,
-    margin: 5,
-  },
   dividing_line: {
     borderTopWidth: 1.5,
     borderColor: "lightgrey",
