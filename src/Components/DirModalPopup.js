@@ -1,221 +1,267 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
-  StyleSheet,
-  Button,
-  Image,
-  Text,
-  TouchableOpacity,
-  Modal,
-  Animated,
+	View,
+	StyleSheet,
+	Button,
+	Image,
+	Text,
+	TouchableOpacity,
+	Modal,
+	Animated,
+	TextInput,
+	Keyboard,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { EvilIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system";
 import { getDatabase, ref, onValue, set, query } from "firebase/database";
 import { db } from "../firebase/config";
 
-const STORAGE_KEY = "@login_id";
-
 const ModalSetup = ({ visible, children }) => {
-  const [showModal, setShowModal] = React.useState(visible);
-  const scaleValue = React.useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
-    toggleModal();
-  }, [visible]);
-  const toggleModal = () => {
-    if (visible) {
-      setShowModal(true);
-      Animated.spring(scaleValue, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      setTimeout(() => setShowModal(false), 200);
-      Animated.timing(scaleValue, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-  return (
-    <Modal transparent visible={showModal}>
-      <View style={styles.modalBackGround}>
-        <Animated.View
-          style={[
-            styles.modalContainer,
-            { transform: [{ scale: scaleValue }] },
-          ]}
-        >
-          {children}
-        </Animated.View>
-      </View>
-    </Modal>
-  );
+	const [showModal, setShowModal] = React.useState(visible);
+	const scaleValue = React.useRef(new Animated.Value(0)).current;
+	React.useEffect(() => {
+		toggleModal();
+	}, [visible]);
+	const toggleModal = () => {
+		if (visible) {
+			setShowModal(true);
+			Animated.spring(scaleValue, {
+				toValue: 1,
+				duration: 300,
+				useNativeDriver: true,
+			}).start();
+		} else {
+			setTimeout(() => setShowModal(false), 200);
+			Animated.timing(scaleValue, {
+				toValue: 0,
+				duration: 300,
+				useNativeDriver: true,
+			}).start();
+		}
+	};
+	return (
+		<Modal transparent visible={showModal}>
+			<View style={styles.modalBackGround}>
+				<Animated.View
+					style={[
+						styles.modalContainer,
+						{ transform: [{ scale: scaleValue }] },
+					]}
+				>
+					{children}
+				</Animated.View>
+			</View>
+		</Modal>
+	);
 };
 
+const STORAGE_KEY = "@login_id";
+
 function ModalPopup({ visibleState, onClose, navigation }) {
-  const [visible, setVisible] = React.useState(visibleState);
-  const [userId, setUserId] = useState();
+	const [visible, setVisible] = React.useState(visibleState);
+	const [userId, setUserId] = useState();
+	const [newName, setNewName] = useState("");
+	const onChangeText = (payload) => setNewName(payload);
+	useEffect(() => {
+		userLoad();
+	}, []);
 
-  useEffect(() => {
-    userLoad();
-  }, []);
+	async function userLoad() {
+		setUserId(await AsyncStorage.getItem(STORAGE_KEY));
+	}
 
-  async function userLoad() {
-    setUserId(await AsyncStorage.getItem(STORAGE_KEY));
-  }
+	useEffect(() => {
+		setVisible(visibleState);
+		console.log("[ModalPopup.js] visibleState: " + visibleState);
+	}, [visibleState]);
 
-  useEffect(() => {
-    setVisible(visibleState);
-    console.log("[ModalPopup.js] visibleState: " + visibleState);
-  }, [visibleState]);
+	return (
+		<ModalSetup visible={visible}>
+			<View style={styles.modalView}>
+				<View style={styles.modalInView}>
+					<TouchableOpacity
+						style={{ flex: 1 }}
+						activeOpacity={1}
+						onPress={() => {
+							Keyboard.dismiss();
+						}}
+					>
+						<View style={{ flex: 0.5, alignItems: "center" }}>
+							<Text
+								style={{
+									fontSize: 30,
+									fontFamily: "SUITE-Medium",
+									margin: 10,
+								}}
+							>
+								폴더를 선택해주세요
+							</Text>
+						</View>
 
-  return (
-    <ModalSetup visible={visible}>
-      <View style={styles.modalView}>
-        <View style={styles.modalInView}>
-          <View style={{ flex: 0.5, alignItems: "center" }}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontFamily: "SUITE-Medium",
-                margin: 10,
-              }}
-            >
-              폴더를 선택해주세요
-            </Text>
-          </View>
+						<View
+							style={{
+								flex: 4,
+								marginTop: 4,
+								alignItems: "center",
+							}}
+						>
+							<View
+								style={{
+									flexDirection: "row",
+									alignItems: "center",
+									width: "70%",
+									justifyContent: "space-between",
+									borderWidth: 1,
+									borderRadius: 200,
+									paddingHorizontal: 15,
+									paddingVertical: 5,
+								}}
+							>
+								<TextInput
+									onChangeText={onChangeText}
+									returnKeyType="done"
+									value={newName}
+									placeholder="폴더 이름을 정해주세요."
+									placeholderTextColor={"grey"}
+									style={{}}
+								/>
+								<View style={{ marginLeft: 28, alignItems: "center" }}>
+									<TouchableOpacity
+										onPress={() => {
+											Keyboard.dismiss();
+										}}
+									>
+										<EvilIcons name="plus" size={38} color="#4f69f9" />
+									</TouchableOpacity>
+								</View>
+							</View>
 
-          <View
-            style={{ flex: 4, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text>여기에 폴더 정보들 출력</Text>
-          </View>
-        </View>
+							<View style={{}}></View>
+						</View>
+					</TouchableOpacity>
+				</View>
 
-        <View style={styles.modalButtonContainer}>
-          <View style={styles.modalInCancleView}>
-            <TouchableOpacity
-              style={styles.cancel}
-              onPress={() => {
-                onClose();
-                setVisible(false);
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    ...styles.modal_Text,
-                    fontWeight: "bold",
-                  }}
-                >
-                  취소
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.modalInCancleView}>
-            <TouchableOpacity
-              style={styles.cancel}
-              onPress={() => {
-                onClose();
-                setVisible(false);
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    ...styles.modal_Text,
-                    fontWeight: "bold",
-                  }}
-                >
-                  완료
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </ModalSetup>
-  );
+				<View style={styles.modalButtonContainer}>
+					<View style={styles.modalInCancleView}>
+						<TouchableOpacity
+							style={styles.cancel}
+							onPress={() => {
+								onClose();
+								setVisible(false);
+							}}
+						>
+							<View>
+								<Text
+									style={{
+										...styles.modal_Text,
+										fontWeight: "bold",
+									}}
+								>
+									취소
+								</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+					<View style={styles.modalInCancleView}>
+						<TouchableOpacity
+							style={styles.cancel}
+							onPress={() => {
+								onClose();
+								setVisible(false);
+							}}
+						>
+							<View>
+								<Text
+									style={{
+										...styles.modal_Text,
+										fontWeight: "bold",
+									}}
+								>
+									완료
+								</Text>
+							</View>
+						</TouchableOpacity>
+					</View>
+				</View>
+			</View>
+		</ModalSetup>
+	);
 }
 
 const styles = StyleSheet.create({
-  modalBackGround: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  modalContainer: {
-    width: "100%",
-    height: "80%",
-    borderRadius: 20,
-    elevation: 20,
-  },
-  modalView: {
-    flex: 1,
-    height: "80%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalInView: {
-    flex: 1,
-    width: "80%",
-    marginBottom: 15,
-    borderRadius: 15,
-    backgroundColor: "white",
-  },
-  modalButtonContainer: {
-    flex: 0.1,
-    width: "80%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 15,
-    marginBottom: 20,
-    flexDirection: "row",
-  },
-  modalInCancleView: {
-    backgroundColor: "white",
-    borderRadius: 15,
-    width: "48%",
-  },
-  cancel: {
-    paddingVertical: 15,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modal_Text: {
-    fontSize: 22,
-    fontWeight: "500",
-  },
-  page: {
-    margin: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 5,
-      height: 5,
-    },
-    shadowOpacity: 1,
-    elevation: 9,
-  },
-  pageInView: {
-    flex: 1,
-    backgroundColor: "#f2f2f2",
-    borderWidth: 0.3,
-    borderRadius: 15,
-    padding: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+	modalBackGround: {
+		flex: 1,
+		backgroundColor: "rgba(0,0,0,0.5)",
+		justifyContent: "flex-end",
+		alignItems: "center",
+	},
+	modalContainer: {
+		width: "100%",
+		height: "80%",
+		borderRadius: 20,
+		elevation: 20,
+	},
+	modalView: {
+		flex: 1,
+		height: "80%",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	modalInView: {
+		flex: 1,
+		width: "80%",
+		marginBottom: 15,
+		borderRadius: 15,
+		backgroundColor: "white",
+	},
+	modalButtonContainer: {
+		flex: 0.1,
+		width: "80%",
+		justifyContent: "space-between",
+		alignItems: "center",
+		borderRadius: 15,
+		marginBottom: 20,
+		flexDirection: "row",
+	},
+	modalInCancleView: {
+		backgroundColor: "white",
+		borderRadius: 15,
+		width: "48%",
+	},
+	cancel: {
+		paddingVertical: 15,
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	modal_Text: {
+		fontSize: 22,
+		fontWeight: "500",
+	},
+	page: {
+		margin: 15,
+		justifyContent: "center",
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 5,
+			height: 5,
+		},
+		shadowOpacity: 1,
+		elevation: 9,
+	},
+	pageInView: {
+		flex: 1,
+		backgroundColor: "#f2f2f2",
+		borderWidth: 0.3,
+		borderRadius: 15,
+		padding: 8,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
 
 export default ModalPopup;

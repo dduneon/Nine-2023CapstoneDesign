@@ -25,90 +25,90 @@ const STORAGE_KEY = "@login_id";
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
-  const [userId, setUserId] = useState();
-  // 폰트 불러오는 작업 실행 , 실행 완료시 스플래시 스크린 종료
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await Font.loadAsync({
-          "SUITE-Light": require("./assets/fonts/SUITE-Light.otf"),
-          "SUITE-Medium": require("./assets/fonts/SUITE-Medium.otf"),
-        });
+	const [appIsReady, setAppIsReady] = useState(false);
+	const [userId, setUserId] = useState();
+	// 폰트 불러오는 작업 실행 , 실행 완료시 스플래시 스크린 종료
+	useEffect(() => {
+		async function prepare() {
+			try {
+				await Font.loadAsync({
+					"SUITE-Light": require("./assets/fonts/SUITE-Light.otf"),
+					"SUITE-Medium": require("./assets/fonts/SUITE-Medium.otf"),
+				});
 
-        userLoad();
+				userLoad();
 
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
+				await new Promise((resolve) => setTimeout(resolve, 2000));
+			} catch (e) {
+				console.warn(e);
+			} finally {
+				setAppIsReady(true);
+			}
+		}
 
-    prepare();
-  }, []);
+		prepare();
+	}, []);
 
-  useEffect(() => {
-    console.log("[App.js] userId", userId);
-    getData(userId);
-  }, [userId]);
+	useEffect(() => {
+		console.log("[App.js] userId", userId);
+		getData(userId);
+	}, [userId]);
 
-  useEffect(() => {
-    if (appIsReady) {
-      console.log("[App.js] prepare is OK");
-      SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
+	useEffect(() => {
+		if (appIsReady) {
+			console.log("[App.js] prepare is OK");
+			SplashScreen.hideAsync();
+		}
+	}, [appIsReady]);
 
-  async function userLoad() {
-    setUserId(await AsyncStorage.getItem(STORAGE_KEY));
-  }
-  if (appIsReady) {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={LoginPage}
-            options={{
-              headerShown: false, // 상단에 흰색 바가 생기고 HOME이라는 글씨가 쓰여있는데 그거 안 보이게 하는 속성
-            }}
-          />
-          <Stack.Screen
-            name="Main_Home"
-            component={Main}
-            options={{
-              gestureEnabled: false,
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="AI"
-            component={AIPage}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="TextInput"
-            component={TextPage}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="KakaoLogin"
-            component={KakaoLogin}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Information"
-            component={Information}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </NavigationContainer>
-    );
-  }
+	async function userLoad() {
+		setUserId(await AsyncStorage.getItem(STORAGE_KEY));
+	}
+	if (appIsReady) {
+		return (
+			<NavigationContainer>
+				<Stack.Navigator initialRouteName="Login">
+					<Stack.Screen
+						name="Login"
+						component={LoginPage}
+						options={{
+							headerShown: false, // 상단에 흰색 바가 생기고 HOME이라는 글씨가 쓰여있는데 그거 안 보이게 하는 속성
+						}}
+					/>
+					<Stack.Screen
+						name="Main_Home"
+						component={Main}
+						options={{
+							gestureEnabled: false,
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name="AI"
+						component={AIPage}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name="TextInput"
+						component={TextPage}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="KakaoLogin"
+						component={KakaoLogin}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="Information"
+						component={Information}
+						options={{ headerShown: false }}
+					/>
+				</Stack.Navigator>
+				<StatusBar style="auto" />
+			</NavigationContainer>
+		);
+	}
 }
 const styles = StyleSheet.create({});
