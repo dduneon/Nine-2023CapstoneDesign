@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   Naver_image: {
-    width: width,
+    width: width - 250,
     marginTop: 60,
-    marginLeft: 20,
+    marginLeft: 25,
     resizeMode: "contain"
   }
 });
