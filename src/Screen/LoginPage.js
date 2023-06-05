@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Button,
@@ -7,28 +7,25 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Fontisto } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
+  SafeAreaView,
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-import KakaoLogin from "../Components/KakaoLogin";
-import GoogleLogin from "../Components/GoogleLogin";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import NaverLogin from "../Components/NaverLogin";
+import KakaoLogin from '../Components/KakaoLogin';
+import GoogleLogin from '../Components/GoogleLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NaverLogin from '../Components/NaverLogin';
 
-const STORAGE_KEY = "@login_id";
+const STORAGE_KEY = '@login_id';
 
-const { height, width } = Dimensions.get("window");
+const { height, width } = Dimensions.get('window');
 
 function Login({ navigation }) {
   useEffect(() => {
     //deleteData('@login_image')
     fetchData();
   }, []);
-/*
+  /*
   const deleteData = async (key) => {
     try {
       await AsyncStorage.removeItem(key);
@@ -40,53 +37,64 @@ function Login({ navigation }) {
     const useInfo = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(useInfo);
     if (useInfo != null) {
-      navigation.navigate("Main_Home");
+      navigation.navigate('Main_Home');
     }
   };
 
   return (
-    <View style={styles.LoginScreen}>
-      <Image
-        source={require("../../assets/Nine_image.png")}
-        style={styles.Nine_image}
-      />
-      <View style={{ alignContent: "center" }}>
-        <TouchableOpacity
-          activeOpacity="0.6"
-          onPress={() => navigation.navigate("KakaoLogin")}
-        >
-          <Image
-            source={require("../../assets/kakao_login.png")}
-            style={styles.kakao_image}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity="0.6">
-          <NaverLogin navigation={navigation}/>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity="0.6">
-          <GoogleLogin navigation={navigation}/>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerItems}>
+        <Image
+          source={require('../../assets/Nine_image.png')}
+          style={styles.Nine_image}
+        />
+      </View>
+      <View style={styles.loginItems}>
+        <Text>SNS 계정으로 간편 가입하기</Text>
+        <View style={styles.loginIcons}>
+          <TouchableOpacity
+            style={styles.icon_kakao}
+            activeOpacity="0.6"
+            onPress={() => navigation.navigate('KakaoLogin')}
+          >
+            <Image
+              style={{ resizeMode: 'contain' }}
+              source={require('../../assets/icons/icon_kakao.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity="0.6">
+            <NaverLogin style={styles.icon_naver} navigation={navigation} />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity="0.6">
+            <GoogleLogin style={styles.icon_google} navigation={navigation} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  LoginScreen: {
-    flex: 1,
-  },
+  container: { flex: 1 },
+  headerItems: { flex: 1, marginLeft: 20, marginTop: 40 },
   Nine_image: {
-    width: "80%",
-    marginLeft: 35,
-    resizeMode: "contain",
+    flex: 1,
+    resizeMode: 'contain',
+    width: '70%',
   },
-  kakao_image: {
-    width: width - 65,
-    marginLeft: 45,
-    resizeMode: "contain",
+  loginItems: { flex: 1, width: '100%' },
+  loginIcons: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
+  icon_kakao: { marginLeft: 50 },
+  icon_naver: {},
+  icon_google: {},
 });
 
 export default Login;

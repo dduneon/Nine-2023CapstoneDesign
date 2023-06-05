@@ -1,26 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import { 
-    StyleSheet,
-    View, 
-    Image, 
-    TouchableOpacity,
-    Dimensions
-} from "react-native";
-import * as AuthSession from "expo-auth-session";
-import axios from "axios";
+import { StatusBar } from 'expo-status-bar';
+import * as React from 'react';
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import * as AuthSession from 'expo-auth-session';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEY = '@login_id';
 
-const CLIENT_ID = "Mzd3dap0KLih9pAZ86Qk";
-const REDIRECT_URL = "https://auth.expo.io/@seonghyeon_lee/Nine";
-const CLIENT_SECRET = "j3iOBc9PWy";
+const CLIENT_ID = 'Mzd3dap0KLih9pAZ86Qk';
+const REDIRECT_URL = 'https://auth.expo.io/@seonghyeon_lee/Nine';
+const CLIENT_SECRET = 'j3iOBc9PWy';
 const MYPATH = '@path';
 
-var state_value = "";
+var state_value = '';
 
-const { height, width } = Dimensions.get("window");
+const { height, width } = Dimensions.get('window');
 
 export default function NaverLogin({ navigation }) {
   const login = async () => {
@@ -28,7 +28,7 @@ export default function NaverLogin({ navigation }) {
       authUrl: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=1234&redirect_uri=${REDIRECT_URL}`,
     });
 
-    if (result.type === "success") {
+    if (result.type === 'success') {
       const code = result.params.code;
       state_value = result.params.state;
       //mutate({
@@ -40,13 +40,13 @@ export default function NaverLogin({ navigation }) {
   };
 
   const requestToken = async (request_code) => {
-    var Access_Token = "none";
+    var Access_Token = 'none';
     var request_token_url = `https://nid.naver.com/oauth2.0/token?`;
     axios({
-      methos: "post",
+      methos: 'post',
       url: request_token_url,
       params: {
-        grant_type: "authorization_code",
+        grant_type: 'authorization_code',
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
         code: request_code,
@@ -59,54 +59,43 @@ export default function NaverLogin({ navigation }) {
         requestUserInfo(Access_Token);
       })
       .catch(function (error) {
-        console.log("error", error);
+        console.log('error', error);
       });
   };
 
   const requestUserInfo = async (Access_Token) => {
     axios({
-      method: "GET",
-      url: "https://openapi.naver.com/v1/nid/me",
+      method: 'GET',
+      url: 'https://openapi.naver.com/v1/nid/me',
       headers: {
         Authorization: `Bearer ${Access_Token}`,
       },
     })
       .then(async (response) => {
         await AsyncStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(response.data.response.id)
-          );
-        await AsyncStorage.setItem(MYPATH,"N");
+          STORAGE_KEY,
+          JSON.stringify(response.data.response.id)
+        );
+        await AsyncStorage.setItem(MYPATH, 'N');
         navigation.navigate('Main_Home');
       })
       .catch(function (error) {
-        console.log("error", error);
+        console.log('error', error);
       });
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={login}>
-        <Image
-          source={require("../../assets/naver_login.png")}
-          style={styles.Naver_image}
-        />
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={login}>
+      <Image
+        source={require('../../assets/icons/icon_naver.png')}
+        style={styles.Naver_image}
+      />
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   Naver_image: {
-    width: width - 250,
-    marginTop: 60,
-    marginLeft: 25,
-    resizeMode: "contain"
-  }
+    resizeMode: 'contain',
+  },
 });
