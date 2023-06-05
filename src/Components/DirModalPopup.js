@@ -254,6 +254,7 @@ function ModalPopup({
                 onClose();
                 setVisible(false);
                 setNewName('');
+                setselIndex();
               }}
             >
               <View>
@@ -274,6 +275,7 @@ function ModalPopup({
               onPress={() => {
                 onClose();
                 setVisible(false);
+                setselIndex();
               }}
             >
               <View>
