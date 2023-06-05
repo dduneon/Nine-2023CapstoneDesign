@@ -50,7 +50,9 @@ function Login({ navigation }) {
         />
       </View>
       <View style={styles.loginItems}>
-        <Text>SNS 계정으로 간편 가입하기</Text>
+        <Text style={{ fontFamily: 'SUITE-Medium', fontSize: 15 }}>
+          SNS 계정으로 간편 가입하기
+        </Text>
         <View style={styles.loginIcons}>
           <TouchableOpacity
             style={styles.icon_kakao}
@@ -58,7 +60,12 @@ function Login({ navigation }) {
             onPress={() => navigation.navigate('KakaoLogin')}
           >
             <Image
-              style={{ resizeMode: 'contain' }}
+              style={{
+                flex: 1,
+                resizeMode: 'contain',
+                width: '100%',
+                height: '100%',
+              }}
               source={require('../../assets/icons/icon_kakao.png')}
             />
           </TouchableOpacity>
@@ -77,14 +84,23 @@ function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  headerItems: { flex: 1, marginLeft: 20, marginTop: 40 },
+  container: { flex: 1, width: '100%', backgroundColor: 'green' },
+  headerItems: {
+    width: '100%',
+    flex: 2,
+    backgroundColor: 'yellow',
+  },
   Nine_image: {
-    flex: 1,
     resizeMode: 'contain',
     width: '70%',
   },
-  loginItems: { flex: 1, width: '100%' },
+  loginItems: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: 'red',
+  },
   loginIcons: {
     flex: 1,
     width: '100%',
@@ -92,8 +108,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  icon_kakao: { marginLeft: 50 },
-  icon_naver: {},
+  icon_kakao: {
+    marginRight: 20,
+    height: '20%',
+    width: '20%',
+    backgroundColor: 'blue',
+  },
+  icon_naver: {
+    marginRight: 20,
+    height: '20%',
+    width: '20%',
+    backgroundColor: 'orange',
+  },
   icon_google: {},
 });
 

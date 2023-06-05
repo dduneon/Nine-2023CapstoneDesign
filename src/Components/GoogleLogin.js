@@ -90,5 +90,7 @@ export default function GoogleLogin({ navigation }) {
 const styles = StyleSheet.create({
   google_image: {
     resizeMode: 'contain',
+    width: '100%',
+    height: '100%',
   },
 });
