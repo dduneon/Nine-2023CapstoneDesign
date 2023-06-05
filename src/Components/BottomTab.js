@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect, createContext, useContext } from "react";
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Modal,
   Animated,
-} from "react-native";
-import { Fontisto } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+} from 'react-native';
+import { Fontisto } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 function BottomTab({ onTabChange, onPlusPress }) {
   const [tab, setTab] = useState(0);
@@ -17,12 +17,12 @@ function BottomTab({ onTabChange, onPlusPress }) {
   const home = () => {
     setTab(0);
     onTabChange(0);
-    console.log("[BottomTab.js] Tab: " + tab);
+    console.log('[BottomTab.js] Tab: ' + tab);
   };
   const mypage = () => {
     setTab(1);
     onTabChange(1);
-    console.log("[BottomTab.js] Tab: " + tab);
+    console.log('[BottomTab.js] Tab: ' + tab);
   };
 
   return (
@@ -39,7 +39,7 @@ function BottomTab({ onTabChange, onPlusPress }) {
           <Ionicons name="home-outline" size={24} color="#445CE9" />
         )}
         <Text style={tab === 0 ? styles.tabActiveText : styles.tabInactiveText}>
-          HOME
+          오답 노트
         </Text>
       </TouchableOpacity>
       <View style={styles.backgroundCircle}>
@@ -71,7 +71,7 @@ function BottomTab({ onTabChange, onPlusPress }) {
           <Ionicons name="person-outline" size={24} color="#445CE9" />
         )}
         <Text style={tab === 1 ? styles.tabActiveText : styles.tabInactiveText}>
-          MY
+          내 정보
         </Text>
       </TouchableOpacity>
     </View>
@@ -80,43 +80,45 @@ function BottomTab({ onTabChange, onPlusPress }) {
 
 const styles = StyleSheet.create({
   bottomTab: {
-    flexDirection: "row",
+    flexDirection: 'row',
     elevation: 10,
-    alignItems: "center",
-    justifyContent: "space-around",
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   homeMenu: {
     flex: 1,
     marginTop: 10,
     marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   myMenu: {
     flex: 1,
     marginTop: 10,
     marginRight: 20,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tabActiveText: {
-    color: "blue",
-    fontWeight: "bold",
+    fontFamily: 'SUITE-Medium',
+    color: 'blue',
+    fontWeight: 'bold',
   },
   tabInactiveText: {
-    color: "blue",
-    fontWeight: "normal",
+    fontFamily: 'SUITE-Medium',
+    color: 'blue',
+    fontWeight: 'normal',
   },
   backgroundCircle: {
     flex: 1,
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     marginTop: -20,
-    alignItems: "center",
-    justifyContent: "center", // 수직 정렬을 위해 센터 정렬
-    position: "relative",
+    alignItems: 'center',
+    justifyContent: 'center', // 수직 정렬을 위해 센터 정렬
+    position: 'relative',
   },
 });
 
