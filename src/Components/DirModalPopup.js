@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   Button,
-  Image,
+  Pressable,
   Text,
   TouchableOpacity,
   Modal,
@@ -25,7 +25,6 @@ import {
   makeFolder,
   exportData,
 } from '../Functions/DataFunction';
-
 const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
@@ -64,9 +63,7 @@ const ModalSetup = ({ visible, children }) => {
     </Modal>
   );
 };
-
 const STORAGE_KEY = '@login_id';
-
 function ModalPopup({
   question,
   answer,
@@ -78,6 +75,7 @@ function ModalPopup({
   const [visible, setVisible] = React.useState(visibleState);
   const [userId, setUserId] = useState();
   const [newName, setNewName] = useState('');
+  const [selIndex, setselIndex] = useState();
   const onChangeText = (payload) => {
     setNewName(payload);
     getData(userId);
@@ -86,45 +84,36 @@ function ModalPopup({
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [makeSignal, setMakeSignal] = useState(false);
-
   useEffect(() => {
     userLoad();
   }, []);
-
   useEffect(() => {
     setVisible(visibleState);
     console.log('[DirModalPopup.js] visibleState: ' + visibleState);
   }, [visibleState]);
-
   useEffect(() => {
     uploadData();
   }, [userId]);
-
   useEffect(() => {
     if (jsonData === null) {
       setJsonDataState('폴더가 비어있네요\n폴더를 만들어주세요.');
     }
   }, [jsonData]);
-
   useEffect(() => {
     uploadData();
     setMakeSignal(false);
   }, [makeSignal]);
-
   async function userLoad() {
     setUserId(await AsyncStorage.getItem(STORAGE_KEY));
   }
-
   async function uploadData() {
     setJsonData(await getJSON());
   }
-
   function exportFirebase() {
     makeFolder(userId, newName);
     getData(userId);
     uploadData();
   }
-
   return (
     <ModalSetup visible={visible}>
       <View style={styles.modalView}>
@@ -147,7 +136,6 @@ function ModalPopup({
                 폴더를 선택해주세요
               </Text>
             </View>
-
             <View
               style={{
                 flex: 4,
@@ -178,17 +166,18 @@ function ModalPopup({
                 <View style={{ marginLeft: 25, alignItems: 'center' }}>
                   <TouchableOpacity
                     onPress={() => {
-                      exportFirebase();
-                      Keyboard.dismiss();
-                      setNewName('');
-                      setMakeSignal(true);
+                      if (newName != '') {
+                        exportFirebase();
+                        Keyboard.dismiss();
+                        setNewName('');
+                        setMakeSignal(true);
+                      }
                     }}
                   >
                     <EvilIcons name="plus" size={38} color="#4f69f9" />
                   </TouchableOpacity>
                 </View>
               </View>
-
               <View
                 style={{
                   marginTop: 15,
@@ -202,18 +191,27 @@ function ModalPopup({
                     data={Object.keys(jsonData)}
                     renderItem={({ item, index }) => (
                       <View style={styles.page} key={index}>
-                        <View style={styles.pageInView}>
-                          <TouchableOpacity style={{ flex: 1 }}>
-                            <Text
-                              style={{
-                                fontFamily: 'SUITE-Medium',
-                                fontSize: 14,
-                              }}
-                            >
-                              {item}
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
+                        <Pressable
+                          style={({ pressed }) => [
+                            styles.pageInView,
+                            {
+                              backgroundColor:
+                                selIndex == index ? '#AAB6BE' : '#f2f2f2', // 클릭 시 배경색 변경
+                            },
+                          ]}
+                          onPress={() => {
+                            setselIndex(index);
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontFamily: 'SUITE-Medium',
+                              fontSize: 14,
+                            }}
+                          >
+                            {item}
+                          </Text>
+                        </Pressable>
                       </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
@@ -234,7 +232,6 @@ function ModalPopup({
             </View>
           </TouchableOpacity>
         </View>
-
         <View style={styles.modalButtonContainer}>
           <View style={styles.modalInCancleView}>
             <TouchableOpacity
@@ -243,6 +240,7 @@ function ModalPopup({
                 onClose();
                 setVisible(false);
                 setNewName('');
+                setselIndex();
               }}
             >
               <View>
@@ -263,6 +261,7 @@ function ModalPopup({
               onPress={() => {
                 onClose();
                 setVisible(false);
+                setselIndex();
               }}
             >
               <View>
@@ -282,7 +281,6 @@ function ModalPopup({
     </ModalSetup>
   );
 }
-
 const styles = StyleSheet.create({
   modalBackGround: {
     flex: 1,
@@ -340,7 +338,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-
     shadowOffset: {
       width: 5,
       height: 5,
@@ -359,5 +356,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 export default ModalPopup;
