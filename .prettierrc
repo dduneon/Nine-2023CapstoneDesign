@@ -1,8 +1,8 @@
 {
     "tabWidth": 2,
-    "useTabs": true,
+    "useTabs": false,
     "endOfLine": "lf",
     "printWidth": 80,
     "semi": true,
-    "singleQuote": false
+    "singleQuote": true
 }
