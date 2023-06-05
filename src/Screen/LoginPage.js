@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
   icon_nine: {
     marginTop: 10,
     resizeMode: 'contain',
-    width: '50%',
-    height: '20%',
+    width: '55%',
+    height: '25%',
   },
   loginItems: {
     flex: 1,
