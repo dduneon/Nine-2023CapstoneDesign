@@ -1,3 +1,6 @@
+# [+] @dduneon our .env files
+.env
+
 # Expo
 .expo
 __generated__

@@ -17,15 +17,23 @@ import ModalPopup from "../Components/ModalPopup";
 function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, width: "100%" }}>
+      <View style={{ flex: 1 }}>
         <Header />
       </View>
-      <View style={{ flex: 4, alignItems: "center", marginTop: 120 }}>
-        {activeTab === 0 ? <HomePage /> : <MyPage />}
+      <View
+        style={{
+          flex: 5,
+          alignItems: "baseline",
+          marginTop: -30,
+          padding: 0,
+        }}
+      >
+        {activeTab === 0 ? <HomePage /> : <MyPage navigation={navigation} />}
       </View>
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{ flex: 0.8, backgroundColor: "white" }}>
         <BottomTab
           onTabChange={(tab) => setActiveTab(tab)}
           onPlusPress={() => {

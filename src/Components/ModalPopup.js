@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   Modal,
   Animated,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -57,7 +57,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 
   useEffect(() => {
     setVisible(visibleState);
-    console.log("[ModalPopup.js] visibleState: " + visibleState);
+    console.log('[ModalPopup.js] visibleState: ' + visibleState);
   }, [visibleState]);
 
   const closeModal = () => {
@@ -66,13 +66,13 @@ function ModalPopup({ visibleState, onClose, navigation }) {
   };
 
   const handleImagePicker = async () => {
-    console.log("camera 켜짐");
+    console.log('camera 켜짐');
     const result = await ImagePicker.launchCameraAsync({
       base64: true,
     });
 
     if (!result.canceled) {
-      navigation.navigate("TextInput", {
+      navigation.navigate('TextInput', {
         itemId: 1000,
         otherParam: result.assets[0].base64,
       });
@@ -80,7 +80,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
   };
 
   const pickImage = async () => {
-    console.log("gallery 켜짐");
+    console.log('gallery 켜짐');
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -90,7 +90,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
     });
 
     if (!result.canceled) {
-      navigation.navigate("TextInput", {
+      navigation.navigate('TextInput', {
         itemId: 1001,
         otherParam: result.assets[0].base64,
       });
@@ -103,21 +103,21 @@ function ModalPopup({ visibleState, onClose, navigation }) {
         <TouchableOpacity
           style={{
             ...styles.textContainer_detail,
-            width: "100%",
+            width: '100%',
             borderBottomWidth: 0.5,
-            borderColor: "lightgrey",
+            borderColor: 'lightgrey',
           }}
           onPress={() => {
             (async () => {
               const cameraStatus =
                 await ImagePicker.requestCameraPermissionsAsync();
-              setHasCameraPermisson(cameraStatus.status === "granted");
+              setHasCameraPermisson(cameraStatus.status === 'granted');
             })();
 
             closeModal();
             setTimeout(function () {
               handleImagePicker();
-            }, 350);
+            }, 500);
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
@@ -125,21 +125,21 @@ function ModalPopup({ visibleState, onClose, navigation }) {
         <TouchableOpacity
           style={{
             ...styles.textContainer_detail,
-            width: "100%",
+            width: '100%',
             borderBottomWidth: 0.5,
-            borderColor: "lightgrey",
+            borderColor: 'lightgrey',
           }}
           onPress={() => {
             (async () => {
               const galleryStatus =
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
-              setHasGalleryPermission(galleryStatus.status === "granted");
+              setHasGalleryPermission(galleryStatus.status === 'granted');
             })();
 
             closeModal();
             setTimeout(function () {
               pickImage();
-            }, 350);
+            }, 700);
           }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
@@ -147,9 +147,9 @@ function ModalPopup({ visibleState, onClose, navigation }) {
         <TouchableOpacity
           style={styles.textContainer_detail}
           onPress={() => {
-            navigation.navigate("TextInput", {
+            navigation.navigate('TextInput', {
               itemId: 1002,
-              otherParam: "",
+              otherParam: '',
             });
             closeModal();
           }}
@@ -170,7 +170,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             <Text
               style={{
                 ...styles.modal_Text,
-                fontWeight: "bold",
+                fontWeight: 'bold',
               }}
             >
               취소
@@ -185,37 +185,37 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 const styles = StyleSheet.create({
   modalBackGround: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   textContainer: {
     borderRadius: 12,
     elevation: 20,
     marginBottom: 12,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   textContainer_detail: {
     paddingVertical: 15,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   modalContainer: {
-    width: "80%",
+    width: '80%',
     borderRadius: 20,
     elevation: 20,
     marginBottom: 40,
   },
   cancel: {
     paddingVertical: 15,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   modal_Text: {
     fontSize: 22,
-    fontWeight: "500",
-    color: "#445CE9",
+    fontWeight: '500',
+    color: '#445CE9',
   },
 });
 

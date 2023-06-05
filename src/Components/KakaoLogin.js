@@ -1,14 +1,31 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+  width,
+  height,
+} from "react-native";
 import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@login_id";
+const MYPICTURE = "@login_image";
+const MYNAME = "@name";
+const MYPATH = "@path";
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
 const Redirect_URI = "https://auth.expo.io/@htj7425/Nine";
 
-const KakaoLogin = ({ navigation }) => {
+export default function KakaoLogin({ navigation }) {
+  const [press, setpress] = useState(0);
+
+  const change = () => {
+    setpress(1);
+  };
   function LogInProgress(data) {
     console.log("data: ", data);
     const exp = "code=";
@@ -39,7 +56,7 @@ const KakaoLogin = ({ navigation }) => {
     })
       .then(function (response) {
         Access_Token = response.data.access_token;
-        console.log("Access_Token: ", Access_Token);
+        //console.log("Access_Token: ", Access_Token);
         requestUserInfo(Access_Token);
       })
       .catch(function (error) {
@@ -47,8 +64,9 @@ const KakaoLogin = ({ navigation }) => {
       });
   };
 
+  var user_id;
   //  정보 조회 함수
-  function requestUserInfo(Access_Token) {
+  async function requestUserInfo(Access_Token) {
     axios({
       method: "GET",
       url: "https://kapi.kakao.com/v2/user/me",
@@ -56,33 +74,36 @@ const KakaoLogin = ({ navigation }) => {
         Authorization: `Bearer ${Access_Token}`,
       },
     })
-      .then((response) => {
-        console.log("token response:", response);
-
-        var user_id = response.data.id;
-        var user_ninkname = response.data.kakao_account.profile.nickname;
-        var user_image = response.data.kakao_account.profile.profile_image_url;
-        console.log("user_id: ", user_id);
-        console.log("user_nickname: ", user_ninkname);
-        console.log("user_image", user_image);
+      .then(async (response) => {
+        // 로그인 고유 id 저장
+        await AsyncStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(response.data.id)
+        );
+        // 사용자 이름 저장
+        await AsyncStorage.setItem(
+          MYNAME,
+          JSON.stringify(response.data.properties.nickname)
+        );
+        // 사용자 Image 저장
+        await AsyncStorage.setItem(
+          MYPICTURE,
+          JSON.stringify(response.data.properties.profile_image)
+        );
+        await AsyncStorage.setItem(MYPATH, "K");
+        navigation.navigate("Main_Home");
       })
       .catch(function (error) {
         console.log("error", error);
       });
   }
 
-  // asyncstorage 에 토큰 저장
-  const storeData = async (returnValue) => {
-    try {
-      await AsyncStorage.setItem("userAccessToken", returnValue);
-    } catch (error) {}
-  };
   return (
     <View style={{ flex: 1 }}>
       <WebView
         originWhitelist={["*"]}
         scalesPageToFit={false}
-        style={{ marginTop: 30 }}
+        style={{ marginTop: 30, flex: 1, width: width, height: height }}
         source={{
           uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${API_KEY}&redirect_uri=${Redirect_URI}`,
         }}
@@ -95,6 +116,4 @@ const KakaoLogin = ({ navigation }) => {
       />
     </View>
   );
-};
-
-export default KakaoLogin;
+}
