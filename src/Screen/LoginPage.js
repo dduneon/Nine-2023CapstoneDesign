@@ -54,6 +54,7 @@ function Login({ navigation }) {
           />
         </View>
         <View style={{ flex: 1 }}></View>
+
       </View>
 
       <View style={styles.loginItems}>

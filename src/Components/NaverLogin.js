@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
+
 import {
   StyleSheet,
   View,
   Image,
   TouchableOpacity,
   Dimensions,
-} from 'react-native';
-import * as AuthSession from 'expo-auth-session';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_KEY = '@login_id';
+} from "react-native";
+import * as AuthSession from "expo-auth-session";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@login_id";
 
 const CLIENT_ID = 'Mzd3dap0KLih9pAZ86Qk';
 const REDIRECT_URL = 'https://auth.expo.io/@dduneon/Nine';
@@ -78,6 +80,7 @@ export default function NaverLogin({ navigation }) {
         );
         await AsyncStorage.setItem(MYPATH, 'N');
         navigation.navigate('Main_Home');
+
       })
       .catch(function (error) {
         console.log('error', error);
@@ -108,5 +111,6 @@ const styles = StyleSheet.create({
   icon_naver: {
     height: '40%',
     width: '21%',
+
   },
 });
