@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -33,8 +32,8 @@ export default function App() {
     async function prepare() {
       try {
         await Font.loadAsync({
-          'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
-          'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
+          "SUITE-Light": require("./assets/fonts/SUITE-Light.otf"),
+          "SUITE-Medium": require("./assets/fonts/SUITE-Medium.otf"),
         });
 
         userLoad();
@@ -57,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
     if (appIsReady) {
-      console.log('[App.js] prepare is OK');
+      console.log("[App.js] prepare is OK");
       SplashScreen.hideAsync();
     }
   }, [appIsReady]);

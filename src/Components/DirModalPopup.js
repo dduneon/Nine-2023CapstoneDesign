@@ -12,6 +12,13 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
+import { getDatabase, ref, onValue, set, query } from "firebase/database";
+import { db } from "../firebase/config";
+
+const STORAGE_KEY = "@login_id";
+
 const ModalSetup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
@@ -53,6 +60,15 @@ const ModalSetup = ({ visible, children }) => {
 
 function ModalPopup({ visibleState, onClose, navigation }) {
   const [visible, setVisible] = React.useState(visibleState);
+  const [userId, setUserId] = useState();
+
+  useEffect(() => {
+    userLoad();
+  }, []);
+
+  async function userLoad() {
+    setUserId(await AsyncStorage.getItem(STORAGE_KEY));
+  }
 
   useEffect(() => {
     setVisible(visibleState);
