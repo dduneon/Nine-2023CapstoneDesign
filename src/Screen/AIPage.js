@@ -47,6 +47,7 @@ function AIPage({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const responseData = data.choices[0].message.content.trim();
         setAnswer(responseData);
       })
