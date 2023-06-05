@@ -11,10 +11,11 @@ import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const STORAGE_KEY = "@login_id";
-const MYPICTURE = "@login_image";
-const MYNAME = "@name";
-const MYPATH = "@path";
+const STORAGE_KEY = '@login_id';
+const MYPICTURE = '@login_image';
+const MYNAME = '@name';
+const MYPATH = '@path';
+const MYTOKEN = '@token';
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
@@ -90,8 +91,14 @@ export default function KakaoLogin({ navigation }) {
           MYPICTURE,
           JSON.stringify(response.data.properties.profile_image)
         );
-        await AsyncStorage.setItem(MYPATH, "K");
-        navigation.navigate("Main_Home");
+        // 로그아웃용 Access_Token 저장
+        await AsyncStorage.setItem(
+          MYTOKEN,
+          JSON.stringify(Access_Token)
+        );
+        // 로그인 경로 저장
+        await AsyncStorage.setItem(MYPATH,"K");
+        navigation.navigate('Main_Home');
       })
       .catch(function (error) {
         console.log("error", error);

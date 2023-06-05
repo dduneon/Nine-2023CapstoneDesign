@@ -47,44 +47,6 @@ function Home({ navigation }) {
     setJsonData(await getJSON());
   }
 
-  /*
-  //DB에서 JSON 데이터를 받음
-  function getData() {
-    const temp = query(ref(db, "users/" + userId + "/"));
-    onValue(temp, (res) => {
-      const data = res.toJSON();
-
-      if (data != null) {
-        setJSON(data);
-      } else {
-        setJsonDataState("문제를 등록해주세요!");
-      }
-    });
-  }*/
-
-  /*
-  //getData로 부터 DB의 data를 받아와 JSON에 저장
-  async function setJSON(data) {
-    const fileUri = FileSystem.documentDirectory + "data.json";
-    const jsonData = JSON.stringify(data);
-    await FileSystem.writeAsStringAsync(fileUri, jsonData);
-    FileSystem.readAsStringAsync(fileUri);
-    console.log("JSON 데이터가 성공적으로 저장되었습니다.");
-    getJSON();
-  }*/
-
-  /*
-  //data.json으로부터 데이터 받음
-  async function getJSON() {
-    const fileUri = FileSystem.documentDirectory + "data.json";
-    const readData = JSON.parse(await FileSystem.readAsStringAsync(fileUri));
-
-    setJsonData(readData);
-
-    Object.keys(readData).map((res) => {
-      console.log(res);
-    });
-  }*/
 
   return (
     <View style={{ flex: 1, width: "100%" }}>

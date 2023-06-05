@@ -16,6 +16,7 @@ import LoginPage from "./src/Screen/LoginPage";
 import Main from "./src/Screen/Main";
 import AIPage from "./src/Screen/AIPage";
 import TextPage from "./src/Screen/TextPage";
+import Information from "./src/Screen/Information";
 
 import { getData } from "./src/Functions/DataFunction";
 
@@ -97,6 +98,11 @@ export default function App() {
         <Stack.Screen
           name="KakaoLogin"
           component={KakaoLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Information"
+          component={Information}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
