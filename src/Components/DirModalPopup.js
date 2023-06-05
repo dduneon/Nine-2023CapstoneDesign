@@ -10,6 +10,7 @@ import {
 	Animated,
 	TextInput,
 	Keyboard,
+	FlatList,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,6 +19,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system";
 import { getDatabase, ref, onValue, set, query } from "firebase/database";
 import { db } from "../firebase/config";
+import {
+	getJSON,
+	getData,
+	makeFolder,
+	exportData,
+} from "../Functions/DataFunction";
 
 const ModalSetup = ({ visible, children }) => {
 	const [showModal, setShowModal] = React.useState(visible);
@@ -60,23 +67,56 @@ const ModalSetup = ({ visible, children }) => {
 
 const STORAGE_KEY = "@login_id";
 
-function ModalPopup({ visibleState, onClose, navigation }) {
+function ModalPopup({ question, answer, visibleState, onClose, navigation }) {
 	const [visible, setVisible] = React.useState(visibleState);
 	const [userId, setUserId] = useState();
 	const [newName, setNewName] = useState("");
-	const onChangeText = (payload) => setNewName(payload);
+	const onChangeText = (payload) => {
+		setNewName(payload);
+		getData(userId);
+		uploadData();
+	};
+	const [jsonData, setJsonData] = useState(null);
+	const [jsonDataState, setJsonDataState] = useState("Loading ...");
+	const [makeSignal, setMakeSignal] = useState(false);
+
 	useEffect(() => {
 		userLoad();
 	}, []);
+
+	useEffect(() => {
+		setVisible(visibleState);
+		console.log("[DirModalPopup.js] visibleState: " + visibleState);
+	}, [visibleState]);
+
+	useEffect(() => {
+		uploadData();
+	}, [userId]);
+
+	useEffect(() => {
+		if (jsonData === null) {
+			setJsonDataState("폴더가 비어있네요\n폴더를 만들어주세요.");
+		}
+	}, [jsonData]);
+
+	useEffect(() => {
+		uploadData();
+		setMakeSignal(false);
+	}, [makeSignal]);
 
 	async function userLoad() {
 		setUserId(await AsyncStorage.getItem(STORAGE_KEY));
 	}
 
-	useEffect(() => {
-		setVisible(visibleState);
-		console.log("[ModalPopup.js] visibleState: " + visibleState);
-	}, [visibleState]);
+	async function uploadData() {
+		setJsonData(await getJSON());
+	}
+
+	function exportFirebase() {
+		makeFolder(userId, newName);
+		getData(userId);
+		uploadData();
+	}
 
 	return (
 		<ModalSetup visible={visible}>
@@ -128,10 +168,13 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 									placeholderTextColor={"grey"}
 									style={{}}
 								/>
-								<View style={{ marginLeft: 28, alignItems: "center" }}>
+								<View style={{ marginLeft: 25, alignItems: "center" }}>
 									<TouchableOpacity
 										onPress={() => {
+											exportFirebase();
 											Keyboard.dismiss();
+											setNewName("");
+											setMakeSignal(true);
 										}}
 									>
 										<EvilIcons name="plus" size={38} color="#4f69f9" />
@@ -139,7 +182,48 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 								</View>
 							</View>
 
-							<View style={{}}></View>
+							<View
+								style={{
+									marginTop: 15,
+									width: "100%",
+									marginRight: "7%",
+								}}
+							>
+								{jsonData ? (
+									<FlatList
+										numColumns={1}
+										data={Object.keys(jsonData)}
+										renderItem={({ item, index }) => (
+											<View style={styles.page} key={index}>
+												<View style={styles.pageInView}>
+													<TouchableOpacity style={{ flex: 1 }}>
+														<Text
+															style={{
+																fontFamily: "SUITE-Medium",
+																fontSize: 14,
+															}}
+														>
+															{item}
+														</Text>
+													</TouchableOpacity>
+												</View>
+											</View>
+										)}
+										keyExtractor={(item, index) => index.toString()}
+									/>
+								) : (
+									<View
+										style={{
+											flex: 1,
+											alignItems: "center",
+										}}
+									>
+										<Text style={{ fontSize: 35, fontFamily: "SUITE-Light" }}>
+											{jsonDataState}
+										</Text>
+									</View>
+								)}
+							</View>
 						</View>
 					</TouchableOpacity>
 				</View>
@@ -151,6 +235,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 							onPress={() => {
 								onClose();
 								setVisible(false);
+								setNewName("");
 							}}
 						>
 							<View>
@@ -242,10 +327,13 @@ const styles = StyleSheet.create({
 		fontWeight: "500",
 	},
 	page: {
+		flex: 1,
+		width: "100%",
 		margin: 15,
 		justifyContent: "center",
 		alignItems: "center",
 		shadowColor: "#000",
+
 		shadowOffset: {
 			width: 5,
 			height: 5,
@@ -255,6 +343,7 @@ const styles = StyleSheet.create({
 	},
 	pageInView: {
 		flex: 1,
+		width: "60%",
 		backgroundColor: "#f2f2f2",
 		borderWidth: 0.3,
 		borderRadius: 15,
