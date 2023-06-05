@@ -83,6 +83,14 @@ function My({ navigation }) {
   };
 
   const Logout = async () => {
+    const id = await AsyncStorage.getItem(MYPATH);
+    if (id === "K") {
+      setPath("카카오");
+    } else if (id === "N") {
+      setPath("네이버");
+    } else if (id === "G") {
+      setPath("구글");
+    }
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       navigation.navigate("Login");

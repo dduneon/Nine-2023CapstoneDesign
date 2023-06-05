@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   google_image:{
     width: width,
-    marginLeft: 15,
+    marginLeft: 25,
     marginTop: 180,
     resizeMode: "contain",  
   }
