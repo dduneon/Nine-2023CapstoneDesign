@@ -17,10 +17,18 @@ import ModalPopup from '../Components/ModalPopup';
 function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [headerTitle, setheaderTitle] = useState('');
 
+  useEffect(() => {
+    if (activeTab === 0) {
+      setheaderTitle('나의 오답 노트');
+    } else {
+      setheaderTitle('내 정보');
+    }
+  }, [activeTab]);
   return (
     <View style={{ flex: 1 }}>
-      <Header styles={{ flex: 1 }} />
+      <Header style={{ flex: 1 }} headerTitle={headerTitle} />
       <View
         style={{
           flex: 12,
