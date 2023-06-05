@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+
 import {
   View,
   Dimensions,
@@ -6,10 +7,10 @@ import {
   Image,
   width,
   height,
-} from "react-native";
-import { WebView } from "react-native-webview";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native';
+import { WebView } from 'react-native-webview';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEY = '@login_id';
 const MYPICTURE = '@login_image';
@@ -18,8 +19,9 @@ const MYPATH = '@path';
 const MYTOKEN = '@token';
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
-const API_KEY = "2488a8ac518d2e78a0b20d947d538554";
-const Redirect_URI = "https://auth.expo.io/@htj7425/Nine";
+const API_KEY = '2488a8ac518d2e78a0b20d947d538554';
+const Redirect_URI = 'https://auth.expo.io/@dduneon/Nine';
+
 
 export default function KakaoLogin({ navigation }) {
   const [press, setpress] = useState(0);
@@ -91,6 +93,7 @@ export default function KakaoLogin({ navigation }) {
           MYPICTURE,
           JSON.stringify(response.data.properties.profile_image)
         );
+
         // 로그아웃용 Access_Token 저장
         await AsyncStorage.setItem(
           MYTOKEN,

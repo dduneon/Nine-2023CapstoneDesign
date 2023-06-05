@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Button,
@@ -6,13 +6,14 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-import BottomTab from "../Components/BottomTab";
-import Header from "../Components/Header";
-import HomePage from "./HomePage";
-import MyPage from "./MyPage";
-import ModalPopup from "../Components/ModalPopup";
+import BottomTab from '../Components/BottomTab';
+import Header from '../Components/Header';
+import HomePage from './HomePage';
+import MyPage from './MyPage';
+import ModalPopup from '../Components/ModalPopup';
+import APP from '../../App';
 
 function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -26,14 +27,14 @@ function Main({ navigation }) {
       <View
         style={{
           flex: 5,
-          alignItems: "baseline",
+          alignItems: 'baseline',
           marginTop: -30,
           padding: 0,
         }}
       >
         {activeTab === 0 ? <HomePage /> : <MyPage navigation={navigation} />}
       </View>
-      <View style={{ flex: 0.8, backgroundColor: "white" }}>
+      <View style={{ flex: 0.8, backgroundColor: 'white' }}>
         <BottomTab
           onTabChange={(tab) => setActiveTab(tab)}
           onPlusPress={() => {
