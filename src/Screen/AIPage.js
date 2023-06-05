@@ -7,7 +7,8 @@ import {
   Pressable,
   StyleSheet,
 } from "react-native";
-
+import { getDatabase, ref, onValue, set, query } from "firebase/database";
+import db from "../firebase/config";
 import DirModalPopup from "../Components/DirModalPopup";
 
 function AIPage({ navigation, route }) {

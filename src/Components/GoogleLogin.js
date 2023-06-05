@@ -2,8 +2,14 @@ import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
-import { StyleSheet, Text, View, Image, TouchableOpacity,
-  Dimensions} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import TextPage from "./../Screen/TextPage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -28,7 +34,7 @@ expo prebuild
 const { height, width } = Dimensions.get("window");
 
 const STORAGE_KEY = "@login_id";
-const MYPATH = '@path';
+const MYPATH = "@path";
 
 WebBrowser.maybeCompleteAuthSession();
 // 사용자가 Google로 로그인하려고 할 때 이벤트 들을 수 있음
@@ -74,8 +80,10 @@ export default function GoogleLogin({ navigation }) {
           await promtAsync();
         }}
       >
-        <Image source={require("../../assets/google_login.png")}
-      style = {styles.google_image} />
+        <Image
+          source={require("../../assets/google_login.png")}
+          style={styles.google_image}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -88,10 +96,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  google_image:{
+  google_image: {
     width: width,
     marginLeft: 25,
     marginTop: 180,
-    resizeMode: "contain",  
-  }
+    resizeMode: "contain",
+  },
 });

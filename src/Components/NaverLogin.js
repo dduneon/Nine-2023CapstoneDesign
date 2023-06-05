@@ -1,22 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { 
-    StyleSheet,
-    View, 
-    Image, 
-    TouchableOpacity,
-    Dimensions
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import * as AuthSession from "expo-auth-session";
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const STORAGE_KEY = '@login_id';
+const STORAGE_KEY = "@login_id";
 
 const CLIENT_ID = "Mzd3dap0KLih9pAZ86Qk";
 const REDIRECT_URL = "https://auth.expo.io/@seonghyeon_lee/Nine";
 const CLIENT_SECRET = "j3iOBc9PWy";
-const MYPATH = '@path';
+const MYPATH = "@path";
 
 var state_value = "";
 
@@ -59,6 +59,7 @@ export default function NaverLogin({ navigation }) {
         requestUserInfo(Access_Token);
       })
       .catch(function (error) {
+        navigation.goBack();
         console.log("error", error);
       });
   };
@@ -73,13 +74,14 @@ export default function NaverLogin({ navigation }) {
     })
       .then(async (response) => {
         await AsyncStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(response.data.response.id)
-          );
-        await AsyncStorage.setItem(MYPATH,"N");
-        navigation.navigate('Main_Home');
+          STORAGE_KEY,
+          JSON.stringify(response.data.response.id)
+        );
+        await AsyncStorage.setItem(MYPATH, "N");
+        navigation.goBack();
       })
       .catch(function (error) {
+        navigation.goBack();
         console.log("error", error);
       });
   };
@@ -107,6 +109,6 @@ const styles = StyleSheet.create({
     width: width - 250,
     marginTop: 60,
     marginLeft: 25,
-    resizeMode: "contain"
-  }
+    resizeMode: "contain",
+  },
 });
