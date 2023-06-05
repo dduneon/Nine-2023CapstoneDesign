@@ -87,6 +87,7 @@ export default function App() {
             name="AI"
             component={AIPage}
             options={{
+              gestureEnabled: false,
               headerShown: false,
             }}
           />
