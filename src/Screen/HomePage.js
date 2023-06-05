@@ -44,15 +44,19 @@ function Home({ navigation }) {
         justifyContent: "center",
         margin: 20,
       }}
-    >
+    >{ id_num === 0 ?
+      <AntDesign name="pluscircleo" size={24} color="black" />: 
       <TouchableOpacity>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View style={{ justifyContent: "center", alignItems: "cent ber" }}>
           <Image source={require("../../assets/folder_image.png")} />
           <View style={{ width: width / 4, height: height / 64 }}>
             <Text style={{ textAlign: "center" }}>{item.text} </Text>
           </View>
         </View>
       </TouchableOpacity>
+}
+      
+
     </View>
   );
 
@@ -77,6 +81,7 @@ function Home({ navigation }) {
         keyExtractor={(text) => text.id}
         style={{ margin: 25 }}
       />
+      
     </View>
   );
 }

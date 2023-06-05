@@ -11,9 +11,10 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Fontisto } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { folders } from "../Data/data";
+
 
 const MYNAME = "@name";
 const MYPICTURE = "@login_image";
@@ -124,11 +125,24 @@ function My({ navigation }) {
 
       <View style={styles.info_container}>
         <View style={styles.text_container}></View>
+        
         <Text style={styles.problem_text}> 로그인 경로는 {path} 입니다! </Text>
+        <View style={styles.dividing_line}><View style={styles.text_container}/></View>
         <Text style={styles.problem_text}>
           {" "}
           지금까지 질문한 문제: {num} 개에요!
         </Text>
+        <View style={styles.dividing_line}><View style={styles.text_container}/></View>
+        <View>
+          <TouchableOpacity style={{flexDirection: "row",justifyContent:"space-between"}}
+          onPress = {() => navigation.navigate("Information")}>
+            <Text style={styles.problem_text}> 앱 정보 확인하기</Text>
+            <AntDesign style={{alignSelf: "center", marginRight: 15}} name="right" size={24} color="black" />
+          </TouchableOpacity>
+          </View>
+          <View style={styles.dividing_line}><View style={styles.text_container}/></View>
+        
+       
       </View>
 
       <View
@@ -164,14 +178,20 @@ const styles = StyleSheet.create({
     width: width,
   },
   text_container: {
-    marginTop: 30,
-    justifyContent: "space-evenly",
+    marginTop: 5,
   },
   problem_text: {
-    margin: 10,
+    margin: 15,
     fontFamily: "SUITE-Medium",
     fontSize: 20,
+    alignSelf: "flex-start"
   },
+  dividing_line: {
+    margin: 5,
+    borderTopWidth: 1,
+    borderColor: "lightgrey",
+    width: width,
+  }
 });
 
 export default My;
