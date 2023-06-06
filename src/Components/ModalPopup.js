@@ -68,6 +68,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
   const handleImagePicker = async () => {
     console.log('camera 켜짐');
     const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
       base64: true,
     });
 
