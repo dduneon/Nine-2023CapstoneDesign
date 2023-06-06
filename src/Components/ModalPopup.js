@@ -116,7 +116,11 @@ function ModalPopup({ visibleState, onClose, navigation }) {
                 await ImagePicker.requestCameraPermissionsAsync();
               setHasCameraPermisson(cameraStatus.status === 'granted');
             })();
-            handleImagePicker();
+
+            closeModal();
+            setTimeout(function () {
+              handleImagePicker();
+            }, 500);
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
