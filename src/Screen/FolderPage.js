@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import * as Font from 'expo-font';
 import {
   View,
-  Image,
   Text,
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Dimensions,
   ScrollView,
 } from 'react-native';
-import { Fontisto, AntDesign } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as FileSystem from 'expo-file-system';
+import { AntDesign } from '@expo/vector-icons';
 
-import { getDatabase, ref, onValue, set, query } from 'firebase/database';
-import { db } from '../firebase/config';
-import {
-  getJSON,
-  getData,
-  makeFolder,
-  userLoad,
-} from '../Functions/DataFunction';
+import { getJSON } from '../Functions/DataFunction';
 
 import Header from '../Components/Header';
 
@@ -30,7 +18,6 @@ function Home({ route, navigation }) {
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [selectState, setSelectState] = useState([]);
-  const [extractedData, setExtractedData] = useState();
 
   useEffect(() => {
     uploadData();
@@ -46,7 +33,7 @@ function Home({ route, navigation }) {
         jsonData.hasOwnProperty('folderName')
       ) {
         setJsonDataState(
-          'HOME 하단의 추가 버튼을 눌러\n나인에게 모르는 문제를 물어보고\n내 오답노트에 추가할 수 있어요'
+          '폴더가 비어있어요\n문제를 추가하려면 나인에게 물어본 후\n오답노트에 추가해주세요'
         );
       } else {
         setJsonData(jsonData);
