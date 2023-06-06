@@ -153,6 +153,12 @@ function My({ navigation }) {
         <View style={styles.dividing_line}>
           <View style={styles.text_container} />
         </View>
+        <TouchableOpacity onPress={Logout}>
+          <Text style={styles.logout_text}>로그아웃하기</Text>
+        </TouchableOpacity>
+        <View style={styles.dividing_line}>
+          <View style={styles.text_container} />
+        </View>
       </View>
 
       <View
@@ -162,9 +168,6 @@ function My({ navigation }) {
           marginBottom: 15,
         }}
       >
-        <TouchableOpacity onPress={Logout}>
-          <Text style={{ marginRight: 30 }}>로그아웃하기</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -202,6 +205,13 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     width: width,
   },
+  logout_text: {
+    margin: 15,
+    fontFamily: 'SUITE-Medium',
+    color: 'red',
+    fontSize: 20,
+    alignSelf: 'center',
+  }
 });
 
 export default My;
