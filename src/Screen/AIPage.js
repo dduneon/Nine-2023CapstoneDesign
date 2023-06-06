@@ -165,6 +165,9 @@ function AIPage({ navigation, route }) {
         </Pressable>
       </View>
       <DirModalPopup
+        question={otherParam}
+        answer={ans}
+        com={com}
         visibleState={modalVisible}
         onClose={() => setModalVisible(false)}
         navigation={navigation}

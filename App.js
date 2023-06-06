@@ -18,6 +18,8 @@ import AIPage from './src/Screen/AIPage';
 import TextPage from './src/Screen/TextPage';
 import InformationPage from './src/Screen/InformationPage';
 
+import FolderPage from './src/Screen/FolderPage';
+
 import { getData } from './src/Functions/DataFunction';
 
 const Stack = createNativeStackNavigator();
@@ -104,6 +106,11 @@ export default function App() {
           <Stack.Screen
             name="Information"
             component={InformationPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Folder"
+            component={FolderPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

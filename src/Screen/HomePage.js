@@ -38,15 +38,21 @@ function Home({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (jsonData === null) {
-      setJsonDataState(
-        '하단의 추가 버튼을 눌러\n나인에게 모르는 문제를 물어보고\n내 오답노트에 추가할 수 있어요'
-      );
-    }
-  }, [jsonData]);
+    const interval = setInterval(async () => {
+      uploadData();
+      if (jsonData === null) {
+        setJsonDataState(
+          '하단의 추가 버튼을 눌러\n나인에게 모르는 문제를 물어보고\n내 오답노트에 추가할 수 있어요'
+        );
+      }
+    }, 1000); // 1초마다 업데이트
+
+    return () => clearInterval(interval); // 컴포넌트가 unmount될 때 interval 정리
+  }, []);
 
   async function uploadData() {
-    setJsonData(await getJSON());
+    const data = await getJSON();
+    setJsonData(data);
   }
 
   return (
@@ -59,7 +65,15 @@ function Home({ navigation }) {
             renderItem={({ item, index }) => (
               <View style={styles.page} key={index}>
                 <View style={styles.pageInView}>
-                  <TouchableOpacity style={{ flex: 1 }}>
+                  <TouchableOpacity
+                    style={{ flex: 1 }}
+                    onPress={() => {
+                      navigation.navigate('Folder', {
+                        itemId: 1101,
+                        otherParam: item,
+                      });
+                    }}
+                  >
                     <Image source={require('../../assets/folder_image.png')} />
                     <Text
                       style={{

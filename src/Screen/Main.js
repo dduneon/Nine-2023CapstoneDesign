@@ -35,7 +35,11 @@ function Main({ navigation }) {
           alignItems: 'baseline',
         }}
       >
-        {activeTab === 0 ? <HomePage /> : <MyPage navigation={navigation} />}
+        {activeTab === 0 ? (
+          <HomePage navigation={navigation} />
+        ) : (
+          <MyPage navigation={navigation} />
+        )}
       </View>
       <View style={{ flex: 2, backgroundColor: 'white' }}>
         <BottomTab
