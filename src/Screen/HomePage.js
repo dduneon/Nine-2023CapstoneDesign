@@ -33,8 +33,6 @@ const { height, width } = Dimensions.get('window');
 function Home({ navigation }) {
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectFolder, setSelectFolder] = useState('');
 
   useEffect(() => {
     uploadData();
@@ -71,7 +69,6 @@ function Home({ navigation }) {
                   <TouchableOpacity
                     style={{ flex: 1 }}
                     onPress={() => {
-                      setModalVisible(true);
                       navigation.navigate('Folder', {
                         itemId: 1101,
                         otherParam: item,

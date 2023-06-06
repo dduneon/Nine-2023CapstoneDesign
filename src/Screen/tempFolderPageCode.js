@@ -19,7 +19,7 @@ function Home({ route, navigation }) {
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [selectState, setSelectState] = useState([]);
   const [extractedData, setExtractedData] = useState();
-
+  console.log(otherParam);
   useEffect(() => {
     uploadData();
   }, []);
@@ -53,7 +53,7 @@ function Home({ route, navigation }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#DCE2F0' }}>
-      <Header style={{ flex: 1 }} headerTitle={otherParam} />
+      <Header style={{ flex: 1 }} headerTitle={''} />
       <View style={{ flex: 12 }}>
         {jsonData ? (
           <FlatList
@@ -62,30 +62,7 @@ function Home({ route, navigation }) {
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 style={{ flex: 1 }}
-                onPress={() => {
-                  /*const fullData =
-                    item +
-                    '번 문제/' +
-                    jsonData[item].question.question +
-                    '/' +
-                    jsonData[item].answer.answer +
-                    '/' +
-                    jsonData[item].com.com;
-                  */
-                  const makeStr = item + '번 문제';
-                  const fullData = {
-                    folderName: otherParam,
-                    numQuestion: makeStr,
-                    number: item,
-                    question: jsonData[item].question.question,
-                    answer: jsonData[item].answer.answer,
-                    com: jsonData[item].com.com,
-                  };
-                  navigation.navigate('Note', {
-                    itemId: 1601,
-                    otherParam: JSON.stringify(fullData),
-                  });
-                }}
+                onPress={() => handleTouchableOpacityPress(index)}
                 activeOpacity={selectState[index] ? 1 : 0}
               >
                 <View style={styles.page} key={index}>
@@ -98,7 +75,15 @@ function Home({ route, navigation }) {
                       }}
                     >
                       <View style={{ position: 'absolute', right: '55%' }}>
-                        <AntDesign name="caretright" size={14} color="black" />
+                        {selectState[index] ? (
+                          <AntDesign name="caretdown" size={14} color="black" />
+                        ) : (
+                          <AntDesign
+                            name="caretright"
+                            size={14}
+                            color="black"
+                          />
+                        )}
                       </View>
                       <View
                         style={{
@@ -117,6 +102,26 @@ function Home({ route, navigation }) {
                         </Text>
                       </View>
                     </View>
+                    {selectState[index] ? (
+                      <View style={{ flex: 1, paddingVertical: 12 }}>
+                        <ScrollView style={{ flex: 1 }}>
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              fontFamily: 'SUITE-Light',
+                            }}
+                          >
+                            {jsonData[item].question.question}
+                          </Text>
+                        </ScrollView>
+                        <ScrollView style={{ flex: 1 }}>
+                          <Text>{jsonData[item].answer.answer}</Text>
+                          <Text>{jsonData[item].com.com}</Text>
+                        </ScrollView>
+                      </View>
+                    ) : (
+                      <View></View>
+                    )}
                   </View>
                 </View>
               </TouchableOpacity>

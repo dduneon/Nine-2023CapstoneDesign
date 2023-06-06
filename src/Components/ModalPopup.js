@@ -68,6 +68,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
   const handleImagePicker = async () => {
     console.log('camera 켜짐');
     const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
       base64: true,
     });
 
@@ -116,7 +117,10 @@ function ModalPopup({ visibleState, onClose, navigation }) {
               setHasCameraPermisson(cameraStatus.status === 'granted');
             })();
 
-            handleImagePicker();
+            closeModal();
+            setTimeout(function () {
+              handleImagePicker();
+            }, 500);
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>

@@ -1,22 +1,59 @@
-import { getDatabase, ref, onValue, set, query } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  query,
+  remove,
+} from 'firebase/database';
 import { db } from '../firebase/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from 'expo-file-system';
 
 //새로운 폴더 생성 (DB에서 적용되는 부분)
 function makeFolder(userId, folderName) {
-  const path = 'users' + '/' + userId + '/' + folderName;
+  const path = `users/${userId}/${folderName}`;
   const reference = ref(db, path);
   console.log(path);
   set(reference, { folderName });
-  getData();
 }
 
+function folderDelete(userId, folderName) {
+  const path = `users/${userId}/${folderName}`;
+  const reference = ref(db, path);
+  remove(reference)
+    .then(() => {
+      console.log('폴더 삭제 완료');
+    })
+    .catch((error) => {
+      console.log('폴더 삭제 중 오류 발생: ', error);
+    });
+}
+
+async function questionDelete(userId, folderName, number) {
+  const path = `users/${userId}/${folderName}/${number}`;
+  const reference = ref(db, path);
+  console.log(path);
+  remove(reference)
+    .then(() => {
+      console.log('질문 삭제 완료');
+    })
+    .catch((error) => {
+      console.log('질문 삭제 중 오류 발생: ', error);
+    });
+}
+/*
+function questionDelete(userId, folderName, number, question, answer, com) {
+  const path = `users/${userId}/${folderName}/${number}`;
+  const reference = ref(db, path);
+  set(reference);
+  getData(userId);
+}*/
+
 function exportData(userId, folderName, number, question, answer, com) {
-  const path = 'users/' + userId + '/' + folderName + '/' + number;
+  const path = `users/${userId}/${folderName}/${number}`;
   const reference = ref(db, path);
   set(reference, { question: { question }, answer: { answer }, com: { com } });
-  getData();
 }
 
 //DB에서 JSON 데이터를 받음
@@ -36,7 +73,7 @@ function exportData(userId, folderName, number, question, answer, com) {
 
 // DB로 부터 data 받아와서 local json에 저장
 function getData(userId) {
-  const path = 'users' + '/' + userId + '/';
+  const path = `users/${userId}`;
   const temp = query(ref(db, path));
   let data;
   onValue(temp, async (res) => {
@@ -66,4 +103,11 @@ async function getJSON() {
   return readData;
 }
 
-export { getJSON, getData, makeFolder, exportData };
+export {
+  getJSON,
+  getData,
+  makeFolder,
+  exportData,
+  questionDelete,
+  folderDelete,
+};
