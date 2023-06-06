@@ -17,7 +17,9 @@ import Main from './src/Screen/Main';
 import AIPage from './src/Screen/AIPage';
 import TextPage from './src/Screen/TextPage';
 import InformationPage from './src/Screen/InformationPage';
+
 import FolderPage from './src/Screen/FolderPage';
+
 import { getData } from './src/Functions/DataFunction';
 
 const Stack = createNativeStackNavigator();
