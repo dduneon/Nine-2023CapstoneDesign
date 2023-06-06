@@ -30,6 +30,7 @@ export default function Information({ navigation }) {
             - CapstoneDesign 작품 -
           </Text>
         </View>
+        <View style={{flex:1}}>
         <View>
           <Text
             style={{ marginLeft: 10, fontSize: 20, fontFamily: 'SUITE-Light' }}
@@ -150,6 +151,7 @@ export default function Information({ navigation }) {
             </Text>
           </View>
         </View>
+        </View>
       </View>
     </View>
   );
@@ -157,9 +159,11 @@ export default function Information({ navigation }) {
 
 const styles = StyleSheet.create({
   headerItems: {
+    flex:1,
     flexDirection: 'column',
   },
   headerLogo: {
+    flex:0.9,
     paddingLeft: 30,
     paddingTop: 90,
     alignItems: 'flex-start',
