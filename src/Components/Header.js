@@ -11,15 +11,19 @@ import {
 
 // Fontisto 부분 size 수정해줘야함 24나 32로 해놓으면 휴대폰 스크린 크기에 따라 크고 작게 보일 수 있으므로
 
-function Header({ style, headerTitle }) {
+function Header({ style, headerTitle, onEditStateChange }) {
+  const [pressBtnState, setPressBtnState] = useState(false);
+  // True일 시 편집중인것임
+  const onPressEditBtn = () => {
+    setPressBtnState(pressBtnState ? false : true);
+    //onEditStateChange(pressBtnState);
+    // 구현 완료시 이부분 주석 제거
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titletext}>{headerTitle}</Text>
-      {headerTitle === '나의 오답 노트' ? (
-        <View style={styles.logo}>
-          <Button title="편집" style={styles.editBtn}></Button>
-        </View>
-      ) : (
+      {headerTitle === '내 정보' ? (
         <View style={styles.logo}>
           <Image
             style={styles.aiimage}
@@ -29,6 +33,14 @@ function Header({ style, headerTitle }) {
             style={styles.applogo}
             source={require('../../assets/icons/icon_nine.png')}
           />
+        </View>
+      ) : (
+        <View style={styles.editView}>
+          <Button
+            title={pressBtnState ? '완료' : '편집'}
+            style={styles.editBtn}
+            onPress={onPressEditBtn}
+          ></Button>
         </View>
       )}
     </SafeAreaView>
@@ -42,10 +54,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#B7C6E6',
     justifyContent: 'flex-end',
   },
-  editBtn: {
-    fontSize: 30,
-    color: 'blue',
+  editView: {
+    flex: 0.5,
+    justifyContent: 'flex-end',
+    marginBottom: 4,
+    marginRight: 20,
+    alignItems: 'flex-end',
   },
+  editBtn: {},
   titletext: {
     flex: 1.5,
     fontFamily: 'SUITE-Medium',
@@ -57,7 +73,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   logo: {
-    flex: 1,
+    flex: 0.8,
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginBottom: 5,
