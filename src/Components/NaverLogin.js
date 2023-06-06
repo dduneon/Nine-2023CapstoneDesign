@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const STORAGE_KEY = "@login_id";
 
 const CLIENT_ID = "Mzd3dap0KLih9pAZ86Qk";
-const REDIRECT_URL = "https://auth.expo.io/@htj7425/Nine";
+const REDIRECT_URL = "https://auth.expo.io/@seonghyeon_lee/Nine";
 const CLIENT_SECRET = "j3iOBc9PWy";
 const MYPATH = "@path";
 
@@ -73,6 +73,7 @@ export default function NaverLogin({ navigation }) {
 			},
 		})
 			.then(async (response) => {
+				console.log(response)
 				await AsyncStorage.setItem(
 					STORAGE_KEY,
 					JSON.stringify(response.data.response.id)
