@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, StyleSheet, SafeAreaView } from 'react-native';
-import { Fontisto, MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+  Button,
+} from 'react-native';
 
 // Fontisto 부분 size 수정해줘야함 24나 32로 해놓으면 휴대폰 스크린 크기에 따라 크고 작게 보일 수 있으므로
 
 function Header({ style, headerTitle }) {
-  const notice = () => {}; // 종 모양 눌렀을 때 발생할 이벤트
-
-  const user = () => {}; // 사람 모양 눌렀을 때 발생할 이벤트
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titletext}>{headerTitle}</Text>
-      <View style={styles.logo}>
-        <Image
-          style={styles.aiimage}
-          source={require('../../assets/icons/icon_ai.png')}
-        />
-        <Image
-          style={styles.applogo}
-          source={require('../../assets/icons/icon_nine.png')}
-        />
-      </View>
+      {headerTitle === '나의 오답 노트' ? (
+        <View style={styles.logo}>
+          <Button title="편집" style={styles.editBtn}></Button>
+        </View>
+      ) : (
+        <View style={styles.logo}>
+          <Image
+            style={styles.aiimage}
+            source={require('../../assets/icons/icon_ai.png')}
+          />
+          <Image
+            style={styles.applogo}
+            source={require('../../assets/icons/icon_nine.png')}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -31,6 +41,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#B7C6E6',
     justifyContent: 'flex-end',
+  },
+  editBtn: {
+    fontSize: 30,
+    color: 'blue',
   },
   titletext: {
     flex: 1.5,
@@ -47,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginBottom: 5,
-    marginRight: 10,
+    marginRight: 20,
     justifyContent: 'flex-end',
   },
   aiimage: {
