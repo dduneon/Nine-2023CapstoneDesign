@@ -25,13 +25,13 @@ import {
 
 import Header from '../Components/Header';
 
-function Home({ route, navigation }) {
-  const { itemId, otherParam } = route.params;
+function Home({ navigation }) {
+  //const { itemId, otherParam } = route.params;
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [selectState, setSelectState] = useState([]);
   const [extractedData, setExtractedData] = useState();
-
+  console.log(otherParam);
   useEffect(() => {
     uploadData();
   }, []);

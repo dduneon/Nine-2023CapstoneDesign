@@ -72,6 +72,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
     });
 
     if (!result.canceled) {
+      closeModal();
       navigation.navigate('TextInput', {
         itemId: 1000,
         otherParam: result.assets[0].base64,
@@ -90,6 +91,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
     });
 
     if (!result.canceled) {
+      closeModal();
       navigation.navigate('TextInput', {
         itemId: 1001,
         otherParam: result.assets[0].base64,
@@ -114,10 +116,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
               setHasCameraPermisson(cameraStatus.status === 'granted');
             })();
 
-            closeModal();
-            setTimeout(function () {
-              handleImagePicker();
-            }, 500);
+            handleImagePicker();
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
@@ -136,10 +135,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
               setHasGalleryPermission(galleryStatus.status === 'granted');
             })();
 
-            closeModal();
-            setTimeout(function () {
-              pickImage();
-            }, 700);
+            pickImage();
           }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
