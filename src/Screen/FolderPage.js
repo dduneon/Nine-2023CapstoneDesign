@@ -25,8 +25,8 @@ import {
 
 import Header from '../Components/Header';
 
-function Home({ navigation }) {
-  //const { itemId, otherParam } = route.params;
+function Home({ route, navigation }) {
+  const { itemId, otherParam } = route.params;
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [selectState, setSelectState] = useState([]);
@@ -65,7 +65,7 @@ function Home({ navigation }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#DCE2F0' }}>
-      <Header style={{ flex: 1 }} headerTitle={otherParam} />
+      <Header style={{ flex: 1 }} headerTitle={''} />
       <View style={{ flex: 12 }}>
         {jsonData ? (
           <FlatList

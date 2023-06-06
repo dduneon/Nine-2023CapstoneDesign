@@ -21,8 +21,6 @@ import * as FileSystem from 'expo-file-system';
 import { getDatabase, ref, onValue, set, query } from 'firebase/database';
 import { db } from '../firebase/config';
 
-import DirDetailModal from '../Components/DirDetailModal';
-
 import {
   getJSON,
   getData,
@@ -73,13 +71,11 @@ function Home({ navigation }) {
                   <TouchableOpacity
                     style={{ flex: 1 }}
                     onPress={() => {
-                      setSelectFolder(item);
                       setModalVisible(true);
-
-                      /*navigation.navigate('Folder', {
+                      navigation.navigate('Folder', {
                         itemId: 1101,
                         otherParam: item,
-                      });*/
+                      });
                     }}
                   >
                     <Image source={require('../../assets/folder_image.png')} />
@@ -119,13 +115,6 @@ function Home({ navigation }) {
           </View>
         )}
       </View>
-      <DirDetailModal
-        selectFolder={selectFolder}
-        temp={jsonData ? JSON.stringify(jsonData) : '{}'}
-        visibleState={modalVisible}
-        onClose={() => setModalVisible(false)}
-        navigation={navigation}
-      />
     </View>
   );
 }
