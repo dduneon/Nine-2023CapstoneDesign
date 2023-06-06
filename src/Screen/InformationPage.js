@@ -30,14 +30,11 @@ export default function Information({ navigation }) {
             - CapstoneDesign 작품 -
           </Text>
         </View>
-        <View style={{flex:1}}>
-        <View>
           <Text
             style={{ marginLeft: 10, fontSize: 20, fontFamily: 'SUITE-Light' }}
           >
             GitHub
           </Text>
-        </View>
         <View style={styles.dividing_line}>
           <View style={styles.text_container} />
         </View>
@@ -151,6 +148,7 @@ export default function Information({ navigation }) {
             </Text>
           </View>
         </View>
+        <View>
         </View>
       </View>
     </View>
