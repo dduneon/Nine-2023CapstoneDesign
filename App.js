@@ -16,8 +16,8 @@ import LoginPage from './src/Screen/LoginPage';
 import Main from './src/Screen/Main';
 import AIPage from './src/Screen/AIPage';
 import TextPage from './src/Screen/TextPage';
-import Information from './src/Screen/Information';
-
+import InformationPage from './src/Screen/InformationPage';
+import FolderPage from './src/Screen/FolderPage';
 import { getData } from './src/Functions/DataFunction';
 
 const Stack = createNativeStackNavigator();
@@ -87,6 +87,7 @@ export default function App() {
             name="AI"
             component={AIPage}
             options={{
+              gestureEnabled: false,
               headerShown: false,
             }}
           />
@@ -102,7 +103,12 @@ export default function App() {
           />
           <Stack.Screen
             name="Information"
-            component={Information}
+            component={InformationPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Folder"
+            component={FolderPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

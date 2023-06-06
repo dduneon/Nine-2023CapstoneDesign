@@ -10,6 +10,7 @@ import {
 import { getDatabase, ref, onValue, set, query } from 'firebase/database';
 import db from '../firebase/config';
 import DirModalPopup from '../Components/DirModalPopup';
+import LoadingPage from './LoadingPage';
 
 function AIPage({ navigation, route }) {
   const { itemId, otherParam } = route.params;
@@ -74,14 +75,16 @@ function AIPage({ navigation, route }) {
     }
   }, [gptData]);
 
+  if (!gptData) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <LoadingPage />
+      </SafeAreaView>
+    );
+  }
   // 해야할점 : 데이터 token 수 조정하기
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: '#DCE2F0',
-      }}
-    >
+    <SafeAreaView style={styles.container}>
       <Text
         style={{
           fontSize: 30,
@@ -173,6 +176,10 @@ function AIPage({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#DCE2F0',
+  },
   leftButton: {
     width: '45%',
     alignItems: 'center',

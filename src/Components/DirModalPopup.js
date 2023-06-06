@@ -11,6 +11,7 @@ import {
   TextInput,
   Keyboard,
   FlatList,
+  Alert,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -84,6 +85,10 @@ function ModalPopup({
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
   const [makeSignal, setMakeSignal] = useState(false);
+
+  const [folderName, setFolderName] = useState();
+  const number = JSON.stringify(question).split('.')[0].split('"')[1];
+
   useEffect(() => {
     userLoad();
   }, []);
@@ -101,7 +106,7 @@ function ModalPopup({
   }, [jsonData]);
   useEffect(() => {
     uploadData();
-    setMakeSignal(false);
+    //setMakeSignal(false);
   }, [makeSignal]);
   async function userLoad() {
     setUserId(await AsyncStorage.getItem(STORAGE_KEY));
@@ -114,6 +119,7 @@ function ModalPopup({
     getData(userId);
     uploadData();
   }
+
   return (
     <ModalSetup visible={visible}>
       <View style={styles.modalView}>
@@ -201,6 +207,7 @@ function ModalPopup({
                           ]}
                           onPress={() => {
                             setselIndex(index);
+                            setFolderName(item);
                           }}
                         >
                           <Text
@@ -215,6 +222,7 @@ function ModalPopup({
                       </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
+                    extraData={jsonData}
                   />
                 ) : (
                   <View
@@ -259,9 +267,26 @@ function ModalPopup({
             <TouchableOpacity
               style={styles.cancel}
               onPress={() => {
-                onClose();
-                setVisible(false);
-                setselIndex();
+                if (selIndex != null) {
+                  onClose();
+                  setVisible(false);
+                  setselIndex();
+                  exportData(userId, folderName, number, question, answer, com);
+                  getData(userId);
+                  navigation.navigate('Main_Home');
+                } else {
+                  Alert.alert(
+                    '폴더를 선택해주세요.', // 제목
+                    '', // 내용
+                    [
+                      {
+                        text: '확인',
+                        style: 'cancel', // 버튼 스타일 (cancel, default, destructive 중 선택)
+                      },
+                    ],
+                    { cancelable: false } // 뒤로 가기 버튼으로 알림을 닫을 수 있는지 여부
+                  );
+                }
               }}
             >
               <View>

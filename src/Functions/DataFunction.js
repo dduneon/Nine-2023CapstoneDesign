@@ -13,7 +13,8 @@ function makeFolder(userId, folderName) {
 }
 
 function exportData(userId, folderName, number, question, answer, com) {
-  const reference = ref(db, 'users/', userId, '/', folderName, '/', number);
+  const path = 'users/' + userId + '/' + folderName + '/' + number;
+  const reference = ref(db, path);
   set(reference, { question: { question }, answer: { answer }, com: { com } });
   getData();
 }
@@ -35,7 +36,8 @@ function exportData(userId, folderName, number, question, answer, com) {
 
 // DB로 부터 data 받아와서 local json에 저장
 function getData(userId) {
-  const temp = query(ref(db, 'users/' + userId + '/'));
+  const path = 'users' + '/' + userId + '/';
+  const temp = query(ref(db, path));
   let data;
   onValue(temp, async (res) => {
     data = res.toJSON();
