@@ -93,7 +93,7 @@
 
 ## 라이센스
 
-MIT &copy; [준현](https://dduneon.tistory.com)
+구성 및 작성: [준현](https://dduneon.tistory.com)
 
 <!-- Stack Icon Refernces -->
 
