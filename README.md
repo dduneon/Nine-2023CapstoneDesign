@@ -35,9 +35,9 @@
 
 ## 기술 스택
 
-| JavaScript | React Native |  Node   |  firebase   |
-| :--------: | :----------: | :-----: | :---------: |
-|   ![js]    |    ![rn]     | ![node] | ![firebase] |
+| JavaScript | React Native |  Node   |   firebase    |
+| :--------: | :----------: | :-----: | :-----------: |
+|   ![js]    |    ![rn]     | ![node] | ![firebasest] |
 
 ## 사용 툴
 
@@ -110,4 +110,4 @@ MIT &copy; [준현](https://dduneon.tistory.com)
 [figma]: /images/stack/figma.svg
 [notion]: /images/stack/notion.svg
 [node]: /images/stack/node.svg
-[firebase]: /images/stack/firebase.svg
+[firebasest]: /images/stack/firebase.svg
