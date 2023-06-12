@@ -5,12 +5,12 @@
 
 <br>
 
-## 팀원 
+## 팀원
 
-|                           김준현                           |            이성현            |             하태준             |      김민지       |
-| :--------------------------------------------------------: | :--------------------------: | :----------------------------: | :---------------: |
-|                            팀장                            |             팀원             |              팀원              |       팀원        |
-| GitHub, Notion 전반적인 관리 및 작업, 프로젝트 방향성 설정 | Figma 활용한 프로로타입 구성 | API활용 방안 연구 및 방향 제시 | 프로젝트 문서관리 |
+|                                 김준현                                  |            이성현            |             하태준             |      김민지       |
+| :---------------------------------------------------------------------: | :--------------------------: | :----------------------------: | :---------------: |
+|                                  팀장                                   |             팀원             |              팀원              |       팀원        |
+| GitHub, Notion 전반적인 관리 및 작업, 프로젝트 방향성 설정 및 개발 리딩 | Figma 활용한 프로로타입 구성 | API활용 방안 연구 및 방향 제시 | 프로젝트 문서관리 |
 
 ## 프로젝트 소개
 
@@ -35,9 +35,9 @@
 
 ## 기술 스택
 
-| JavaScript | React Native |  Node   |
-| :--------: | :----------: | :-----: |
-|   ![js]    |    ![rn]     | ![node] |
+| JavaScript | React Native |  Node   |  firebase   |
+| :--------: | :----------: | :-----: | :---------: |
+|   ![js]    |    ![rn]     | ![node] | ![firebase] |
 
 ## 사용 툴
 
@@ -49,19 +49,41 @@
 
 ## 구현 기능
 
+### 대형 플랫폼 간편로그인 API 활용
+
+![loginpage]
+
+<br>
+
+### 간편로그인과 데이터베이스 연동하여 사용자 실시간 데이터베이스 제공
+
+![firebase]
+
+![firebase2]
+
+<br>
+
+### 사용자 친화적인 UI 구성하여 누구나 쉽고 편리하게 서비스 이용 가능
+
+![mainpage]
+
+<br>
+
+### Google Cloud Vision (OCR API) 활용한 사용자의 카메라로 찍은 이미지를 글로 옮기는 기능 제공
+
+![ocr]
+
+<br>
+
 ### OPENAI API 활용 영어 문제 질의 및 답, 해설 제공
 
 ![openai]
 
-### OCR API 활용 카메라로 찍은 이미지를 글로 옮기는 기능 제공
+<br>
 
-![ocr]
+## 서비스 차별점
 
-### 대형 플랫폼 간편로그인 API 활용 및 데이터베이스 활용 오답노트 제공
-
-![login]
-
-## 배운 점 & 아쉬운 점
+![차별점]
 
 <p align="justify">
 
@@ -75,12 +97,17 @@ MIT &copy; [준현](https://dduneon.tistory.com)
 
 <!-- Stack Icon Refernces -->
 
+[차별점]: /images/common/readme-차별점.png
 [main]: /images/common/readme-main.png
+[mainpage]: /images/common/readme-mainpage.png
 [ocr]: /images/common/readme-ocr.png
-[login]: /images/common/readme-login.png
+[loginpage]: /images/common/readme-loginpage.png
 [openai]: /images/common/readme-openai.png
+[firebase]: /images/common/readme-firebase.png
+[firebase2]: /images/common/readme-firebase2.png
 [js]: /images/stack/javascript.svg
 [rn]: /images/stack/react-native.svg
 [figma]: /images/stack/figma.svg
 [notion]: /images/stack/notion.svg
 [node]: /images/stack/node.svg
+[firebase]: /images/stack/firebase.svg
