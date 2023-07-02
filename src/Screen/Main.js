@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
 import BottomTab from '../Components/BottomTab';
 import Header from '../Components/Header';
 import HomePage from './HomePage';
@@ -18,6 +17,7 @@ function Main({ navigation }) {
   const [activeTab, setActiveTab] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [headerTitle, setheaderTitle] = useState('');
+  const [onEditStateChange, setOnEditStateChange] = useState(false);
 
   useEffect(() => {
     if (activeTab === 0) {
@@ -28,7 +28,16 @@ function Main({ navigation }) {
   }, [activeTab]);
   return (
     <View style={{ flex: 1 }}>
-      <Header style={{ flex: 1 }} headerTitle={headerTitle} />
+      <Header
+        style={{ flex: 1 }}
+        headerTitle={headerTitle}
+        editMode={() => {
+          setOnEditStateChange(true);
+        }}
+        exitEditMode={() => {
+          setOnEditStateChange(false);
+        }}
+      />
       <View
         style={{
           flex: 12,
@@ -36,7 +45,7 @@ function Main({ navigation }) {
         }}
       >
         {activeTab === 0 ? (
-          <HomePage navigation={navigation} />
+          <HomePage navigation={navigation} editState={onEditStateChange} />
         ) : (
           <MyPage navigation={navigation} />
         )}
