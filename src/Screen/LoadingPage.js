@@ -19,7 +19,7 @@ function LoadingPage({}) {
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   image: { width: '60%', resizeMode: 'contain' },
-  mainText: { fontFamily: 'SUITE-Medium', fontSize: 25 },
+  mainText: { fontFamily: 'SUITE-Medium', fontSize: 28 },
   subText: { fontFamily: 'SUITE-Medium', fontSize: 25 },
   explainText: { fontFamily: 'SUITE-Light', fontSize: 15, marginTop: 30 },
 });

@@ -89,7 +89,9 @@ function AIPage({ navigation, route }) {
         style={{
           fontSize: 30,
           fontFamily: 'SUITE-Medium',
-          margin: 10,
+          marginBottom: 10,
+          marginLeft: 10,
+          marginRight: 10,
         }}
       >
         인공지능 나인이 제공한{'\n'}답과 해설이에요
@@ -97,10 +99,10 @@ function AIPage({ navigation, route }) {
       <View
         style={{
           flex: 0.5,
-          backgroundColor: 'yellow',
-          padding: 10,
-          marginBottom: 10,
-          backgroundColor: '#ACA7CA',
+          padding: 7,
+          marginLeft: 10,
+          marginRight: 10,
+          backgroundColor: '#BACDDB',
           borderRadius: 10,
         }}
       >
@@ -108,7 +110,7 @@ function AIPage({ navigation, route }) {
           <Text
             style={{
               fontSize: 12,
-              fontFamily: 'SUITE-Light',
+              fontFamily: 'IropkeBatangM',
             }}
           >
             {otherParam}
@@ -118,14 +120,25 @@ function AIPage({ navigation, route }) {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#CE9EA8',
-          padding: 10,
+          backgroundColor: '#A0BFE0',
+          padding: 7,
+          margin: 10,
           borderRadius: 10,
         }}
       >
         <ScrollView style={{ flex: 1, color: '#02343F' }}>
-          <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>{ans}</Text>
-          <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>{com}</Text>
+          <Text
+            style={{
+              fontSize: 20,
+              fontFamily: 'IropkeBatangM',
+              marginBottom: 10,
+            }}
+          >
+            {ans}
+          </Text>
+          <Text style={{ fontSize: 18, fontFamily: 'IropkeBatangM' }}>
+            {com}
+          </Text>
         </ScrollView>
       </View>
       <View
@@ -133,7 +146,6 @@ function AIPage({ navigation, route }) {
           flexDirection: 'row',
           marginLeft: 5,
           marginRight: 5,
-          marginTop: 10,
           justifyContent: 'center',
         }}
       >
@@ -141,7 +153,7 @@ function AIPage({ navigation, route }) {
           style={({ pressed }) => [
             styles.leftButton,
             {
-              backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
+              backgroundColor: pressed ? '#7895CB' : '#445CE9', // 클릭 시 배경색 변경
             },
           ]}
           onPress={() => {
@@ -154,7 +166,7 @@ function AIPage({ navigation, route }) {
           style={({ pressed }) => [
             styles.rightButton,
             {
-              backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
+              backgroundColor: pressed ? '#7895CB' : '#445CE9', // 클릭 시 배경색 변경
             },
           ]}
           onPress={() => {

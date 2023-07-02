@@ -36,6 +36,7 @@ export default function App() {
         await Font.loadAsync({
           'SUITE-Light': require('./assets/fonts/SUITE-Light.otf'),
           'SUITE-Medium': require('./assets/fonts/SUITE-Medium.otf'),
+          IropkeBatangM: require('./assets/fonts/IropkeBatangM.otf'),
         });
 
         userLoad();
