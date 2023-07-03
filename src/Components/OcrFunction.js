@@ -1,5 +1,5 @@
 //file name: helperFunctions.js
-const API_KEY = "AIzaSyDr1RnsiOMJOBDld6OQK1FSSPr6GGnHvyM"; //put your key here.
+const API_KEY = 'AIzaSyDr1RnsiOMJOBDld6OQK1FSSPr6GGnHvyM'; //put your key here.
 //this endpoint will tell Google to use the Vision API. We are passing in our key as well.
 const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
 function generateBody(image) {
@@ -11,7 +11,7 @@ function generateBody(image) {
         },
         features: [
           {
-            type: "TEXT_DETECTION", //we will use this API for text detection purposes.
+            type: 'TEXT_DETECTION', //we will use this API for text detection purposes.
             maxResults: 1,
           },
         ],
@@ -24,10 +24,10 @@ function generateBody(image) {
 async function callGoogleVisionAsync(image) {
   const body = generateBody(image); //pass in our image for the payload
   const response = await fetch(API_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });
