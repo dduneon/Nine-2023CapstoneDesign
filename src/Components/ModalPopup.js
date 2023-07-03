@@ -159,8 +159,6 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             borderColor: 'lightgrey',
           }}
           onPress={() => {
-            closeModal();
-
             handleCameraPermission();
           }}
         >
