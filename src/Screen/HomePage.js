@@ -11,6 +11,7 @@ import {
   TextInput,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -26,17 +27,27 @@ import {
   getData,
   makeFolder,
   userLoad,
+  folderDelete,
 } from '../Functions/DataFunction';
+
+const STORAGE_KEY = '@login_id';
 
 const { height, width } = Dimensions.get('window');
 
-function Home({ navigation }) {
+function Home({ navigation, editState }) {
   const [jsonData, setJsonData] = useState(null);
   const [jsonDataState, setJsonDataState] = useState('Loading ...');
 
+  const [userId, setUserId] = useState();
+
   useEffect(() => {
     uploadData();
+    userLoad();
   }, []);
+
+  async function userLoad() {
+    setUserId(await AsyncStorage.getItem(STORAGE_KEY));
+  }
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -56,6 +67,22 @@ function Home({ navigation }) {
     setJsonData(data);
   }
 
+  const onDelete = async (item) => {
+    Alert.alert('폴더 삭제', `${item}를 삭제하시겠습니까?`, [
+      { text: '취소', style: 'destructive' },
+      {
+        text: '삭제',
+        onPress: async () => {
+          try {
+            folderDelete(userId, item);
+          } catch (err) {
+            console.log('err:', err);
+          }
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={{ flex: 1, width: '100%', backgroundColor: '#DCE2F0' }}>
       <View style={{ flex: 5, alignItems: 'center' }}>
@@ -69,13 +96,23 @@ function Home({ navigation }) {
                   <TouchableOpacity
                     style={{ flex: 1 }}
                     onPress={() => {
-                      navigation.navigate('Folder', {
-                        itemId: 1101,
-                        otherParam: item,
-                      });
+                      editState
+                        ? onDelete(item)
+                        : navigation.navigate('Folder', {
+                            itemId: 1101,
+                            otherParam: item,
+                          });
                     }}
                   >
-                    <Image source={require('../../assets/folder_image.png')} />
+                    {editState ? (
+                      <Image
+                        source={require('../../assets/delete_folder_image.png')}
+                      />
+                    ) : (
+                      <Image
+                        source={require('../../assets/folder_image.png')}
+                      />
+                    )}
                     <Text
                       style={{
                         fontFamily: 'SUITE-Medium',

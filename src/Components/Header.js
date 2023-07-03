@@ -11,13 +11,11 @@ import {
 
 // Fontisto 부분 size 수정해줘야함 24나 32로 해놓으면 휴대폰 스크린 크기에 따라 크고 작게 보일 수 있으므로
 
-function Header({ style, headerTitle, onEditStateChange }) {
+function Header({ style, headerTitle, editMode, exitEditMode }) {
   const [pressBtnState, setPressBtnState] = useState(false);
   // True일 시 편집중인것임
   const onPressEditBtn = () => {
     setPressBtnState(pressBtnState ? false : true);
-    //onEditStateChange(pressBtnState);
-    // 구현 완료시 이부분 주석 제거
   };
 
   return (
@@ -39,7 +37,14 @@ function Header({ style, headerTitle, onEditStateChange }) {
           <Button
             title={pressBtnState ? '완료' : '편집'}
             style={styles.editBtn}
-            onPress={onPressEditBtn}
+            onPress={() => {
+              if (!pressBtnState) {
+                editMode();
+              } else {
+                exitEditMode();
+              }
+              onPressEditBtn();
+            }}
           ></Button>
         </View>
       )}
