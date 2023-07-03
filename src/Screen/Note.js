@@ -51,108 +51,105 @@ function NotePage({ navigation, route }) {
 
   // 해야할점 : 데이터 token 수 조정하기
   return (
-    <SafeAreaView style={{ ...styles.container }}>
-      <View
+    <SafeAreaView style={styles.container}>
+      <Text
         style={{
-          backgroundColor: '#B7C6E6',
-          paddingLeft: 15,
-          marginBottom: 8,
+          fontSize: 30,
+          fontFamily: 'SUITE-Medium',
+          marginBottom: 10,
+          marginLeft: 10,
+          marginRight: 10,
         }}
       >
-        <Text
-          style={{
-            width: '100%',
-            backgroundColor: '#B7C6E6',
-            fontSize: 30,
-            fontFamily: 'SUITE-Medium',
-          }}
-        >
-          {folderName}
-        </Text>
+        {folderName}
+      </Text>
+      <View
+        style={{
+          flex: 0.5,
+          padding: 7,
+          marginLeft: 10,
+          marginRight: 10,
+          backgroundColor: '#BACDDB',
+          borderRadius: 10,
+        }}
+      >
+        <ScrollView style={{ flex: 1 }}>
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'IropkeBatangM',
+            }}
+          >
+            {question}
+          </Text>
+        </ScrollView>
       </View>
-
-      <View style={{ flex: 1, backgroundColor: '#DCE2F0' }}>
-        <View
-          style={{
-            flex: 0.5,
-            padding: 10,
-            marginBottom: 10,
-            backgroundColor: '#ACA7CA',
-            borderRadius: 10,
-          }}
-        >
-          <ScrollView style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontSize: 12,
-                fontFamily: 'SUITE-Light',
-              }}
-            >
-              {question}
-            </Text>
-          </ScrollView>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: '#CE9EA8',
-            padding: 10,
-            borderRadius: 10,
-          }}
-        >
-          <ScrollView style={{ flex: 1, color: '#02343F' }}>
-            <Text style={{ fontSize: 23, fontFamily: 'SUITE-Light' }}>
-              {ans}
-            </Text>
-            <Text style={{ fontSize: 20, fontFamily: 'SUITE-Light' }}>
-              {com}
-            </Text>
-          </ScrollView>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: 5,
-            marginRight: 5,
-            marginTop: 10,
-            justifyContent: 'center',
-          }}
-        >
-          <Pressable
-            style={({ pressed }) => [
-              styles.leftButton,
-              {
-                backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
-              },
-            ]}
-            onPress={() => {
-              navigation.navigate('Main_Home');
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#A0BFE0',
+          padding: 7,
+          margin: 10,
+          borderRadius: 10,
+        }}
+      >
+        <ScrollView style={{ flex: 1, color: '#02343F' }}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontFamily: 'IropkeBatangM',
+              marginBottom: 10,
             }}
           >
-            <Text style={styles.text}>홈화면으로 이동하기</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.rightButton,
-              {
-                backgroundColor: pressed ? '#3f3f3f' : 'black', // 클릭 시 배경색 변경
-              },
-            ]}
-            onPress={async () => {
-              try {
-                await questionDelete(userId, folderName, number);
-              } catch (error) {
-                console.log(error);
-              }
+            {ans}
+          </Text>
+          <Text style={{ fontSize: 18, fontFamily: 'IropkeBatangM' }}>
+            {com}
+          </Text>
+        </ScrollView>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginLeft: 5,
+          marginRight: 5,
+          justifyContent: 'center',
+        }}
+      >
+        <Pressable
+          style={({ pressed }) => [
+            styles.leftButton,
+            {
+              backgroundColor: pressed ? '#7895CB' : '#445CE9', // 클릭 시 배경색 변경
+            },
+          ]}
+          onPress={() => {
+            navigation.navigate('Main_Home');
+          }}
+        >
+          <Text style={styles.text}>홈화면으로 이동하기</Text>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.rightButton,
+            {
+              backgroundColor: pressed ? '#7895CB' : '#445CE9', // 클릭 시 배경색 변경
+            },
+          ]}
+          onPress={async () => {
+            try {
+              await questionDelete(userId, folderName, number);
+            } catch (error) {
+              console.log(error);
+            }
 
-              //const path = `users/${userId}/${folderName}/${numQuestion}`;
-              //remove(ref(db, path));
-              navigation.navigate('Main_Home');
-            }}
-          >
-            <Text style={styles.text}>삭제</Text>
-          </Pressable>
-        </View>
+            //const path = `users/${userId}/${folderName}/${numQuestion}`;
+            //remove(ref(db, path));
+            navigation.navigate('Main_Home');
+          }}
+        >
+          <Text style={styles.text}>삭제</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );

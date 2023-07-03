@@ -129,13 +129,6 @@ function My({ navigation }) {
         <View style={styles.dividing_line}>
           <View style={styles.text_container} />
         </View>
-        <Text style={styles.problem_text}>
-          {' '}
-          지금까지 질문한 문제: {num} 개에요!
-        </Text>
-        <View style={styles.dividing_line}>
-          <View style={styles.text_container} />
-        </View>
         <View>
           <TouchableOpacity
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
@@ -167,8 +160,7 @@ function My({ navigation }) {
           justifyContent: 'flex-end',
           marginBottom: 15,
         }}
-      >
-      </View>
+      ></View>
     </View>
   );
 }
@@ -211,7 +203,7 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 20,
     alignSelf: 'center',
-  }
+  },
 });
 
 export default My;
