@@ -110,6 +110,7 @@ function TextPage({ route, navigation }) {
               placeholder="문제를 입력해주세요."
               color="#02343F"
               style={{ fontSize: 15 }}
+              scrollEnabled={false}
             />
           </ScrollView>
         </View>
