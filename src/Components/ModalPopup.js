@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Modal,
   Animated,
+  Alert,
+  Linking,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -57,8 +59,54 @@ function ModalPopup({ visibleState, onClose, navigation }) {
 
   useEffect(() => {
     setVisible(visibleState);
-    console.log('[ModalPopup.js] visibleState: ' + visibleState);
   }, [visibleState]);
+
+  const handleCameraPermission = async () => {
+    const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+    setHasCameraPermisson(cameraStatus.status === 'granted');
+
+    if (cameraStatus.status !== 'granted') {
+      // Camera permission not granted, ask again
+      Alert.alert(
+        '카메라 접근 권한이 필요합니다',
+        '기능을 사용하기 위해 카메라 접근 권한을 허용해주세요',
+        [
+          { text: '취소', style: 'cancel' },
+          {
+            text: '설정 열기',
+            onPress: () => Linking.openSettings(),
+          },
+        ]
+      );
+    } else {
+      // Camera permission granted, proceed with image capture
+      handleImagePicker();
+    }
+  };
+
+  const handleGalleryPermission = async () => {
+    const galleryStatus =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    setHasGalleryPermission(galleryStatus.status === 'granted');
+
+    if (galleryStatus.status !== 'granted') {
+      // Camera permission not granted, ask again
+      Alert.alert(
+        '갤러리 접근 권한이 필요합니다',
+        '기능을 사용하기 위해 갤러리 접근 권한을 허용해주세요',
+        [
+          { text: '취소', style: 'cancel' },
+          {
+            text: '설정 열기',
+            onPress: () => Linking.openSettings(),
+          },
+        ]
+      );
+    } else {
+      // Camera permission granted, proceed with image capture
+      pickImage();
+    }
+  };
 
   const closeModal = () => {
     onClose();
@@ -111,16 +159,9 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             borderColor: 'lightgrey',
           }}
           onPress={() => {
-            (async () => {
-              const cameraStatus =
-                await ImagePicker.requestCameraPermissionsAsync();
-              setHasCameraPermisson(cameraStatus.status === 'granted');
-            })();
-
             closeModal();
-            setTimeout(function () {
-              handleImagePicker();
-            }, 500);
+
+            handleCameraPermission();
           }}
         >
           <Text style={styles.modal_Text}>카메라</Text>
@@ -133,13 +174,7 @@ function ModalPopup({ visibleState, onClose, navigation }) {
             borderColor: 'lightgrey',
           }}
           onPress={() => {
-            (async () => {
-              const galleryStatus =
-                await ImagePicker.requestMediaLibraryPermissionsAsync();
-              setHasGalleryPermission(galleryStatus.status === 'granted');
-            })();
-
-            pickImage();
+            handleGalleryPermission();
           }}
         >
           <Text style={styles.modal_Text}>앨범</Text>
