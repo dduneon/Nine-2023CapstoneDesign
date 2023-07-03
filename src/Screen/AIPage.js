@@ -36,7 +36,7 @@ function AIPage({ navigation, route }) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-3.5-turbo-0613',
         messages: [
           {
             role: 'user',
