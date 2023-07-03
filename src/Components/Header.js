@@ -34,18 +34,22 @@ function Header({ style, headerTitle, editMode, exitEditMode }) {
         </View>
       ) : (
         <View style={styles.editView}>
-          <Button
-            title={pressBtnState ? '완료' : '편집'}
-            style={styles.editBtn}
-            onPress={() => {
-              if (!pressBtnState) {
-                editMode();
-              } else {
-                exitEditMode();
-              }
-              onPressEditBtn();
-            }}
-          ></Button>
+          {headerTitle === '나의 오답 노트' ? (
+            <Button
+              title={pressBtnState ? '완료' : '편집'}
+              style={styles.editBtn}
+              onPress={() => {
+                if (!pressBtnState) {
+                  editMode();
+                } else {
+                  exitEditMode();
+                }
+                onPressEditBtn();
+              }}
+            ></Button>
+          ) : (
+            <></>
+          )}
         </View>
       )}
     </SafeAreaView>
