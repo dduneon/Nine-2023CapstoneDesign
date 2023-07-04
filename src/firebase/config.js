@@ -1,14 +1,14 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, query } from "firebase/database";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue, set, query } from 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBclGOH29Q-jDGjRbxOpDgv0XzRJj8Zn48",
-  authDomain: "nine-f2a0b.firebaseapp.com",
-  projectId: "nine-f2a0b",
-  storageBucket: "nine-f2a0b.appspot.com",
-  messagingSenderId: "78772924392",
-  appId: "1:78772924392:web:af5d0851babe31ef487e5d",
-  measurementId: "G-4GPH2YRV9K",
+  apiKey: 'AIzaSyBGZELWjuKjbRzXX04us-QZ7JifhX1q8ZA',
+  authDomain: 'nine-d621e.firebaseapp.com',
+  projectId: 'nine-d621e',
+  storageBucket: 'nine-d621e.appspot.com',
+  messagingSenderId: '760683318872',
+  appId: '1:760683318872:web:38a37e47c3906e795d042d',
+  measurementId: 'G-QL3WX0DT82',
 };
 
 initializeApp(firebaseConfig);
