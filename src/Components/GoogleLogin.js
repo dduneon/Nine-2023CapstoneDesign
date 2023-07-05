@@ -14,7 +14,6 @@ import {
 import TextPage from './../Screen/TextPage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 /*
 npx expo install expo-auth-session expo-crypto
 npx expo install expo-web-browser
@@ -77,7 +76,7 @@ export default function GoogleLogin({ navigation }) {
   return (
     <TouchableOpacity
       style={styles.icon_google}
-      activeOpacity="0.6"
+      activeOpacity={0.6}
       disabled={!request}
       onPress={async () => {
         await promtAsync();
