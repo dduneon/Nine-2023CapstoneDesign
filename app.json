@@ -14,10 +14,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Capstone.Nine"
+      "bundleIdentifier": "com.Nine.myAIteacher"
     },
     "android": {
-      "package": "com.Capstone.Nine",
+      "package": "com.Capstone.Nine.myAIteacher",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
