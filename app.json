@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#DCE2F0"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.Nine.myAIteacher"
@@ -25,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "200de289-74ce-47fc-b617-d4c4349fd9a0"
+      }
     }
   }
 }

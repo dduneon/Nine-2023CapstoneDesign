@@ -115,7 +115,7 @@ android {
 
     namespace "com.nine"
     defaultConfig {
-        applicationId 'com.Capstone.Nine'
+        applicationId 'com.Capstone.Nine.myAIteacher'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, set, query } from 'firebase/database';
 
+const apiKey = process.env.FIREBASE_API_KEY;
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyBGZELWjuKjbRzXX04us-QZ7JifhX1q8ZA',
+  apiKey: apiKey,
   authDomain: 'nine-d621e.firebaseapp.com',
   projectId: 'nine-d621e',
   storageBucket: 'nine-d621e.appspot.com',

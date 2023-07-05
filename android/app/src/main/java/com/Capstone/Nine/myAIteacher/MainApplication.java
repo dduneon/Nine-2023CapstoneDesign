@@ -1,4 +1,4 @@
-package com.Capstone.Nine;
+package com.Capstone.Nine.myAIteacher;
 
 import android.app.Application;
 import android.content.res.Configuration;
